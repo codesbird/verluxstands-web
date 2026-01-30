@@ -1,47 +1,23 @@
-"use client"
+import { Metadata } from "next"
 
-import React from "react"
-
-import { useEffect } from "react"
-import { useRouter, usePathname } from "next/navigation"
-import { AuthProvider, useAuth } from "@/lib/auth-context"
-
-function AdminAuthGuard({ children }: { children: React.ReactNode }) {
-  const { user, loading } = useAuth()
-  const router = useRouter()
-  const pathname = usePathname()
-
-  useEffect(() => {
-    if (!loading && !user && pathname !== "/admin/login") {
-      router.push("/admin/login")
-    }
-  }, [user, loading, pathname, router])
-
-  if (loading) {
-    return (
-      <div className="min-h-screen bg-background flex items-center justify-center">
-        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary" />
-      </div>
-    )
-  }
-
-  if (!user && pathname !== "/admin/login") {
-    return null
-  }
-
-  return <>{children}</>
+// Server-side metadata: prevent Google indexing of admin panel
+export const metadata: Metadata = {
+  robots: {
+    index: false,
+    follow: false,
+    nocache: true,
+    noarchive: true,
+  },
+  title: "Admin Dashboard - Verlux Stands (Private)",
+  description: "Private admin dashboard - not accessible to public",
 }
+
+import AdminLayoutClient from "@/app/admin/layout-client"
 
 export default function AdminLayout({
   children,
 }: {
   children: React.ReactNode
 }) {
-  return (
-    <AuthProvider>
-      <AdminAuthGuard>
-        {children}
-      </AdminAuthGuard>
-    </AuthProvider>
-  )
+  return <AdminLayoutClient>{children}</AdminLayoutClient>
 }
