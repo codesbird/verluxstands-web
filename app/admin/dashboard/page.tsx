@@ -57,7 +57,7 @@ export default function AdminDashboard() {
         if (snapshot.exists()) {
           const data = snapshot.val() as Record<string, SEOPageData>
           const pages = Object.values(data)
-          
+
           setStats({
             totalPages: pages.length,
             indexedPages: pages.filter((p) => p.index).length,
@@ -166,27 +166,27 @@ export default function AdminDashboard() {
               >
                 <Globe className="w-5 h-5 text-primary" />
                 <div>
-<p className="font-medium text-foreground">View Sitemap</p>
-  <p className="text-sm text-muted-foreground">See all indexed pages</p>
-  </div>
-  </a>
-  <button
-  onClick={handleSeedData}
-  disabled={seeding}
-  className="flex items-center gap-3 p-3 rounded-lg bg-primary/10 hover:bg-primary/20 transition-colors w-full text-left disabled:opacity-50"
-  >
-  {seeding ? (
-    <Loader2 className="w-5 h-5 text-primary animate-spin" />
-  ) : (
-    <Database className="w-5 h-5 text-primary" />
-  )}
-  <div>
-  <p className="font-medium text-foreground">Seed Initial Data</p>
-  <p className="text-sm text-muted-foreground">Populate SEO data for all pages</p>
-  </div>
-  </button>
-  </CardContent>
-  </Card>
+                  <p className="font-medium text-foreground">View Sitemap</p>
+                  <p className="text-sm text-muted-foreground">See all indexed pages</p>
+                </div>
+              </a>
+              <button
+                onClick={handleSeedData}
+                disabled={seeding}
+                className="flex items-center gap-3 p-3 rounded-lg bg-primary/10 hover:bg-primary/20 transition-colors w-full text-left disabled:opacity-50"
+              >
+                {seeding ? (
+                  <Loader2 className="w-5 h-5 text-primary animate-spin" />
+                ) : (
+                  <Database className="w-5 h-5 text-primary" />
+                )}
+                <div>
+                  <p className="font-medium text-foreground">Seed Initial Data</p>
+                  <p className="text-sm text-muted-foreground">Populate SEO data for all pages</p>
+                </div>
+              </button>
+            </CardContent>
+          </Card>
 
           <Card className="bg-card border-border">
             <CardHeader>
@@ -207,11 +207,10 @@ export default function AdminDashboard() {
                     <div
                       className="bg-green-500 h-2 rounded-full transition-all"
                       style={{
-                        width: `${
-                          stats.totalPages > 0
+                        width: `${stats.totalPages > 0
                             ? (stats.indexedPages / stats.totalPages) * 100
                             : 0
-                        }%`,
+                          }%`,
                       }}
                     />
                   </div>
@@ -222,8 +221,8 @@ export default function AdminDashboard() {
                     <span className="text-sm text-foreground">
                       {stats.totalPages > 0
                         ? Math.round(
-                            ((stats.totalPages - stats.missingSchema) / stats.totalPages) * 100
-                          )
+                          ((stats.totalPages - stats.missingSchema) / stats.totalPages) * 100
+                        )
                         : 0}%
                     </span>
                   </div>
@@ -231,11 +230,10 @@ export default function AdminDashboard() {
                     <div
                       className="bg-primary h-2 rounded-full transition-all"
                       style={{
-                        width: `${
-                          stats.totalPages > 0
+                        width: `${stats.totalPages > 0
                             ? ((stats.totalPages - stats.missingSchema) / stats.totalPages) * 100
                             : 0
-                        }%`,
+                          }%`,
                       }}
                     />
                   </div>

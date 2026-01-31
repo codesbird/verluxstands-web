@@ -83,7 +83,7 @@ export const metadata: Metadata = {
 
 export const viewport: Viewport = {
   themeColor: [
-    { media: '(prefers-color-scheme: light)', color: '#d4af37' },
+    { media: '(prefers-color-scheme: light)', color: '#37d473' },
     { media: '(prefers-color-scheme: dark)', color: '#0a0a0a' },
   ],
   width: 'device-width',
@@ -97,6 +97,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <head>
+        <meta name="google-site-verification" content="39eNGD1V-facSa8H4Ay34p8yBjGCTFjH_JvIbjqTtKA" />
+      </head>
       <body className={`font-sans antialiased`}>
         {children}
         <Analytics />
