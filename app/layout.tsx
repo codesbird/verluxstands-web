@@ -7,8 +7,10 @@ import './globals.css'
 const _inter = Inter({ subsets: ["latin"] });
 const _playfair = Playfair_Display({ subsets: ["latin"] });
 
+let baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "https://verluxstands.com";
 export const metadata: Metadata = {
-  metadataBase: new URL('https://verluxstands.com'),
+
+  metadataBase: new URL(baseUrl),
   title: {
     default: 'Verlux Stands | Premium Exhibition Stand Design & Build Company',
     template: '%s | Verlux Stands'
@@ -24,12 +26,12 @@ export const metadata: Metadata = {
     telephone: false,
   },
   alternates: {
-    canonical: '/',
+    canonical: baseUrl,
   },
   openGraph: {
     type: 'website',
     locale: 'en_GB',
-    url: 'https://verluxstands.com',
+    url: baseUrl,
     siteName: 'Verlux Stands',
     title: 'Verlux Stands | Premium Exhibition Stand Design & Build Company',
     description: 'Award-winning exhibition stand design and build company. Custom trade show booths, modular displays & bespoke exhibition solutions worldwide.',
@@ -77,7 +79,7 @@ export const metadata: Metadata = {
     apple: '/apple-icon.png',
   },
   verification: {
-    google: 'your-google-verification-code',
+    google: '39eNGD1V-facSa8H4Ay34p8yBjGCTFjH_JvIbjqTtKA',
   },
 }
 
@@ -97,9 +99,6 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <head>
-        <meta name="google-site-verification" content="39eNGD1V-facSa8H4Ay34p8yBjGCTFjH_JvIbjqTtKA" />
-      </head>
       <body className={`font-sans antialiased`}>
         {children}
         <Analytics />

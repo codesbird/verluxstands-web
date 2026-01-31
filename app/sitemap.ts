@@ -2,7 +2,7 @@ import { MetadataRoute } from "next"
 import { getIndexableSEOPages } from "@/lib/seo"
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "https://verluxstands.com"
+  let baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "https://verluxstands.com"
 
   try {
     // Fetch all indexable pages from RTDB
@@ -11,11 +11,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     if (seoPages.length > 0) {
       // Generate sitemap from CMS data
       return seoPages.map((page) => {
+
         const url = page.slug === "home" ? baseUrl : `${baseUrl}/${page.slug}`
-        const lastModified = page.lastUpdated 
+        const lastModified = page.lastUpdated
           ? new Date(typeof page.lastUpdated === 'number' ? page.lastUpdated : Date.now())
           : new Date()
-        
+
         // Determine priority based on page type
         let priority = 0.8
         if (page.slug === "home") priority = 1.0
