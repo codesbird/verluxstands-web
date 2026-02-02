@@ -22,6 +22,7 @@ import { Progress } from "@/components/ui/progress"
 import { getDatabase, ref, get } from "firebase/database"
 import { SEOPageData, SchemaType, defaultSEOData } from "@/lib/types/seo"
 import { updateSEOPage } from "@/lib/actions/seo-actions"
+import { AdminSidebarToggleButton } from "@/components/admin/sidebar"
 import {
   Loader2,
   Save,
@@ -197,12 +198,12 @@ function SEOEditorContent() {
   }
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-background flex justify-start max-h-[80vh] overflow-hidden">
       <AdminSidebar />
-      <main className="ml-64 p-8">
+      <main className="w-full p-8 overflow-y-auto">
         <div className="flex items-center justify-between mb-8">
           <div>
-            <h1 className="text-3xl font-serif text-foreground">SEO Editor</h1>
+            <h1 className="text-3xl font-serif text-foreground"><AdminSidebarToggleButton/> SEO Editor</h1>
             <p className="text-muted-foreground mt-1">
               Edit SEO settings for your pages
             </p>
@@ -586,7 +587,7 @@ function SEOEditorContent() {
 export default function SEOEditorPage() {
   return (
     <Suspense fallback={
-      <div className="min-h-screen bg-background">
+      <div className="min-h-screen bg-background flex justify-start">
         <AdminSidebar />
         <main className="ml-64 p-8 flex items-center justify-center">
           <Loader2 className="w-8 h-8 animate-spin text-primary" />

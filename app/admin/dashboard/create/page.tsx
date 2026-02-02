@@ -2,7 +2,7 @@
 
 import { useState } from "react"
 import { useRouter } from "next/navigation"
-import { AdminSidebar } from "@/components/admin/sidebar"
+import { AdminSidebar, AdminSidebarToggleButton } from "@/components/admin/sidebar"
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
@@ -123,11 +123,11 @@ export default function CreatePagePage() {
   }
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-background flex justify-start max-h-[80vh] overflow-hidden">
       <AdminSidebar />
-      <main className="ml-64 p-8">
+      <main className="w-full p-8 overflow-y-auto">
         <div className="mb-8">
-          <h1 className="text-3xl font-serif text-foreground">Create New Page</h1>
+          <h1 className="text-3xl font-serif text-foreground"><AdminSidebarToggleButton/> Create New Page</h1>
           <p className="text-muted-foreground mt-1">
             Step {step} of 2: {step === 1 ? "Page Setup" : "SEO Settings"}
           </p>

@@ -9,9 +9,18 @@ const seoCache = new Map<string, { data: SEOPageData; timestamp: number }>()
 const CACHE_TTL = 5 * 60 * 1000 // 5 minutes
 
 export async function getSEO(slug: string): Promise<SEOPageData> {
+  if (!slug || slug.startsWith(".well-known") || slug.includes(".")) {
+    console.log("Requested SEO for invalid slug:", slug)
+    return {
+      ...defaultSEOData,
+      slug,
+      canonical: `${baseUrl}/${slug === "home" ? "" : slug}`,
+    }
+  }
+
   // Normalize slug
   const normalizedSlug = slug === "/" ? "home" : slug.replace(/^\//, "")
-  
+
   // Check cache first
   const cached = seoCache.get(normalizedSlug)
   if (cached && Date.now() - cached.timestamp < CACHE_TTL) {
@@ -42,7 +51,7 @@ export async function getSEO(slug: string): Promise<SEOPageData> {
         id: normalizedSlug,
         lastUpdated: data.lastUpdated ? new Date(data.lastUpdated) : null,
       }
-      
+
       // Update cache
       seoCache.set(normalizedSlug, { data: seoData, timestamp: Date.now() })
       return seoData
@@ -135,13 +144,13 @@ export function generateMetadataFromSEO(seo: SEOPageData): Metadata {
       siteName: "Verlux Stands",
       images: seo.ogImage
         ? [
-            {
-              url: seo.ogImage.startsWith("http") ? seo.ogImage : `${baseUrl}${seo.ogImage}`,
-              width: 1200,
-              height: 630,
-              alt: seo.ogTitle || seo.title,
-            },
-          ]
+          {
+            url: seo.ogImage.startsWith("http") ? seo.ogImage : `${baseUrl}${seo.ogImage}`,
+            width: 1200,
+            height: 630,
+            alt: seo.ogTitle || seo.title,
+          },
+        ]
         : [],
       type: "website",
       locale: "en_GB",

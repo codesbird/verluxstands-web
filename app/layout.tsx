@@ -3,6 +3,7 @@ import type { Metadata, Viewport } from 'next'
 import { Inter, Playfair_Display } from 'next/font/google'
 import { Analytics } from '@vercel/analytics/next'
 import './globals.css'
+import Tracker from "@/components/analytics/Tracker"
 
 const _inter = Inter({ subsets: ["latin"] });
 const _playfair = Playfair_Display({ subsets: ["latin"] });
@@ -95,11 +96,12 @@ export const viewport: Viewport = {
 export default function RootLayout({
   children,
 }: Readonly<{
-  children: React.ReactNode
-}>) {
+    children: React.ReactNode
+  }>) {
   return (
     <html lang="en">
       <body className={`font-sans antialiased`}>
+        <Tracker />
         {children}
         <Analytics />
       </body>

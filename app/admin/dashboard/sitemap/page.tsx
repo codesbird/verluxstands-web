@@ -60,9 +60,9 @@ export default function SitemapPage() {
   const noIndexPages = pages.filter((p) => !p.index)
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-background flex justify-start overflow-hidden max-h-[90vh]">
       <AdminSidebar />
-      <main className="ml-64 p-8">
+      <main className="w-full p-8 overflow-y-auto">
         <div className="flex items-center justify-between mb-8">
           <div>
             <h1 className="text-3xl font-serif text-foreground">Sitemap</h1>

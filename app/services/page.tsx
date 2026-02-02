@@ -65,7 +65,7 @@ const services = [
 
 export default async function ServicesPage() {
   const seo = await getSEO("services")
-  
+
   return (
     <>
       <DynamicSchema seo={seo} />
@@ -73,8 +73,8 @@ export default async function ServicesPage() {
         { name: "Home", url: "https://verluxstands.com" },
         { name: "Services", url: "https://verluxstands.com/services" }
       ]} />
-      <ServiceSchema 
-        serviceName="Exhibition Stand Design & Build" 
+      <ServiceSchema
+        serviceName="Exhibition Stand Design & Build"
         description="Complete exhibition stand services including concept development, 3D design, custom fabrication, logistics and installation worldwide."
       />
       <main className="min-h-screen bg-background">
@@ -84,7 +84,7 @@ export default async function ServicesPage() {
           title="End-to-End Exhibition Solutions"
           description="From initial concept to final installation, we provide comprehensive services to ensure your exhibition presence exceeds expectations."
         />
-        
+
         <section className="py-20 md:py-28">
           <div className="container mx-auto px-6">
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">

@@ -13,8 +13,12 @@ import {
   PlusCircle,
   MapPin,
   Layers,
+  BarChart3,
+  X,
+  Menu
 } from "lucide-react"
 import { Button } from "@/components/ui/button"
+import useSidebarToggle from "@/lib/sidebar-toggle"
 
 const navItems = [
   {
@@ -48,6 +52,11 @@ const navItems = [
     icon: MapPin,
   },
   {
+    title: "Analytics",
+    href: "/admin/dashboard/analytics",
+    icon: BarChart3,
+  },
+  {
     title: "Settings",
     href: "/admin/dashboard/settings",
     icon: Settings,
@@ -57,16 +66,19 @@ const navItems = [
 export function AdminSidebar() {
   const pathname = usePathname()
   const { signOut, user } = useAuth()
+  const { isOpen, toggleSidebar } = useSidebarToggle();
 
   return (
-    <aside className="fixed left-0 top-0 h-screen w-64 bg-card border-r border-border flex flex-col">
-      <div className="p-6 border-b border-border">
+
+    <aside className={`fixed top-0 left-0 md:relative lg:relative sticky h-screen w-64 bg-card border-r border-border flex flex-col ${!isOpen && 'hidden'} md:flex`}>
+      <div className="p-3 md:p-5 border-b border-border flex items-center justify-between">
         <Link href="/admin/dashboard" className="flex items-center gap-2">
           <div className="w-8 h-8 bg-primary rounded flex items-center justify-center">
             <span className="text-primary-foreground font-bold text-sm">V</span>
           </div>
           <span className="font-serif text-lg text-foreground">Verlux CMS</span>
         </Link>
+        <button className="md:hidden" onClick={() => toggleSidebar()}><X /></button>
       </div>
 
       <nav className="flex-1 p-4 space-y-1 overflow-y-auto">
@@ -104,5 +116,20 @@ export function AdminSidebar() {
         </Button>
       </div>
     </aside>
+
+  )
+}
+
+export function AdminSidebarToggleButton() {
+  const { isOpen, toggleSidebar } = useSidebarToggle();
+
+  return (
+    <Button
+      variant="ghost"
+      className="md:hidden p-2 rounded-lg"
+      onClick={() => toggleSidebar()}
+    >
+      {!isOpen && <Menu className="w-8 h-6" />}
+    </Button>
   )
 }

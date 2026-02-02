@@ -137,9 +137,9 @@ export default function AdminSettingsPage() {
   }
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-background flex justify-start">
       <AdminSidebar />
-      <div className="ml-64 p-8">
+      <div className="w-full p-8">
         <div className="max-w-2xl">
           {/* Header */}
           <div className="mb-8">

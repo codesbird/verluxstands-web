@@ -11,6 +11,9 @@ interface PageProps {
 }
 
 async function getPageConfig(slug: string): Promise<PageConfig | null> {
+  if (!slug || slug.startsWith(".well-known") || slug.includes(".")) {
+    return null
+  }
   try {
     const snap = await adminDB!.ref(`page_builder/${slug}`).get()
     if (snap.exists()) {
@@ -27,7 +30,7 @@ async function getPageConfig(slug: string): Promise<PageConfig | null> {
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { slug: slugArray } = await params
   const slug = slugArray.join("/")
-  
+
   const seo = await getSEO(slug)
   return generateMetadataFromSEO(seo)
 }
@@ -52,29 +55,29 @@ export async function generateStaticParams() {
 export default async function DynamicPage({ params }: PageProps) {
   const { slug: slugArray } = await params
   const slug = slugArray.join("/")
-  
+
   // Check if this is a reserved route (admin, api, etc.)
   const reservedRoutes = ["admin", "api", "_next"]
   if (reservedRoutes.includes(slugArray[0])) {
     notFound()
   }
-  
+
   // Get page config from RTDB
   const pageConfig = await getPageConfig(slug)
-  
+
   // If no page config found, return 404
   if (!pageConfig) {
     notFound()
   }
-  
+
   // Check if page is published
   if (!pageConfig.isPublished) {
     notFound()
   }
-  
+
   // Get SEO data for schema
   const seo = await getSEO(slug)
-  
+
   return (
     <>
       <DynamicSchema seo={seo} />

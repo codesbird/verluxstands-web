@@ -10,6 +10,7 @@ import { SEOPageData } from "@/lib/types/seo"
 import { db } from "@/lib/firebase"
 import { seedInitialSEOData } from "@/lib/actions/seo-actions"
 import { toast } from "sonner"
+import { AdminSidebarToggleButton } from "@/components/admin/sidebar"
 
 export default function AdminDashboard() {
   const [stats, setStats] = useState({
@@ -106,17 +107,17 @@ export default function AdminDashboard() {
   ]
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen max-h-[80vh] bg-background flex justify-start overflow-hidden">
       <AdminSidebar />
-      <main className="ml-64 p-8">
+      <main className="p-8 w-full overflow-y-auto">
         <div className="mb-8">
-          <h1 className="text-3xl font-serif text-foreground">Dashboard</h1>
+          <h1 className="text-3xl font-serif text-foreground"><AdminSidebarToggleButton /> Dashboard</h1>
           <p className="text-muted-foreground mt-1">
             Welcome to the Verlux Stands CMS Dashboard
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8 w-full">
           {statCards.map((stat) => (
             <Card key={stat.title} className="bg-card border-border">
               <CardHeader className="flex flex-row items-center justify-between pb-2">
@@ -208,8 +209,8 @@ export default function AdminDashboard() {
                       className="bg-green-500 h-2 rounded-full transition-all"
                       style={{
                         width: `${stats.totalPages > 0
-                            ? (stats.indexedPages / stats.totalPages) * 100
-                            : 0
+                          ? (stats.indexedPages / stats.totalPages) * 100
+                          : 0
                           }%`,
                       }}
                     />
@@ -231,8 +232,8 @@ export default function AdminDashboard() {
                       className="bg-primary h-2 rounded-full transition-all"
                       style={{
                         width: `${stats.totalPages > 0
-                            ? ((stats.totalPages - stats.missingSchema) / stats.totalPages) * 100
-                            : 0
+                          ? ((stats.totalPages - stats.missingSchema) / stats.totalPages) * 100
+                          : 0
                           }%`,
                       }}
                     />

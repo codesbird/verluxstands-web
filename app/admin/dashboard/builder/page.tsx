@@ -6,6 +6,7 @@ import { AdminSidebar } from "@/components/admin/sidebar"
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
+import { AdminSidebarToggleButton } from "@/components/admin/sidebar"
 import {
   Select,
   SelectContent,
@@ -91,7 +92,7 @@ function SortableComponent({
     <div
       ref={setNodeRef}
       style={style}
-      className="flex items-center gap-4 p-4 bg-secondary rounded-lg border border-border group"
+      className="flex items-center gap-4 p-4 bg-secondary rounded-lg border border-border group "
     >
       <button
         {...attributes}
@@ -266,9 +267,9 @@ function PageBuilderContent() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-background">
+      <div className="min-h-screen bg-background flex justify-start">
         <AdminSidebar />
-        <main className="ml-64 p-8 flex items-center justify-center">
+        <main className="w-full p-8 flex items-center justify-center">
           <Loader2 className="w-8 h-8 animate-spin text-primary" />
         </main>
       </div>
@@ -276,12 +277,13 @@ function PageBuilderContent() {
   }
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-background flex justify-start overflow-hidden max-h-[80vh]">
       <AdminSidebar />
-      <main className="ml-64 p-8">
+      <main className="p-8 w-full overflow-y-auto">
         <div className="flex items-center justify-between mb-8">
           <div>
-            <h1 className="text-3xl font-serif text-foreground">Page Builder</h1>
+
+            <h1 className="text-3xl font-serif text-foreground"><AdminSidebarToggleButton /> Page Builder</h1>
             <p className="text-muted-foreground mt-1">
               Drag and drop components to build your page layout
             </p>
@@ -330,11 +332,10 @@ function PageBuilderContent() {
                   <button
                     key={page.slug}
                     onClick={() => handleSelectPage(page.slug)}
-                    className={`w-full text-left px-3 py-2 rounded-lg text-sm transition-colors ${
-                      selectedSlug === page.slug
-                        ? "bg-primary text-primary-foreground"
-                        : "hover:bg-secondary text-muted-foreground hover:text-foreground"
-                    }`}
+                    className={`w-full text-left px-3 py-2 rounded-lg text-sm transition-colors ${selectedSlug === page.slug
+                      ? "bg-primary text-primary-foreground"
+                      : "hover:bg-secondary text-muted-foreground hover:text-foreground"
+                      }`}
                   >
                     /{page.slug === "home" ? "" : page.slug}
                   </button>
@@ -477,9 +478,9 @@ export default function PageBuilderPage() {
   return (
     <Suspense
       fallback={
-        <div className="min-h-screen bg-background">
+        <div className="min-h-screen bg-background flex justify-start">
           <AdminSidebar />
-          <main className="ml-64 p-8 flex items-center justify-center">
+          <main className="w-full p-8 flex items-center justify-center">
             <Loader2 className="w-8 h-8 animate-spin text-primary" />
           </main>
         </div>

@@ -19,5 +19,7 @@ export default function AdminLayout({
 }: {
   children: React.ReactNode
 }) {
-  return <AdminLayoutClient>{children}</AdminLayoutClient>
+  return (
+      <AdminLayoutClient>{children}</AdminLayoutClient>
+  )
 }

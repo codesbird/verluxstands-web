@@ -4,6 +4,7 @@ import React from "react"
 import { useEffect } from "react"
 import { useRouter, usePathname } from "next/navigation"
 import { AuthProvider, useAuth } from "@/lib/auth-context"
+import { SidebarToggleProvider } from "@/lib/sidebar-toggle"
 
 function AdminAuthGuard({ children }: { children: React.ReactNode }) {
   const { user, loading } = useAuth()
@@ -38,9 +39,11 @@ export default function AdminLayoutClient({
 }) {
   return (
     <AuthProvider>
-      <AdminAuthGuard>
-        {children}
-      </AdminAuthGuard>
+      <SidebarToggleProvider>
+        <AdminAuthGuard>
+          {children}
+        </AdminAuthGuard>
+      </SidebarToggleProvider>
     </AuthProvider>
   )
 }

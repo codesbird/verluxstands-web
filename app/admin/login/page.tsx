@@ -22,8 +22,17 @@ export default function AdminLoginPage() {
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
   const [step, setStep] = useState<"login" | "totp">("login")
-  const { signIn, totpRequired, setTotpRequired, tempAuthEmail, setTempAuthEmail, tempAuthPassword, setTempAuthPassword } = useAuth()
+  const { signIn, user, loading, totpRequired, setTotpRequired, tempAuthEmail, setTempAuthEmail, tempAuthPassword, setTempAuthPassword } = useAuth()
   const router = useRouter()
+
+  // Redirect to dashboard if already logged in
+  useEffect(() => {
+    if (!loading && user) {
+      router.push("/admin/dashboard")
+      return;
+    }
+  }, [user, loading, router])
+
 
   // Check if TOTP required from previous authentication
   useEffect(() => {
@@ -40,7 +49,7 @@ export default function AdminLoginPage() {
 
     try {
       await signIn(email, password)
-      
+
       // Check if TOTP was required
       if (totpRequired) {
         setStep("totp")
@@ -71,7 +80,7 @@ export default function AdminLoginPage() {
       const encodedEmail = encodeEmailForPath(tempAuthEmail)
       const totpSettingsRef = ref(db, `user_totp_settings/${encodedEmail}`)
       const totpSnapshot = await get(totpSettingsRef)
-      
+
       if (!totpSnapshot.exists()) {
         throw new Error("TOTP not configured for this account")
       }
@@ -98,7 +107,7 @@ export default function AdminLoginPage() {
       const pw = tempAuthPassword ?? password
       if (!pw) throw new Error("Missing password for final sign-in")
       await signInWithEmailAndPassword(auth, tempAuthEmail, pw)
-      
+
       setTotpRequired(false)
       setTempAuthEmail(null)
       setTempAuthPassword(null)
@@ -136,7 +145,7 @@ export default function AdminLoginPage() {
             {step === "login" ? "Admin Login" : "Verify Code"}
           </CardTitle>
           <CardDescription className="text-muted-foreground">
-            {step === "login" 
+            {step === "login"
               ? "Access the Verlux Stands CMS Dashboard"
               : "Enter your authenticator code"}
           </CardDescription>
@@ -150,7 +159,7 @@ export default function AdminLoginPage() {
                   {error}
                 </div>
               )}
-              
+
               <div className="space-y-2">
                 <Label htmlFor="email" className="text-foreground">Email</Label>
                 <Input
@@ -163,7 +172,7 @@ export default function AdminLoginPage() {
                   className="bg-secondary border-border text-foreground"
                 />
               </div>
-              
+
               <div className="space-y-2">
                 <Label htmlFor="password" className="text-foreground">Password</Label>
                 <Input
@@ -177,8 +186,8 @@ export default function AdminLoginPage() {
                 />
               </div>
 
-              <Button 
-                type="submit" 
+              <Button
+                type="submit"
                 className="w-full bg-primary text-primary-foreground hover:bg-primary/90"
                 disabled={isLoading}
               >
@@ -204,7 +213,7 @@ export default function AdminLoginPage() {
               <div className="bg-secondary/50 rounded-lg p-4 text-sm text-muted-foreground">
                 <p>Open your authenticator app and enter the 6-digit code below.</p>
               </div>
-              
+
               <div className="space-y-2">
                 <Label htmlFor="totp" className="text-foreground">Authentication Code</Label>
                 <Input
@@ -220,8 +229,8 @@ export default function AdminLoginPage() {
                 />
               </div>
 
-              <Button 
-                type="submit" 
+              <Button
+                type="submit"
                 className="w-full bg-primary text-primary-foreground hover:bg-primary/90"
                 disabled={isLoading || totpCode.length !== 6}
               >
@@ -235,7 +244,7 @@ export default function AdminLoginPage() {
                 )}
               </Button>
 
-              <Button 
+              <Button
                 type="button"
                 variant="ghost"
                 className="w-full text-muted-foreground hover:text-foreground hover:bg-secondary"

@@ -6,6 +6,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Badge } from "@/components/ui/badge"
+import { AdminSidebarToggleButton } from "@/components/admin/sidebar"
 import {
   Table,
   TableBody,
@@ -92,12 +93,12 @@ export default function PagesListPage() {
   }
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-background flex justify-start max-h-[80vh] overflow-hidden">
       <AdminSidebar />
-      <main className="ml-64 p-8">
+      <main className="p-8 w-full overflow-y-auto">
         <div className="flex items-center justify-between mb-8">
           <div>
-            <h1 className="text-3xl font-serif text-foreground">Pages</h1>
+            <h1 className="text-3xl font-serif text-foreground"><AdminSidebarToggleButton/> Pages</h1>
             <p className="text-muted-foreground mt-1">
               Manage all your website pages and their SEO settings
             </p>

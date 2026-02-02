@@ -11,6 +11,7 @@ import { Footer } from "@/components/footer"
 import { OrganizationSchema, LocalBusinessSchema, FAQSchema } from "@/components/structured-data"
 import { getSEO, generateMetadataFromSEO } from "@/lib/seo"
 import { DynamicSchema } from "@/components/seo/schema"
+// import { SidebarToggleProvider } from "@/lib/sidebar-toggle"
 
 // Generate metadata from CMS
 export async function generateMetadata(): Promise<Metadata> {
@@ -39,24 +40,24 @@ const homeFaqs = [
 
 export default async function Home() {
   const seo = await getSEO("home")
-  
+
   return (
     <>
-      <DynamicSchema seo={seo} />
-      <OrganizationSchema />
-      <LocalBusinessSchema />
-      <FAQSchema faqs={homeFaqs} />
-      <main>
-        <Header />
-        <Hero />
-        <Services />
-        <Portfolio />
-        <About />
-        <Process />
-        <Testimonials />
-        <CTA />
-        <Footer />
-      </main>
+        <DynamicSchema seo={seo} />
+        <OrganizationSchema />
+        <LocalBusinessSchema />
+        <FAQSchema faqs={homeFaqs} />
+        <main>
+          <Header />
+          <Hero />
+          <Services />
+          <Portfolio />
+          <About />
+          <Process />
+          <Testimonials />
+          <CTA />
+          <Footer />
+        </main>
     </>
   )
 }

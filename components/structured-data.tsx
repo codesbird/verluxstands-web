@@ -25,12 +25,10 @@ export function OrganizationSchema() {
       "telephone": "+44-20-1234-5678",
       "contactType": "customer service",
       "email": "hello@verluxstands.com",
-      "availableLanguage": ["English"]
+      "availableLanguage": ["English", "Hindi"]
     },
     "sameAs": [
-      "https://www.linkedin.com/company/verluxstands",
-      "https://www.instagram.com/verluxstands",
-      "https://www.facebook.com/verluxstands"
+      "https://www.linkedin.com/company/verlux-stands",
     ],
     "areaServed": {
       "@type": "Place",
@@ -176,7 +174,7 @@ export function FAQSchema({ faqs }: { faqs: { question: string; answer: string }
 
 export function ReviewSchema({ reviews }: { reviews: { author: string; rating: number; reviewBody: string }[] }) {
   const aggregateRating = reviews.reduce((acc, r) => acc + r.rating, 0) / reviews.length
-  
+
   const schema = {
     "@context": "https://schema.org",
     "@type": "Product",
