@@ -2,7 +2,7 @@ import { adminDB, isAdminInitialized } from "./firebase-admin"
 import { SEOPageData, defaultSEOData, defaultSEOPages } from "./types/seo"
 import { Metadata } from "next"
 
-const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "https://verluxstands.com"
+const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "https://verluxstands-web.vercel.app"
 
 // Cache for SEO data to reduce RTDB reads
 const seoCache = new Map<string, { data: SEOPageData; timestamp: number }>()

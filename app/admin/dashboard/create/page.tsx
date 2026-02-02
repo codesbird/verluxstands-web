@@ -81,7 +81,7 @@ export default function CreatePagePage() {
     setSaving(true)
     try {
       const normalizedSlug = slug.toLowerCase().replace(/^\//, "").replace(/\s+/g, "-")
-      const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "https://verluxstands.com"
+      const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "https://verluxstands-web.vercel.app"
 
       // Create SEO page entry
       const seoResult = await createSEOPage({
@@ -161,7 +161,7 @@ export default function CreatePagePage() {
                 <div className="space-y-2">
                   <Label htmlFor="slug" className="text-foreground">Page Slug</Label>
                   <div className="flex items-center gap-2">
-                    <span className="text-muted-foreground">verluxstands.com/</span>
+                    <span className="text-muted-foreground">verluxstands-web.vercel.app/</span>
                     <Input
                       id="slug"
                       value={slug}

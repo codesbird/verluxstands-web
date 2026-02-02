@@ -23,7 +23,7 @@ export default function SitemapPage() {
   const [loading, setLoading] = useState(true)
   const [refreshing, setRefreshing] = useState(false)
 
-  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "https://verluxstands.com"
+  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "https://verluxstands-web.vercel.app"
 
   useEffect(() => {
     fetchPages()

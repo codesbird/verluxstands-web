@@ -54,7 +54,7 @@ export const defaultSEOData: Omit<SEOPageData, "slug"> = {
   lastUpdated: null,
 }
 
-const baseUrl = "https://verluxstands.com"
+const baseUrl = "https://verluxstands-web.vercel.app"
 
 // Default SEO pages for fallback when Firebase Admin is not configured
 export const defaultSEOPages: SEOPageData[] = [

@@ -93,8 +93,8 @@ export default async function TestimonialsPage() {
     <>
       <DynamicSchema seo={seo} />
       <BreadcrumbSchema items={[
-        { name: "Home", url: "https://verluxstands.com" },
-        { name: "Testimonials", url: "https://verluxstands.com/testimonials" }
+        { name: "Home", url: "https://verluxstands-web.vercel.app" },
+        { name: "Testimonials", url: "https://verluxstands-web.vercel.app/testimonials" }
       ]} />
       <ReviewSchema reviews={reviewsForSchema} />
       <main className="min-h-screen bg-background">

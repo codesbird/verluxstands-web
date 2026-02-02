@@ -8,7 +8,7 @@ import Tracker from "@/components/analytics/Tracker"
 const _inter = Inter({ subsets: ["latin"] });
 const _playfair = Playfair_Display({ subsets: ["latin"] });
 
-let baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "https://verluxstands.com";
+let baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "https://verluxstands-web.vercel.app";
 export const metadata: Metadata = {
 
   metadataBase: new URL(baseUrl),

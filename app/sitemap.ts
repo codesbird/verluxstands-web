@@ -2,7 +2,7 @@ import { MetadataRoute } from "next"
 import { getIndexableSEOPages } from "@/lib/seo"
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  let baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "https://verluxstands.com"
+  let baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "https://verluxstands-web.vercel.app"
 
   try {
     // Fetch all indexable pages from RTDB

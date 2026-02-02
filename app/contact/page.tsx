@@ -15,7 +15,7 @@ const contactInfo = [
   {
     icon: Mail,
     title: "Email Us",
-    details: "hello@verluxstands.com",
+    details: "hello@verluxstands-web.vercel.app",
     subtext: "We respond within 24 hours",
   },
   {

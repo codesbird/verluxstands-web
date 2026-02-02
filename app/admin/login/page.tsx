@@ -167,7 +167,7 @@ export default function AdminLoginPage() {
                   type="email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  placeholder="admin@verluxstands.com"
+                  placeholder="admin@verluxstands-web.vercel.app"
                   required
                   className="bg-secondary border-border text-foreground"
                 />

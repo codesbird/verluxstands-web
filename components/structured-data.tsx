@@ -4,8 +4,8 @@ export function OrganizationSchema() {
     "@type": "Organization",
     "name": "Verlux Stands",
     "alternateName": "Verlux Exhibition Stands",
-    "url": "https://verluxstands.com",
-    "logo": "https://verluxstands.com/images/logo.png",
+    "url": "https://verluxstands-web.vercel.app",
+    "logo": "https://verluxstands-web.vercel.app/images/logo.png",
     "description": "Award-winning exhibition stand design and build company. Custom trade show booths, modular displays & bespoke exhibition solutions worldwide.",
     "foundingDate": "2009",
     "numberOfEmployees": {
@@ -24,7 +24,7 @@ export function OrganizationSchema() {
       "@type": "ContactPoint",
       "telephone": "+44-20-1234-5678",
       "contactType": "customer service",
-      "email": "hello@verluxstands.com",
+      "email": "hello@verluxstands-web.vercel.app",
       "availableLanguage": ["English", "Hindi"]
     },
     "sameAs": [
@@ -67,9 +67,9 @@ export function LocalBusinessSchema() {
     "@context": "https://schema.org",
     "@type": "LocalBusiness",
     "name": "Verlux Stands",
-    "image": "https://verluxstands.com/images/hero-stand.jpg",
-    "@id": "https://verluxstands.com",
-    "url": "https://verluxstands.com",
+    "image": "https://verluxstands-web.vercel.app/images/hero-stand.jpg",
+    "@id": "https://verluxstands-web.vercel.app",
+    "url": "https://verluxstands-web.vercel.app",
     "telephone": "+44-20-1234-5678",
     "priceRange": "$$$$",
     "address": {
@@ -113,7 +113,7 @@ export function ServiceSchema({ serviceName, description }: { serviceName: strin
     "provider": {
       "@type": "Organization",
       "name": "Verlux Stands",
-      "url": "https://verluxstands.com"
+      "url": "https://verluxstands-web.vercel.app"
     },
     "description": description,
     "areaServed": {

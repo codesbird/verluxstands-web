@@ -1,6 +1,6 @@
 import { SEOPageData, SchemaType } from "@/lib/types/seo"
 
-const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "https://verluxstands.com"
+const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "https://verluxstands-web.vercel.app"
 
 interface SchemaProps {
   seo: SEOPageData
@@ -17,7 +17,7 @@ function generateLocalBusinessSchema(customData: Record<string, unknown> = {}) {
     logo: `${baseUrl}/images/logo.png`,
     image: `${baseUrl}/images/hero-stand.jpg`,
     telephone: "+44 20 7123 4567",
-    email: "info@verluxstands.com",
+    email: "info@verluxstands-web.vercel.app",
     address: {
       "@type": "PostalAddress",
       streetAddress: "123 Exhibition Way",

@@ -388,7 +388,7 @@ function SEOEditorContent() {
                             id="canonical"
                             value={formData.canonical || ""}
                             onChange={(e) => updateField("canonical", e.target.value)}
-                            placeholder="https://verluxstands.com/page"
+                            placeholder="https://verluxstands-web.vercel.app/page"
                             className="bg-secondary border-border"
                           />
                         </div>
@@ -401,7 +401,7 @@ function SEOEditorContent() {
                               {formData.title || "Page Title"}
                             </p>
                             <p className="text-green-600 text-sm">
-                              {formData.canonical || `https://verluxstands.com/${formData.slug}`}
+                              {formData.canonical || `https://verluxstands-web.vercel.app/${formData.slug}`}
                             </p>
                             <p className="text-muted-foreground text-sm mt-1 line-clamp-2">
                               {formData.description || "Page description will appear here..."}

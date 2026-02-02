@@ -70,8 +70,8 @@ export default async function ServicesPage() {
     <>
       <DynamicSchema seo={seo} />
       <BreadcrumbSchema items={[
-        { name: "Home", url: "https://verluxstands.com" },
-        { name: "Services", url: "https://verluxstands.com/services" }
+        { name: "Home", url: "https://verluxstands-web.vercel.app" },
+        { name: "Services", url: "https://verluxstands-web.vercel.app/services" }
       ]} />
       <ServiceSchema
         serviceName="Exhibition Stand Design & Build"

@@ -74,8 +74,8 @@ export default async function RentalVsBuyingPage() {
     <>
       <DynamicSchema seo={seo} />
       <BreadcrumbSchema items={[
-        { name: "Home", url: "https://verluxstands.com" },
-        { name: "Rental vs Buying", url: "https://verluxstands.com/rental-vs-buying" }
+        { name: "Home", url: "https://verluxstands-web.vercel.app" },
+        { name: "Rental vs Buying", url: "https://verluxstands-web.vercel.app/rental-vs-buying" }
       ]} />
       <FAQSchema faqs={rentalFaqs} />
       <main className="min-h-screen bg-background">
