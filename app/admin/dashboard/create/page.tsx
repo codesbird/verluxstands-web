@@ -125,7 +125,7 @@ export default function CreatePagePage() {
   return (
     <div className="min-h-screen bg-background flex justify-start max-h-[80vh] overflow-hidden">
       <AdminSidebar />
-      <main className="w-full p-8 overflow-y-auto">
+      <main className="w-full p-2 md:p-8 lg:p-8 overflow-y-auto">
         <div className="mb-8">
           <h1 className="text-3xl font-serif text-foreground"><AdminSidebarToggleButton/> Create New Page</h1>
           <p className="text-muted-foreground mt-1">

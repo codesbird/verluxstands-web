@@ -1,14 +1,19 @@
 "use client"
 
 import { createContext, useContext, useEffect, useState, ReactNode } from "react"
-import { 
-  User, 
-  signInWithEmailAndPassword, 
+import {
+  User,
+  signInWithEmailAndPassword,
   signOut as firebaseSignOut,
-  onAuthStateChanged 
+  onAuthStateChanged
 } from "firebase/auth"
 import { auth, db } from "./firebase"
 import { ref, get, set } from "firebase/database"
+import {
+  fetchSignInMethodsForEmail,
+  sendPasswordResetEmail
+} from "firebase/auth"
+
 import { AdminTOTPSettings, encodeEmailForPath } from "./totp"
 
 interface AuthContextType {
@@ -23,6 +28,7 @@ interface AuthContextType {
   setTempAuthEmail: (email: string | null) => void
   tempAuthPassword: string | null
   setTempAuthPassword: (pw: string | null) => void
+  resetPassword: (email: string) => Promise<void>
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined)
@@ -48,15 +54,15 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     try {
       setError(null)
       setLoading(true)
-      
+
       // First, authenticate with email and password
       await signInWithEmailAndPassword(auth, email, password)
-      
+
       // Check if TOTP is enabled for this user
       const encodedEmail = encodeEmailForPath(email)
       const totpSettingsRef = ref(db, `user_totp_settings/${encodedEmail}`)
       const totpSnapshot = await get(totpSettingsRef)
-      
+
       if (totpSnapshot.exists()) {
         const totpSettings = totpSnapshot.val() as AdminTOTPSettings
         if (totpSettings.enabled) {
@@ -89,12 +95,33 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     }
   }
 
+  const resetPassword = async (email: string) => {
+    try {
+      setError(null)
+      await sendPasswordResetEmail(auth, email)
+
+    } catch (err: any) {
+      console.error("Reset error:", err)
+
+      if (err.code === "auth/user-not-found") {
+        setError("No account found with this email.")
+      } else if (err.code === "auth/invalid-email") {
+        setError("Invalid email address.")
+      } else {
+        setError("Failed to send reset email.")
+      }
+
+      throw err
+    } finally {
+    }
+  }
+
   return (
-    <AuthContext.Provider value={{ 
-      user, 
-      loading, 
-      signIn, 
-      signOut, 
+    <AuthContext.Provider value={{
+      user,
+      loading,
+      signIn,
+      signOut,
       error,
       totpRequired,
       setTotpRequired,
@@ -102,6 +129,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       setTempAuthEmail,
       tempAuthPassword,
       setTempAuthPassword,
+      resetPassword
     }}>
       {children}
     </AuthContext.Provider>

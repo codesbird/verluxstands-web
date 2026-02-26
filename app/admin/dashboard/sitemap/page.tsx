@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react"
 import { AdminSidebar } from "@/components/admin/sidebar"
+import { AdminSidebarToggleButton } from "@/components/admin/sidebar"
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
@@ -62,15 +63,17 @@ export default function SitemapPage() {
   return (
     <div className="min-h-screen bg-background flex justify-start overflow-hidden max-h-[90vh]">
       <AdminSidebar />
-      <main className="w-full p-8 overflow-y-auto">
-        <div className="flex items-center justify-between mb-8">
+      <main className="w-full p-2 md:p-8 lg:p-8 overflow-y-auto">
+        <div className="flex items-center justify-between mb-8 gap-2">
           <div>
-            <h1 className="text-3xl font-serif text-foreground">Sitemap</h1>
+            <h1 className="text-3xl font-serif text-foreground flex gap-2">
+              <AdminSidebarToggleButton />
+              Sitemap</h1>
             <p className="text-muted-foreground mt-1">
               View and manage your sitemap for search engines
             </p>
           </div>
-          <div className="flex gap-3">
+          <div className="flex gap-3 flex-wrap">
             <Button
               variant="outline"
               onClick={handleRefresh}
@@ -259,18 +262,18 @@ export default function SitemapPage() {
           </CardHeader>
           <CardContent>
             <pre className="bg-secondary rounded-lg p-4 overflow-x-auto text-sm text-muted-foreground font-mono">
-{`<?xml version="1.0" encoding="UTF-8"?>
+              {`<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 ${indexedPages
-  .map(
-    (page) => `  <url>
+                  .map(
+                    (page) => `  <url>
     <loc>${baseUrl}/${page.slug === "home" ? "" : page.slug}</loc>
     <lastmod>${new Date().toISOString().split("T")[0]}</lastmod>
     <changefreq>weekly</changefreq>
     <priority>${page.slug === "home" ? "1.0" : "0.8"}</priority>
   </url>`
-  )
-  .join("\n")}
+                  )
+                  .join("\n")}
 </urlset>`}
             </pre>
           </CardContent>

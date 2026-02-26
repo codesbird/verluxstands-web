@@ -200,7 +200,7 @@ function SEOEditorContent() {
   return (
     <div className="min-h-screen bg-background flex justify-start max-h-[80vh] overflow-hidden">
       <AdminSidebar />
-      <main className="w-full p-8 overflow-y-auto">
+      <main className="w-full p-2 md:p-8 lg:p-8 overflow-y-auto">
         <div className="flex items-center justify-between mb-8">
           <div>
             <h1 className="text-3xl font-serif text-foreground"><AdminSidebarToggleButton/> SEO Editor</h1>

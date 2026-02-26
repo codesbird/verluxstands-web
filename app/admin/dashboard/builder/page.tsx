@@ -279,7 +279,7 @@ function PageBuilderContent() {
   return (
     <div className="min-h-screen bg-background flex justify-start overflow-hidden max-h-[80vh]">
       <AdminSidebar />
-      <main className="p-8 w-full overflow-y-auto">
+      <main className="p-2 md:p-8 lg:p-8 w-full overflow-y-auto">
         <div className="flex items-center justify-between mb-8">
           <div>
 

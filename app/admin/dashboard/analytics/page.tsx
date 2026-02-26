@@ -154,11 +154,11 @@ export default function AdminAnalyticsPage() {
     return (
         <div className="flex min-h-screen max-h-[80vh]  bg-background justify-between">
             <AdminSidebar />
-            <main className="flex-1 p-6 w-full overflow-y-auto">
+            <main className="flex-1 p-2 md:p-6 w-full overflow-y-auto">
 
-                <div className="flex items-center justify-between mb-8">
+                <div className="flex items-center justify-start mb-8 flex-wrap">
                     <AdminSidebarToggleButton />
-                    <h1 className="text-2xl font-bold w-52">Traffic Analytics</h1>
+                    <h1 className="text-2xl font-bold">Traffic Analytics</h1>
 
                     <div className="flex gap-3 flex-wrap">
                         <select

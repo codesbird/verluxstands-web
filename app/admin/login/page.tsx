@@ -9,7 +9,7 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { AlertCircle, Loader2, Shield, Lock } from "lucide-react"
+import { AlertCircle, Loader2, Shield, Lock, Eye, EyeOff } from "lucide-react"
 import { verifyTOTPCode, encodeEmailForPath } from "@/lib/totp"
 import { ref, get } from "firebase/database"
 import { db, auth } from "@/lib/firebase"
@@ -24,6 +24,7 @@ export default function AdminLoginPage() {
   const [step, setStep] = useState<"login" | "totp">("login")
   const { signIn, user, loading, totpRequired, setTotpRequired, tempAuthEmail, setTempAuthEmail, tempAuthPassword, setTempAuthPassword } = useAuth()
   const router = useRouter()
+  const [showPassword, setShowPassword] = useState(false)
 
   // Redirect to dashboard if already logged in
   useEffect(() => {
@@ -175,15 +176,22 @@ export default function AdminLoginPage() {
 
               <div className="space-y-2">
                 <Label htmlFor="password" className="text-foreground">Password</Label>
-                <Input
-                  id="password"
-                  type="password"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  placeholder="Enter your password"
-                  required
-                  className="bg-secondary border-border text-foreground"
-                />
+                <div className="relative">
+                  <Input
+                    id="password"
+                    type={`${!showPassword ? "password" : "text"}`}
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    placeholder="Enter your password"
+                    required
+                    className="bg-secondary border-border text-foreground"
+                  />
+                  <button type="button" className="absolute top-2 end-2 cursor-pointer"
+                    onClick={() => setShowPassword(!showPassword)}
+                  >
+                    {!showPassword ? <Eye /> : <EyeOff/>}
+                  </button>
+                </div>
               </div>
 
               <Button

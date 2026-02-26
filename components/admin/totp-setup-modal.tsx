@@ -147,9 +147,9 @@ export function TOTPSetupModal({
           {step === "setup" ? (
             <>
               <div className="space-y-4">
-                <div className="bg-white p-4 rounded-lg flex justify-center">
+                <div className="p-4 rounded-lg flex justify-center">
                   {qrCode ? (
-                    <img src={qrCode} alt="TOTP QR Code" className="w-48 h-48" />
+                    <img src={qrCode} alt="TOTP QR Code" className="w-48 h-48 rounded" />
                   ) : (
                     <div className="w-48 h-48 bg-secondary animate-pulse rounded" />
                   )}
@@ -190,7 +190,7 @@ export function TOTPSetupModal({
                       <Copy className="w-4 h-4" />
                     </Button>
                   </div>
-                  <p className="text-xs text-muted-foreground">
+                  <p className="text-xs text-muted-foreground my-3">
                     Save this key in a safe place. You'll need it to recover your account.
                   </p>
                 </div>

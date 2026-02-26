@@ -11,6 +11,7 @@ import { db } from "@/lib/firebase"
 import { seedInitialSEOData } from "@/lib/actions/seo-actions"
 import { toast } from "sonner"
 import { AdminSidebarToggleButton } from "@/components/admin/sidebar"
+import ConfirmModal from "@/components/Confirm"
 
 export default function AdminDashboard() {
   const [stats, setStats] = useState({
@@ -21,6 +22,7 @@ export default function AdminDashboard() {
   })
   const [loading, setLoading] = useState(true)
   const [seeding, setSeeding] = useState(false)
+  const [isConfirmOpen, setConfirmOpen] = useState(false)
 
   async function handleSeedData() {
     setSeeding(true)
@@ -109,7 +111,16 @@ export default function AdminDashboard() {
   return (
     <div className="min-h-screen max-h-[80vh] bg-background flex justify-start overflow-hidden">
       <AdminSidebar />
-      <main className="p-8 w-full overflow-y-auto">
+      <ConfirmModal
+        isOpen={isConfirmOpen}
+        title={"Set Default SEO Data"}
+        message={"Are you sure, You want to set default SEO data for all pages"}
+        confirmText={"Yes"}
+        confirmButtonClass={"bg-red-500 hover:bg-red-600"}
+        onConfirm={() => handleSeedData()}
+        onClose={() => setConfirmOpen(false)}
+      />
+      <main className="p-2 md:p-8 lg:p-8 w-full overflow-y-auto">
         <div className="mb-8">
           <h1 className="text-3xl font-serif text-foreground"><AdminSidebarToggleButton /> Dashboard</h1>
           <p className="text-muted-foreground mt-1">
@@ -172,7 +183,7 @@ export default function AdminDashboard() {
                 </div>
               </a>
               <button
-                onClick={handleSeedData}
+                onClick={() => setConfirmOpen(true)}
                 disabled={seeding}
                 className="flex items-center gap-3 p-3 rounded-lg bg-primary/10 hover:bg-primary/20 transition-colors w-full text-left disabled:opacity-50"
               >
