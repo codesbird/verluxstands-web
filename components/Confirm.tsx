@@ -5,9 +5,9 @@ import React from "react";
 interface ConfirmModalProps {
   isOpen: boolean;
   onClose: () => void;
-  onConfirm: () => void;
+  onConfirm?: () => void
   title?: string;
-  message: string;
+  message: string | undefined | null;
   confirmText?: string;
   cancelText?: string;
   confirmButtonClass?: string;
@@ -28,7 +28,7 @@ export default function ConfirmModal({
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center backdrop-blur-sm bg-black/40">
       <div className="bg-background w-full max-w-md p-5 rounded-xl shadow-lg">
-        
+
         {/* Title */}
         <h2 className="text-lg font-semibold">{title}</h2>
 
@@ -46,8 +46,8 @@ export default function ConfirmModal({
 
           <button
             onClick={() => {
-              onConfirm();
-              onClose();
+              onConfirm?.();
+              onClose?.();
             }}
             className={`px-4 py-2 text-sm rounded text-white ${confirmButtonClass}`}
           >

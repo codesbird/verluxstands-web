@@ -149,7 +149,7 @@ export default function AdminSettingsPage() {
       setTotpEnabled(true)
     } finally {
       setDisableLoading(false);
-      setConfirm(false);
+      setConfirmState(null);
     }
   }
 

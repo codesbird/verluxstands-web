@@ -15,7 +15,8 @@ import {
   Layers,
   BarChart3,
   X,
-  Menu
+  Menu,
+  Calendar
 } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import useSidebarToggle from "@/lib/sidebar-toggle"
@@ -30,6 +31,11 @@ const navItems = [
     title: "Pages",
     href: "/admin/dashboard/pages",
     icon: FileText,
+  },
+  {
+    title: "Events",
+    href: "/admin/dashboard/events",
+    icon: Calendar,
   },
   {
     title: "Create Page",
