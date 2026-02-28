@@ -358,7 +358,7 @@ export default function Events() {
 
 
             <main className="w-full p-2 md:p-8 lg:p-8 lg:pt-0 overflow-y-auto">
-                <div className="flex items-start justify-start mb-3 pt-4 z-10 bg-background flex-col">
+                <div className="mb-3 pt-4">
                     <div className="flex items-center justify-between mb-3 w-full">
                         <div>
                             <h1 className="text-3xl font-serif text-foreground">
@@ -417,7 +417,7 @@ export default function Events() {
                         </div>
 
                     </div>
-                    {<div className="flex sticky top-20 flex-wrap gap-3 mb-2 w-full">
+                    {<div className="flex flex-wrap gap-3 mb-2 w-full">
 
                         {/* Search */}
                         <input
@@ -505,7 +505,6 @@ export default function Events() {
                         </div>
                     </div>}
                 </div>
-
 
                 {
                     sortedEvents.length <= 0 &&

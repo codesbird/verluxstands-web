@@ -75,7 +75,7 @@ export default function EventCard({
     image
 }: EventCardProps) {
     return (
-        <div className="bg-[#111] border relative border-[#222] rounded-2xl p-5 hover:border-primary/50 transition-all">
+        <div className="bg-[#111] border relative border-[#222] rounded-2xl p-5 hover:bg-white/5 hover:border-primary/50 transition-all">
 
             <div className="flex gap-3 flex-wrap">
                 <div className="me-auto">
@@ -102,7 +102,7 @@ export default function EventCard({
                     {/* Attendees */}
                     <div className="flex items-center gap-2 text-sm text-gray-400 mt-2">
                         <Users size={16} />
-                        {attendees ? (<>{formatAttendees(attendees)} Attendees</>):'- - - - -'}
+                        {attendees ? (<>{formatAttendees(attendees)} Attendees</>) : '- - - - -'}
                     </div>
 
                     {/* Booking Deadline */}
@@ -121,26 +121,28 @@ export default function EventCard({
 
 
             {/* Admin Actions */}
-            <div className="flex justify-end gap-3 mt-5 flex-wrap">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-3 mt-5 flex-wrap">
                 <div className="me-auto text-sm text-gray-400">
                     <p>Create At : {timeAgo(createdAt)}</p>
                     {updatedAt && <p>Updated At : {timeAgo(updatedAt)}</p>}
                 </div>
-                 
-                <button
-                    onClick={onEdit}
-                    className="text-sm px-3 py-1 h-8 rounded bg-[#222] hover:bg-[#333]"
-                >
-                    Edit
-                </button>
 
-                <button
-                    disabled={loading}
-                    onClick={(e) => onDelete?.()}
-                    className={`text-sm px-3 h-8 py-1 rounded ${!loading ? "bg-red-600 hover:bg-red-700" : "bg-background"} text-white`}
-                >
-                    Delete
-                </button>
+                <div className="flex justify-between md:justify-end gap-4">
+                    <button
+                        onClick={onEdit}
+                        className="text-sm px-3 py-1 h-8 rounded bg-[#222] hover:bg-[#333]"
+                    >
+                        Edit
+                    </button>
+
+                    <button
+                        disabled={loading}
+                        onClick={(e) => onDelete?.()}
+                        className={`text-sm px-3 h-8 py-1 rounded ${!loading ? "bg-red-600 hover:bg-red-700" : "bg-background"} text-white`}
+                    >
+                        Delete
+                    </button>
+                </div>
             </div>
         </div>
     );
