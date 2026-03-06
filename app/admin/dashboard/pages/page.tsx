@@ -98,7 +98,7 @@ export default function PagesListPage() {
       <main className="p-2 md:p-8 lg:p-8 w-full overflow-y-auto">
         <div className="flex items-center justify-between mb-8">
           <div className="">
-            <h1 className="text-3xl font-serif text-foreground"><AdminSidebarToggleButton/> Pages</h1>
+            <h1 className="text-3xl font-serif text-foreground"><AdminSidebarToggleButton /> Pages</h1>
             <p className="text-muted-foreground mt-1">
               Manage all your website pages and their SEO settings
             </p>
@@ -128,9 +128,10 @@ export default function PagesListPage() {
           </CardHeader>
           <CardContent>
             {loading ? (
-              <div className="flex items-center justify-center py-12">
-                <Loader2 className="w-6 h-6 animate-spin text-primary" />
-              </div>
+              <main className="flex-1 items-center justify-center flex flex-col">
+                <Loader2 className="w-10 h-10 text-primary animate-spin" />
+                <span>Loading pages...</span>
+              </main>
             ) : filteredPages.length === 0 ? (
               <div className="text-center py-12">
                 <p className="text-muted-foreground">No pages found</p>

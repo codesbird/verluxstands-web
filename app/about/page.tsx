@@ -1,9 +1,10 @@
 import { Metadata } from "next"
 import Image from "next/image"
-import { Header } from "@/components/header"
-import { Footer } from "@/components/footer"
-import { PageHeader } from "@/components/page-header"
-import { DynamicSchema } from "@/components/seo/schema"
+import TopHeader from '@/components/common/top-header';
+import Header from "@/components/common/header"
+import Footer from "@/components/common/footer"
+import PageHeader from "@/components/common/page-header"
+import { DynamicSchema } from "@/components/admin/seo/schema"
 import { getSEO, generateMetadataFromSEO } from "@/lib/seo"
 import { CheckCircle2, Users, Award, Globe, Leaf } from "lucide-react"
 
@@ -51,17 +52,18 @@ const team = [
 
 export default async function AboutPage() {
   const seo = await getSEO("about")
-  
+
   return (
     <main className="min-h-screen bg-background">
       <DynamicSchema seo={seo} />
+      <TopHeader />
       <Header />
       <PageHeader
-        subtitle="Our Story"
-        title="Crafting Exhibition Excellence Since 2009"
-        description="For over 15 years, Verlux Stands has been at the forefront of exhibition design and fabrication, creating unforgettable brand experiences worldwide."
+        title="About Us"
+        subtitle="ExproGlobal is your most reliable and go-to exhibition stand builder in Europe."
+        backgroundImage={"https://www.exproglobal-europe.com/wp-content/uploads/2025/12/page-header-img2.jpg"}
       />
-      
+
       {/* Stats Section */}
       <section className="py-16 bg-card border-b border-border">
         <div className="container mx-auto px-6">
@@ -96,15 +98,15 @@ export default async function AboutPage() {
               </h2>
               <div className="space-y-4 text-muted-foreground text-lg leading-relaxed">
                 <p>
-                  Founded in 2009 by Alexander Wright, Verlux Stands began as a small design studio 
+                  Founded in 2009 by Alexander Wright, Verlux Stands began as a small design studio
                   with a bold vision: to transform how brands present themselves at trade shows and exhibitions.
                 </p>
                 <p>
-                  What started in a modest workshop has grown into an internationally recognized 
+                  What started in a modest workshop has grown into an internationally recognized
                   exhibition design company, serving Fortune 500 companies and innovative startups alike.
                 </p>
                 <p>
-                  Our team of architects, designers, and craftsmen share a common passion for creating 
+                  Our team of architects, designers, and craftsmen share a common passion for creating
                   spaces that don't just display products—they tell stories, evoke emotions, and forge connections.
                 </p>
               </div>

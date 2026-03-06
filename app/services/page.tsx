@@ -1,13 +1,15 @@
 import { Metadata } from "next"
-import { Header } from "@/components/header"
-import { Footer } from "@/components/footer"
-import { PageHeader } from "@/components/page-header"
+import TopHeader from "@/components/common/top-header"
+import Header from "@/components/common/header"
+import Footer from "@/components/common/footer"
+import PageHeader from "@/components/common/page-header"
 import { ServiceSchema, BreadcrumbSchema } from "@/components/structured-data"
-import { DynamicSchema } from "@/components/seo/schema"
+import { DynamicSchema } from "@/components/admin/seo/schema"
 import { getSEO, generateMetadataFromSEO } from "@/lib/seo"
 import { Lightbulb, Palette, Hammer, Truck, Users, Award, Settings, Zap, Globe } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import Link from "next/link"
+import QuoteButton from "@/components/common/quote-button"
 
 // Generate metadata from CMS
 export async function generateMetadata(): Promise<Metadata> {
@@ -78,11 +80,12 @@ export default async function ServicesPage() {
         description="Complete exhibition stand services including concept development, 3D design, custom fabrication, logistics and installation worldwide."
       />
       <main className="min-h-screen bg-background">
+        <TopHeader />
         <Header />
         <PageHeader
           subtitle="What We Offer"
           title="End-to-End Exhibition Solutions"
-          description="From initial concept to final installation, we provide comprehensive services to ensure your exhibition presence exceeds expectations."
+          backgroundImage="https://www.exproglobal-europe.com/wp-content/uploads/2025/12/LUBREX.jpg"
         />
 
         <section className="py-20 md:py-28">
@@ -104,11 +107,10 @@ export default async function ServicesPage() {
 
             <div className="mt-16 text-center">
               <p className="text-muted-foreground mb-6">Ready to create your perfect exhibition stand?</p>
-              <Link href="/contact">
-                <Button size="lg" className="bg-primary text-primary-foreground hover:bg-primary/90">
-                  Get a Free Quote
-                </Button>
-              </Link>
+              <QuoteButton
+                name="Get Free Quote"
+                type="button"
+              />
             </div>
           </div>
         </section>

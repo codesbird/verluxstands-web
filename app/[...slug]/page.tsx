@@ -1,10 +1,10 @@
 import { notFound } from "next/navigation"
-import { Metadata } from "next"
+import { Metadata } from "next" 
 import { adminDB } from "@/lib/firebase-admin"
 import { getSEO, generateMetadataFromSEO } from "@/lib/seo"
-import { PageConfig, SEOPageData } from "@/lib/types/seo"
-import { PageRenderer } from "@/components/cms/page-renderer"
-import { DynamicSchema } from "@/components/seo/schema"
+import { PageConfig, SEOPageData } from "@/lib/types/seo" 
+import { PageRenderer } from "@/components/admin/cms/page-renderer"
+import { DynamicSchema } from "@/components/admin/seo/schema"
 
 interface PageProps {
   params: Promise<{ slug: string[] }>

@@ -1,20 +1,21 @@
 "use client"
 
 import { AdminSidebar, AdminSidebarToggleButton } from "@/components/admin/sidebar"
-import { Button } from "@/components/ui/button"
 import { Plus } from "lucide-react"
-import EventCard from "@/components/events/eventsCard"
+import EventCard from "@/components/admin/events/eventsCard"
 import { useState, useEffect } from "react"
-import ConfirmModal from "@/components/Confirm"
-import { ArrowUp, ArrowDown, Download, Upload, ChevronDown } from "lucide-react";
+import ConfirmModal from "@/components/common/Confirm"
+import { ArrowUp, ArrowDown, Download, Upload, ChevronDown, Loader2 } from "lucide-react";
 import {
     createEvent,
     getAllEvents,
-    deleteEventById,
-    updateEvent,
+    deleteEventBySlug,
+    updateEventBySlug,
 } from "@/lib/server/events"
 
-import AddEvent from "@/components/events/addEvent"
+import AddEvent from "@/components/admin/events/addEvent"
+import EventPageBuilder from "@/components/admin/events/EventPageBuilder"
+
 
 export default function Events() {
     const [eventsData, setEventsData] = useState<any[]>([])
@@ -32,27 +33,34 @@ export default function Events() {
     } | null>(null)
 
     const [sortConfig, setSortConfig] = useState({
-        field: "createdAt", // default
-        order: "desc", // asc | desc
+        field: "createdAt",
+        order: "desc",
     });
 
     const [filters, setFilters] = useState({
         category: "all",
-        status: "all", // all | upcoming | past
+        status: "all",
         location: "all",
-        attendees: "all", // all | small | medium | large
+        attendees: "all",
         search: "",
+        eventStatus: "all"
     });
 
     const categories = new Set(eventsData.map((item) => item.category))
-    console.log("categories new one : ", [...categories])
 
     // Fetch events
     useEffect(() => {
         (async () => {
-            const res = await getAllEvents()
-            if (res.success) {
-                setEventsData(res.data || [])
+            setLoading(true);
+            try {
+                const res = await getAllEvents()
+                if (res.success) {
+                    setEventsData(res.data || [])
+                }
+            } catch (e) {
+                console.log("events fetch error: ", e)
+            } finally {
+                setLoading(false);
             }
         })()
     }, [])
@@ -68,50 +76,32 @@ export default function Events() {
     }
 
     const filteredEvents = eventsData.filter((event) => {
-        // Category filter
-        if (
-            filters.category !== "all" &&
-            event.category !== filters.category
-        )
+        if (filters.category !== "all" && event.category !== filters.category)
             return false;
 
-        // Status filter
         if (filters.status !== "all") {
             const status = getEventStatus(event.startDate, event.endDate);
             if (status !== filters.status) return false;
         }
 
-        // Location filter
+        if (filters.eventStatus !== "all") {
+            if (event.status !== filters.eventStatus) return false;
+        }
+
         if (
             filters.location !== "all" &&
-            !event.location
-                .toLowerCase()
-                .includes(filters.location.toLowerCase())
+            !event.location.toLowerCase().includes(filters.location.toLowerCase())
         )
             return false;
 
-        // Attendees filter
         if (filters.attendees !== "all") {
             const num = Number(event.attendees || 0);
-
-            if (filters.attendees === "small" && num >= 10000)
-                return false;
-            if (
-                filters.attendees === "medium" &&
-                (num < 10000 || num > 50000)
-            )
-                return false;
-            if (filters.attendees === "large" && num <= 50000)
-                return false;
+            if (filters.attendees === "small" && num >= 10000) return false;
+            if (filters.attendees === "medium" && (num < 10000 || num > 50000)) return false;
+            if (filters.attendees === "large" && num <= 50000) return false;
         }
 
-        // Search filter
-        if (
-            filters.search &&
-            !event.title
-                .toLowerCase()
-                .includes(filters.search.toLowerCase())
-        )
+        if (filters.search && !event.title.toLowerCase().includes(filters.search.toLowerCase()))
             return false;
 
         return true;
@@ -123,26 +113,16 @@ export default function Events() {
         let valueA = a[field];
         let valueB = b[field];
 
-        // Normalize values for sorting
-
-        // Date fields
-        if (
-            field === "createdAt" ||
-            field === "updatedAt"
-        ) {
+        if (field === "createdAt" || field === "updatedAt") {
             valueA = Number(valueA || 0);
             valueB = Number(valueB || 0);
         }
 
-        if (
-            field === "startDate" ||
-            field === "bookingDeadline"
-        ) {
+        if (field === "startDate" || field === "bookingDeadline") {
             valueA = valueA ? new Date(valueA).getTime() : 0;
             valueB = valueB ? new Date(valueB).getTime() : 0;
         }
 
-        // String field
         if (field === "title") {
             valueA = valueA?.toLowerCase() || "";
             valueB = valueB?.toLowerCase() || "";
@@ -150,9 +130,9 @@ export default function Events() {
 
         if (valueA < valueB) return order === "asc" ? -1 : 1;
         if (valueA > valueB) return order === "asc" ? 1 : -1;
-
         return 0;
     });
+
     // ------------------------
     // CREATE OR UPDATE EVENT
     // ------------------------
@@ -160,15 +140,26 @@ export default function Events() {
         setLoading(true)
 
         if (selectedEvent) {
-            // EDIT MODE
-            const res = await updateEvent(selectedEvent.id, data)
+            // EDIT MODE — use slug as the identifier
+            const res = await updateEventBySlug(selectedEvent.slug, data)
 
             if (res.success) {
                 setEventsData((prev) =>
                     prev.map((item) =>
-                        item.id === selectedEvent.id ? { ...item, ...data, updatedAt } : item
+                        item.slug === selectedEvent.slug
+                            ? {
+                                ...item,
+                                ...data,
+                                updatedAt,
+                                // if the title changed the slug may have changed too
+                                slug: res.newSlug ?? item.slug,
+                                id: res.newSlug ?? item.slug,
+                            }
+                            : item
                     )
                 )
+            } else {
+                alert(res.message)
             }
         } else {
             // CREATE MODE
@@ -177,14 +168,22 @@ export default function Events() {
             if (res.success) {
                 setEventsData((prev) => [
                     ...prev,
-                    { id: res.eventId, ...data },
+                    { id: res.slug, slug: res.slug, ...data },
                 ])
+            } else {
+                // Show slug conflict or other errors to the user
+                alert(res.message)
             }
         }
 
         setLoading(false)
-        setModalOpen(false)
-        setSelectedEvent(null)
+
+        if (!selectedEvent) {
+            setModalOpen(false)
+        } else {
+            setModalOpen(false)
+            setSelectedEvent(null)
+        }
     }
 
     // ------------------------
@@ -200,11 +199,12 @@ export default function Events() {
                 try {
                     setLoading(true)
 
-                    const res = await deleteEventById(event.id)
+                    // Use slug instead of id
+                    const res = await deleteEventBySlug(event.slug)
 
                     if (res.success) {
                         setEventsData((prev) =>
-                            prev.filter((item) => item.id !== event.id)
+                            prev.filter((item) => item.slug !== event.slug)
                         )
                     }
                 } finally {
@@ -224,7 +224,6 @@ export default function Events() {
 
     function formatTimestamp(timestamp?: number) {
         if (!timestamp) return ""
-
         return new Date(Number(timestamp)).toLocaleString("en-US", {
             year: "numeric",
             month: "short",
@@ -238,7 +237,7 @@ export default function Events() {
         if (!eventsData.length) return
 
         const headers = [
-            "id",
+            "slug",
             "category",
             "title",
             "startDate",
@@ -255,12 +254,10 @@ export default function Events() {
                 .map((header) => {
                     let value = event[header]
 
-                    // Convert timestamps to readable format
                     if (header === "createdAt" || header === "updatedAt") {
                         value = formatTimestamp(value)
                     }
 
-                    // Optional: format startDate & endDate nicely
                     if (header === "startDate" || header === "endDate") {
                         value = value
                             ? new Date(value).toLocaleDateString("en-US", {
@@ -276,13 +273,8 @@ export default function Events() {
                 .join(",")
         })
 
-        const csvContent =
-            headers.join(",") + "\n" + rows.join("\n")
-
-        const blob = new Blob([csvContent], {
-            type: "text/csv;charset=utf-8;",
-        })
-
+        const csvContent = headers.join(",") + "\n" + rows.join("\n")
+        const blob = new Blob([csvContent], { type: "text/csv;charset=utf-8;" })
         const url = URL.createObjectURL(blob)
         const link = document.createElement("a")
 
@@ -293,48 +285,57 @@ export default function Events() {
         document.body.removeChild(link)
     }
 
-    async function handleImportCSV(
-        e: React.ChangeEvent<HTMLInputElement>
-    ) {
+    async function handleImportCSV(e: React.ChangeEvent<HTMLInputElement>) {
         const file = e.target.files?.[0]
         if (!file) return
 
         const text = await file.text()
         const lines = text.split("\n").filter(Boolean)
-
         const headers = lines[0].split(",")
 
         const importedEvents = lines.slice(1).map((line) => {
             const values = line.split(",")
-
             const event: any = {}
             headers.forEach((header, index) => {
-                event[header.replace(/"/g, "")] =
-                    values[index]?.replace(/"/g, "") || ""
+                event[header.replace(/"/g, "")] = values[index]?.replace(/"/g, "") || ""
             })
-
             return event
         })
 
-        // Optional: validate required fields
         const validEvents = importedEvents.filter(
             (e) => e.title && e.startDate && e.endDate
         )
 
-        // Save to DB
         for (const event of validEvents) {
-            await createEvent(event)
+            const res = await createEvent(event)
+            // Skip duplicates silently during bulk import
+            if (!res.success) {
+                console.warn(`Skipped "${event.title}": ${res.message}`)
+            }
         }
 
-        // Refresh state
-        setEventsData((prev) => [...prev, ...validEvents])
+        // Refresh from DB to get accurate slugs
+        const res = await getAllEvents()
+        if (res.success) setEventsData(res.data || [])
+    }
+
+    if (loading) {
+        return (
+            <div className="flex min-h-screen items-center justify-center bg-background">
+                <AdminSidebar />
+                <main className="flex-1 items-center justify-center flex flex-col">
+                    <Loader2 className="w-10 h-10 text-primary animate-spin" />
+                    <span>Loading events...</span>
+                </main>
+            </div>
+        )
     }
 
     return (
         <div className="min-h-screen bg-background flex justify-start max-h-[80vh] overflow-hidden">
             <AdminSidebar />
 
-            {/* Modal */}
+
             <AddEvent
                 isOpen={isModalOpen}
                 onClose={() => {
@@ -359,7 +360,7 @@ export default function Events() {
 
             <main className="w-full p-2 md:p-8 lg:p-8 lg:pt-0 overflow-y-auto">
                 <div className="mb-3 pt-4">
-                    <div className="flex items-center justify-between mb-3 w-full">
+                    <div className="flex items-center justify-between w-full">
                         <div>
                             <h1 className="text-3xl font-serif text-foreground">
                                 <AdminSidebarToggleButton />
@@ -369,16 +370,16 @@ export default function Events() {
                         </div>
 
                         <div className="flex relative bg-primary rounded">
-                            <button onClick={() => {
-                                setSelectedEvent(null) // ensure create mode
-                                setModalOpen(true)
-                            }}
+                            <button
+                                onClick={() => {
+                                    setSelectedEvent(null)
+                                    setModalOpen(true)
+                                }}
                                 className="flex gap-1 items-center border-e p-2 px-2 border-yellow-300 hover:bg-yellow-500 rounded"
                             >
-                                <Plus className="w-4 h-4 " />
+                                <Plus className="w-4 h-4" />
                                 New
                             </button>
-
 
                             <button
                                 className="p-2 hover:bg-yellow-500 rounded"
@@ -389,7 +390,6 @@ export default function Events() {
 
                             {isExportOpen && (
                                 <div className="absolute right-0 mt-8 w-48 bg-[#111] border border-[#222] rounded shadow-lg z-50">
-
                                     <button
                                         onClick={() => {
                                             handleExportCSV()
@@ -411,111 +411,101 @@ export default function Events() {
                                             onChange={handleImportCSV}
                                         />
                                     </label>
-
                                 </div>
                             )}
                         </div>
-
                     </div>
-                    {<div className="flex flex-wrap gap-3 mb-2 w-full">
-
-                        {/* Search */}
-                        <input
-                            type="text"
-                            placeholder="Search by event name..."
-                            className="px-3 py-2 rounded bg-[#111] text-sm w-full max-w-[300px]"
-                            value={filters.search}
-                            onChange={(e) =>
-                                setFilters({ ...filters, search: e.target.value })
-                            }
-                        />
-
-                        {/* Category */}
-                        <select
-                            className="px-3 py-2 rounded bg-[#111] text-sm"
-                            value={filters.category}
-                            onChange={(e) =>
-                                setFilters({ ...filters, category: e.target.value })
-                            }
-                        >
-                            <option value="all">All</option>
-                            {[...categories].map((category) => (
-
-                                <option key={category} value={category}>{category.slice(0, 1).toUpperCase()}{category.slice(1)}</option>
-                            )
-                            )}
-                        </select>
-
-                        {/* Status */}
-                        <select
-                            className="px-3 py-2 rounded bg-[#111] text-sm"
-                            value={filters.status}
-                            onChange={(e) =>
-                                setFilters({ ...filters, status: e.target.value })
-                            }
-                        >
-                            <option value="all">All Status</option>
-                            <option value="upcoming">Upcoming</option>
-                            <option value="past">Past</option>
-                            <option value="ongoing">Ongoing</option>
-                        </select>
-
-                        {/* Attendees */}
-                        <select
-                            className="px-2 py-2 rounded bg-[#111] text-sm"
-                            value={filters.attendees}
-                            onChange={(e) =>
-                                setFilters({ ...filters, attendees: e.target.value })
-                            }
-                        >
-                            <option value="all">All Sizes</option>
-                            <option value="small">Small (&lt;10k)</option>
-                            <option value="medium">Medium (10k–50k)</option>
-                            <option value="large">Large (50k+)</option>
-                        </select>
-                        <div className="flex items-center gap-2 bg-[#111] rounded">
-                            <select
-                                className="px-1 py-2 rounded bg-[#111] text-sm border-e"
-                                value={sortConfig.field}
-                                onChange={(e) =>
-                                    setSortConfig((prev) => ({
-                                        ...prev,
-                                        field: e.target.value,
-                                    }))
-                                }
-                            >
-                                <option value="createdAt">Created Date</option>
-                                <option value="updatedAt">Updated Date</option>
-                                <option value="startDate">Event Date</option>
-                                <option value="bookingDeadline">Booking Deadline</option>
-                                <option value="title">Title</option>
-                            </select>
-
-                            <button
-                                title={"Asce or Desc"}
-                                onClick={toggleSortOrder}
-                                className="p-2 rounded bg-[#111] hover:bg-[#222] transition"
-                            >
-                                {sortConfig.order === "asc" ? (
-                                    <ArrowUp size={16} />
-                                ) : (
-                                    <ArrowDown size={16} />
-                                )}
-                            </button>
-                        </div>
-                    </div>}
                 </div>
 
-                {
-                    sortedEvents.length <= 0 &&
+                <div className="flex flex-wrap gap-3 mb-2 w-full sticky top-0 z-1 bg-background py-2">
+                    <input
+                        type="text"
+                        placeholder="Search by event name..."
+                        className="px-3 py-2 rounded bg-[#111] text-sm"
+                        value={filters.search}
+                        onChange={(e) => setFilters({ ...filters, search: e.target.value })}
+                    />
+
+                    <select
+                        className="px-3 py-2 rounded bg-[#111] text-sm"
+                        value={filters.category}
+                        onChange={(e) => setFilters({ ...filters, category: e.target.value })}
+                    >
+                        <option value="all">All</option>
+                        {[...categories].map((category) => (
+                            <option key={category} value={category}>
+                                {category.slice(0, 1).toUpperCase()}{category.slice(1)}
+                            </option>
+                        ))}
+                    </select>
+
+                    <select
+                        className="px-3 py-2 rounded bg-[#111] text-sm"
+                        value={filters.status}
+                        onChange={(e) => setFilters({ ...filters, status: e.target.value })}
+                    >
+                        <option value="all">All Status</option>
+                        <option value="upcoming">Upcoming</option>
+                        <option value="past">Past</option>
+                        <option value="ongoing">Ongoing</option>
+                    </select>
+
+                    <select
+                        className="px-3 py-2 rounded bg-[#111] text-sm"
+                        value={filters.eventStatus}
+                        onChange={(e) => setFilters({ ...filters, eventStatus: e.target.value })}
+                    >
+                        <option value="all">All Type</option>
+                        <option value="published">Published</option>
+                        <option value="draft">Draft</option>
+                    </select>
+
+                    <select
+                        className="px-2 py-2 rounded bg-[#111] text-sm"
+                        value={filters.attendees}
+                        onChange={(e) => setFilters({ ...filters, attendees: e.target.value })}
+                    >
+                        <option value="all">All Sizes</option>
+                        <option value="small">Small (&lt;10k)</option>
+                        <option value="medium">Medium (10k–50k)</option>
+                        <option value="large">Large (50k+)</option>
+                    </select>
+
+                    <div className="flex items-center gap-2 bg-[#111] rounded">
+                        <select
+                            className="px-1 py-2 rounded bg-[#111] text-sm border-e"
+                            value={sortConfig.field}
+                            onChange={(e) =>
+                                setSortConfig((prev) => ({ ...prev, field: e.target.value }))
+                            }
+                        >
+                            <option value="createdAt">Created Date</option>
+                            <option value="updatedAt">Updated Date</option>
+                            <option value="startDate">Event Date</option>
+                            <option value="bookingDeadline">Booking Deadline</option>
+                            <option value="title">Title</option>
+                        </select>
+
+                        <button
+                            title="Ascending or Descending"
+                            onClick={toggleSortOrder}
+                            className="p-2 rounded bg-[#111] hover:bg-[#222] transition"
+                        >
+                            {sortConfig.order === "asc" ? <ArrowUp size={16} /> : <ArrowDown size={16} />}
+                        </button>
+                    </div>
+                </div>
+
+                {sortedEvents.length <= 0 && (
                     <div className="text-center w-full">
                         <h1 className="text-2xl mt-20 text-gray-700">No Events yet!</h1>
                     </div>
-                }
+                )}
+
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-2">
                     {sortedEvents.length > 0 && sortedEvents.map((item) => (
                         <EventCard
-                            key={item.id}
+                            key={item.slug}
                             loading={loading}
                             {...item}
                             onEdit={() => {
@@ -526,7 +516,7 @@ export default function Events() {
                         />
                     ))}
                 </div>
-            </main >
-        </div >
+            </main>
+        </div>
     )
 }

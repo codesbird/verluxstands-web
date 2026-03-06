@@ -6,7 +6,7 @@ const footerLinks = {
     { label: "All Services", href: "/services" },
     { label: "Portfolio", href: "/portfolio" },
     { label: "Rental vs Buying", href: "/rental-vs-buying" },
-    { label: "Trade Show Calendar", href: "/trade-show-calendar" },
+    { label: "Trade Show Calendar", href: "/trade-shows" },
   ],
   company: [
     { label: "About Us", href: "/about" },

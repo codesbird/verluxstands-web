@@ -3,6 +3,8 @@
 import { adminDB, isAdminInitialized } from "../firebase-admin"
 
 interface EventData {
+    id?: string
+    slug?: string
     category: string
     title: string
     startDate: string
@@ -10,34 +12,70 @@ interface EventData {
     location: string
     attendees?: string
     bookingDeadline?: string
-    image:string
+    image: string
+    status: string
+    createdAt?: number
+    updatedAt?: number
 }
+
+// ─── Slug Utilities ────────────────────────────────────────────────────────────
+
+/**
+ * Converts a title into a URL-friendly slug.
+ * e.g. "My Cool Event!" → "my-cool-event"
+ */
+function generateSlug(title: string): string {
+    return title
+        .toLowerCase()
+        .trim()
+        .replace(/[^a-z0-9\s-]/g, "")   // remove special chars
+        .replace(/\s+/g, "-")            // spaces → hyphens
+        .replace(/-+/g, "-")             // collapse multiple hyphens
+}
+
+/**
+ * Checks if a slug is already taken.
+ * Returns an error message if it is, or null if it's free.
+ */
+async function checkSlugConflict(slug: string, excludeSlug?: string): Promise<string | null> {
+    if (excludeSlug && slug === excludeSlug) return null  // same event, no conflict
+
+    const snapshot = await adminDB!.ref(`events/${slug}`).get()
+
+    if (snapshot.exists()) {
+        return `An event with this name already exists. Please use a different title.`
+    }
+
+    return null
+}
+
+// ─── CRUD Actions ──────────────────────────────────────────────────────────────
 
 export const createEvent = async (data: EventData) => {
     try {
         console.log("Firebase received event data:", data)
 
-        // 1️⃣ Check Admin SDK initialization
         if (!isAdminInitialized || !adminDB) {
             throw new Error("Firebase Admin is not initialized.")
         }
 
-        // 2️⃣ Basic validation
         if (!data.category || !data.title || !data.startDate || !data.endDate || !data.location) {
             throw new Error("Missing required event fields.")
         }
 
-        // 3️⃣ Generate unique event ID
-        const newEventRef = adminDB.ref("events").push()
-        const eventId = newEventRef.key
-
-        if (!eventId) {
-            throw new Error("Failed to generate event ID.")
+        // Generate slug and check for conflicts
+        const slug = generateSlug(data.title)
+        const conflict = await checkSlugConflict(slug)
+        if (conflict) {
+            return { success: false, message: conflict }
         }
 
-        // 4️⃣ Prepare event object
-        const eventPayload = {
-            id: eventId,
+        // Use slug as the Firebase key instead of a push() ID
+        const eventRef = adminDB.ref(`events/${slug}`)
+
+        const eventPayload: EventData = {
+            id: slug,           // keep id in sync with the key for convenience
+            slug,
             category: data.category,
             title: data.title,
             startDate: data.startDate,
@@ -46,20 +84,20 @@ export const createEvent = async (data: EventData) => {
             attendees: data.attendees || "",
             bookingDeadline: data.bookingDeadline || "",
             createdAt: Date.now(),
-            image:data.image
+            image: data.image,
+            status: data.status,
         }
 
-        console.log("data is :", eventPayload)
+        console.log("Saving event payload:", eventPayload)
 
-        // 5️⃣ Save to Firebase
-        await newEventRef.set(eventPayload)
+        await eventRef.set(eventPayload)
 
-        console.log("Event created successfully:", eventId)
+        console.log("Event created successfully with slug:", slug)
 
         return {
             success: true,
             message: "Event created successfully.",
-            eventId,
+            slug,              // return slug so the caller can build a URL
         }
 
     } catch (error: any) {
@@ -85,27 +123,20 @@ export async function getAllEvents(): Promise<{
         const snapshot = await adminDB.ref("events").once("value")
 
         if (!snapshot.exists()) {
-            return {
-                success: true,
-                data: [],
-            }
+            return { success: true, data: [] }
         }
 
         const eventsObject = snapshot.val()
 
-        // Convert object to array
         const eventsArray: EventData[] = Object.keys(eventsObject).map((key) => ({
-            id: key,
             ...eventsObject[key],
+            id: key,    // always expose the Firebase key as id
         }))
 
         // Optional: sort by newest first
-        // eventsArray.sort((a, b) => b.createdAt - a.createdAt)
+        // eventsArray.sort((a, b) => (b.createdAt ?? 0) - (a.createdAt ?? 0))
 
-        return {
-            success: true,
-            data: eventsArray,
-        }
+        return { success: true, data: eventsArray }
 
     } catch (error: any) {
         console.error("Error fetching events:", error)
@@ -117,34 +148,56 @@ export async function getAllEvents(): Promise<{
     }
 }
 
+/**
+ * Fetch a single event by its slug.
+ * This is O(1) because the slug IS the Firebase key.
+ */
+export async function getEventBySlug(slug: string): Promise<{
+    success: boolean
+    message: string
+    data: EventData | null
+}> {
+    try {
+        if (!adminDB) throw new Error("Firebase Admin not initialized")
+        if (!slug) throw new Error("Slug is required")
 
-export async function deleteEventById(eventId: string): Promise<{
+        const snapshot = await adminDB.ref(`events/${slug}`).get()
+
+        if (!snapshot.exists()) {
+            return { success: false, message: "Event not found", data: null }
+        }
+
+        return {
+            success: true,
+            message: "",
+            data: snapshot.val() as EventData,
+        }
+
+    } catch (error: any) {
+        return {
+            success: false,
+            message: error?.message || "Failed to fetch event",
+            data: null,
+        }
+    }
+}
+
+export async function deleteEventBySlug(slug: string): Promise<{
     success: boolean
     message: string
 }> {
     try {
-        if (!adminDB) {
-            throw new Error("Firebase Admin not initialized")
-        }
+        if (!adminDB) throw new Error("Firebase Admin not initialized")
+        if (!slug) throw new Error("Slug is required")
 
-        if (!eventId) {
-            throw new Error("Event ID is required")
-        }
-
-        const eventRef = adminDB.ref(`events/${eventId}`)
-
+        const eventRef = adminDB.ref(`events/${slug}`)
         const snapshot = await eventRef.get()
 
-        if (!snapshot.exists()) {
-            throw new Error("Event not found")
-        }
+        if (!snapshot.exists()) throw new Error("Event not found")
 
         await eventRef.remove()
 
-        return {
-            success: true,
-            message: "Event deleted successfully",
-        }
+        return { success: true, message: "Event deleted successfully" }
 
     } catch (error: any) {
         console.error("Delete event error:", error)
@@ -156,49 +209,153 @@ export async function deleteEventById(eventId: string): Promise<{
     }
 }
 
-export async function updateEvent(eventId: string, data: object): Promise<{
+export async function updateEventBySlug(
+    slug: string,
+    data: Partial<EventData>
+): Promise<{
     success: boolean
     message: string
-    data: object | null
+    data: Partial<EventData> | null
+    newSlug?: string        // present when the title (and therefore slug) changed
 }> {
-
     try {
+        if (!adminDB) throw new Error("Firebase Admin not initialized")
+        if (!slug) throw new Error("Slug is required")
 
-        if (!adminDB) {
-            throw new Error("Firebase Admin not initialized")
-        }
-
-        if (!eventId) {
-            throw new Error("Event ID is required")
-        }
-
-        const eventRef = adminDB.ref(`events/${eventId}`)
-
+        const eventRef = adminDB.ref(`events/${slug}`)
         const snapshot = await eventRef.get()
 
-        if (!snapshot.exists()) {
-            throw new Error("Event not found")
+        if (!snapshot.exists()) throw new Error("Event not found")
+
+        let targetSlug = slug
+
+        // If the title changed we need to re-derive the slug
+        if (data.title) {
+            const baseSlug = generateSlug(data.title)
+
+            if (baseSlug !== slug) {
+                const conflict = await checkSlugConflict(baseSlug, slug)
+                if (conflict) {
+                    return { success: false, message: conflict, data: null }
+                }
+                targetSlug = baseSlug
+            }
         }
 
-        // Prevent overwriting restricted fields
-        const updatePayload = {
+        const updatePayload: Partial<EventData> = {
             ...data,
+            slug: targetSlug,
+            id: targetSlug,
             updatedAt: Date.now(),
         }
 
-        await eventRef.update(updatePayload)
+        if (targetSlug !== slug) {
+            // Move data to the new key and delete the old one
+            const oldData: EventData = snapshot.val()
+            const newEventRef = adminDB.ref(`events/${targetSlug}`)
+
+            await newEventRef.set({ ...oldData, ...updatePayload })
+            await eventRef.remove()
+
+            console.log(`Event moved from slug "${slug}" → "${targetSlug}"`)
+        } else {
+            await eventRef.update(updatePayload)
+        }
 
         return {
             success: true,
             message: "Event updated successfully",
-            data: updatePayload
+            data: updatePayload,
+            ...(targetSlug !== slug && { newSlug: targetSlug }),
         }
-    }
-    catch (error: any) {
+
+    } catch (error: any) {
         return {
             success: false,
-            message: error?.message || "Failed to delete event",
-            data: null
+            message: error?.message || "Failed to update event",
+            data: null,
+        }
+    }
+}
+
+
+export async function saveEventContent(slug: string, content: object[]): Promise<{
+    success: boolean
+    message: string
+}> {
+    try {
+        if (!adminDB) throw new Error("Firebase Admin not initialized")
+        if (!slug) throw new Error("Slug is required")
+
+        // Verify the event actually exists first
+        const eventSnapshot = await adminDB.ref(`events/${slug}`).get()
+        if (!eventSnapshot.exists()) throw new Error("Event not found")
+
+        // Store content separately under event-content/<slug>
+        // This keeps it decoupled from the event metadata
+        await adminDB.ref(`event-content/${slug}`).set({
+            blocks: content,
+            updatedAt: Date.now(),
+        })
+
+        return {
+            success: true,
+            message: "Event content saved successfully",
+        }
+
+    } catch (error: any) {
+        return {
+            success: false,
+            message: error?.message || "Failed to save the content",
+        }
+    }
+}
+
+export async function getEventContent(slug: string): Promise<{
+    success: boolean
+    message: string
+    blocks: object[]
+}> {
+    try {
+        if (!adminDB) throw new Error("Firebase Admin not initialized")
+        if (!slug) throw new Error("Slug is required")
+
+        const snapshot = await adminDB.ref(`event-content/${slug}`).get()
+
+        return {
+            success: true,
+            message: "",
+            blocks: snapshot.exists() ? snapshot.val().blocks ?? [] : [],
+        }
+
+    } catch (error: any) {
+        return {
+            success: false,
+            message: error?.message || "Failed to fetch content",
+            blocks: [],
+        }
+    }
+}
+
+export async function deleteEventContent(slug: string): Promise<{
+    success: boolean
+    message: string
+}> {
+    try {
+        if (!adminDB) throw new Error("Firebase Admin not initialized")
+        if (!slug) throw new Error("Slug is required")
+
+        await adminDB.ref(`event-content/${slug}`).remove()
+
+        return {
+            success: true,
+            message: "Event content deleted",
+        }
+
+    } catch (error: any) {
+        return {
+            success: false,
+            message: error?.message || "Failed to delete content",
         }
     }
 }

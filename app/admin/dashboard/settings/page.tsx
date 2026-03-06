@@ -13,7 +13,7 @@ import { ref, get } from "firebase/database"
 import { db } from "@/lib/firebase"
 import { toast } from "sonner"
 import { AdminTOTPSettings, encodeEmailForPath } from "@/lib/totp"
-import Confirm from "@/components/Confirm"
+import Confirm from "@/components/common/Confirm"
 import { AdminSidebarToggleButton } from "@/components/admin/sidebar"
 
 

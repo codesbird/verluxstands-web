@@ -1,10 +1,9 @@
 "use client"
 
-import { AdminSidebar } from "@/components/admin/sidebar"
+import { AdminSidebar,AdminSidebarToggleButton } from "@/components/admin/sidebar"
 import { useEffect, useState, useMemo } from "react"
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card"
 import useOnlineStatus from "@/hooks/Network-Status"
-import { AdminSidebarToggleButton } from "@/components/admin/sidebar"
 import {
     BarChart3,
     Users,
@@ -21,7 +20,8 @@ import {
     Target,
     Zap,
     ArrowRight,
-    Radio
+    Radio,
+    Loader2
 } from "lucide-react"
 import {
     LineChart,
@@ -179,7 +179,7 @@ function getAdvancedAnalytics(
         funnelData: []
     }
 
-    const conversionPages = ["contact", "trade-show-calendar", "services"]
+    const conversionPages = ["contact", "trade-shows", "services"]
     const funnelSteps = ["home", "services", "contact"]
 
     const currentDates =
@@ -413,9 +413,12 @@ export default function AdminAnalyticsPage() {
 
     if (loading) {
         return (
-            <div className="flex min-h-screen bg-background">
+            <div className="flex min-h-screen items-center justify-center bg-background">
                 <AdminSidebar />
-                <main className="flex-1 p-6 ml-64">Loading analytics…</main>
+                <main className="flex-1 items-center justify-center flex flex-col">
+                    <Loader2 className="w-10 h-10 text-primary animate-spin" />
+                    <span>Loading analytics…</span>
+                </main>
             </div>
         )
     }
@@ -423,14 +426,15 @@ export default function AdminAnalyticsPage() {
     return (
         <div className="flex min-h-screen max-h-[80vh] bg-background justify-between">
             <AdminSidebar />
-            <main className="flex-1 p-2 md:p-6 w-full overflow-y-auto">
+            <main className="flex-1 p-2 md:p-6 w-full md:pt-0 overflow-y-auto">
 
                 {/* Header */}
-                <div className="flex items-center justify-start mb-8 flex-wrap gap-3">
+                <div className="flex items-center justify-start sticky top-0 bg-background py-5 z-10 mb-8 flex-wrap gap-3">
                     <AdminSidebarToggleButton />
                     <h1 className="text-2xl font-bold me-auto">Traffic Analytics</h1>
 
                     {/* Live visitors badge */}
+                    {console.log("data  ",data)}
                     {data && (
                         <div className="flex items-center gap-2 bg-green-500/10 border border-green-500/30 text-green-400 px-3 py-1 rounded-full text-sm font-medium">
                             <span className="relative flex h-2 w-2">
@@ -460,7 +464,7 @@ export default function AdminAnalyticsPage() {
                         >
                             <option value="all">All Pages</option>
                             {Object.keys(flatPages).map(p => (
-                                <option key={p} value={p}>{p === 'trade-show-calendar' ? "Calendar" : p.slice(0, 1).toLocaleUpperCase() + p.slice(1)}</option>
+                                <option key={p} value={p}>{p === 'trade-shows' ? "Calendar" : p.slice(0, 1).toLocaleUpperCase() + p.slice(1)}</option>
                             ))}
                         </select>
                     </div>

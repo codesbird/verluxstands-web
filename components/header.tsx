@@ -11,7 +11,7 @@ const navLinks = [
   { href: "/portfolio", label: "Portfolio", active: true },
   { href: "/about", label: "About", active: false },
   { href: "/testimonials", label: "Testimonials", active: false },
-  { href: "/trade-show-calendar", label: "Calendar", active: false },
+  { href: "/trade-shows", label: "Calendar", active: false },
   { href: "/major-cities", label: "Locations", active: false },
 ]
 

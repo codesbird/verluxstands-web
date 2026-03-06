@@ -11,7 +11,7 @@ import { db } from "@/lib/firebase"
 import { seedInitialSEOData } from "@/lib/actions/seo-actions"
 import { toast } from "sonner"
 import { AdminSidebarToggleButton } from "@/components/admin/sidebar"
-import ConfirmModal from "@/components/Confirm"
+import ConfirmModal from "@/components/common/Confirm"
 
 export default function AdminDashboard() {
   const [stats, setStats] = useState({

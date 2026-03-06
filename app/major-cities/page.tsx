@@ -1,8 +1,9 @@
 import { Metadata } from "next"
-import { Header } from "@/components/header"
-import { Footer } from "@/components/footer"
-import { PageHeader } from "@/components/page-header"
-import { DynamicSchema } from "@/components/seo/schema"
+import Header from "@/components/common/header"
+import Footer from "@/components/common/footer"
+import TopHeader from '@/components/common/top-header';
+import PageHeader  from "@/components/common/page-header"
+import { DynamicSchema } from "@/components/admin/seo/schema"
 import { getSEO, generateMetadataFromSEO } from "@/lib/seo"
 import { MapPin, Building2, Calendar, ArrowRight } from "lucide-react"
 import { Button } from "@/components/ui/button"
@@ -86,11 +87,12 @@ export default async function MajorCitiesPage() {
   return (
     <main className="min-h-screen bg-background">
       <DynamicSchema seo={seo} />
+      <TopHeader />
       <Header />
       <PageHeader
         subtitle="Global Presence"
         title="We Deliver Worldwide"
-        description="With partners and teams across the globe, Verlux Stands brings your exhibition vision to life in major cities worldwide."
+        backgroundImage="https://www.exproglobal-europe.com/wp-content/uploads/2025/12/LUBREX.jpg"
       />
       
       <section className="py-20 md:py-28">

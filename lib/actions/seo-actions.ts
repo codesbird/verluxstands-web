@@ -277,11 +277,11 @@ export async function seedInitialSEOData() {
       schemaData: {},
     },
     {
-      slug: "trade-show-calendar",
+      slug: "trade-shows",
       title: "Trade Show Calendar 2026 | Major Exhibitions & Events Worldwide",
       description: "Plan your exhibition presence with our 2026 trade show calendar. CES, Mobile World Congress, Hannover Messe, Gitex & more.",
       keywords: ["trade show calendar 2026", "exhibition calendar", "upcoming trade shows"],
-      canonical: "https://verluxstands-web.vercel.app/trade-show-calendar",
+      canonical: "https://verluxstands-web.vercel.app/trade-shows",
       ogTitle: "Trade Show Calendar 2026 | Verlux Stands",
       ogDescription: "Explore major trade shows and exhibitions worldwide.",
       ogImage: "/images/hero-stand.jpg",

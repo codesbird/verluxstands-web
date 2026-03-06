@@ -16,7 +16,8 @@ import {
   BarChart3,
   X,
   Menu,
-  Calendar
+  Calendar,
+  BriefcaseBusiness
 } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import useSidebarToggle from "@/lib/sidebar-toggle"
@@ -36,6 +37,23 @@ const navItems = [
     title: "Events",
     href: "/admin/dashboard/events",
     icon: Calendar,
+  },
+  {
+    title: "Portfolio",
+    href: "/admin/dashboard/portfolios",
+    icon: BriefcaseBusiness,
+    pages: [
+      {
+        title: "Library",
+        href: "/admin/dashboard/portfolios/library",
+        icon: Search,
+      },
+      {
+        title: "Category",
+        href: "/admin/dashboard/portfolios/categories",
+        icon: Search,
+      },
+    ]
   },
   {
     title: "Create Page",
@@ -61,6 +79,23 @@ const navItems = [
     title: "Analytics",
     href: "/admin/dashboard/analytics",
     icon: BarChart3,
+    pages: [
+      {
+        title: "Map View",
+        href: "/admin/dashboard/analytics/mapview",
+        icon: BarChart3,
+      },
+      {
+        title: "Insights",
+        href: "/admin/dashboard/analytics/insights",
+        icon: BarChart3,
+      },
+      {
+        title: "Ai Predictions",
+        href: "/admin/dashboard/analytics/predictions",
+        icon: BarChart3,
+      }
+    ]
   },
   {
     title: "Settings",
@@ -87,23 +122,69 @@ export function AdminSidebar() {
         <button className="md:hidden" onClick={() => toggleSidebar()}><X /></button>
       </div>
 
-      <nav className="flex-1 p-4 space-y-1 overflow-y-auto">
-        {navItems.map((item) => {
-          const isActive = pathname === item.href
+      <nav className="flex-1 p-4 space-y-1 overflow-y-auto relative">
+        {navItems.map((item, index) => {
+          const hasChildren = !!item.pages?.length
+
+          const isExactParent = pathname === item.href
+          const isChildMatch = item.pages?.some(
+            (page) => pathname === page.href
+          )
+
+          // Parent active if exact OR child active
+          const isParentActive = isExactParent || isChildMatch
+
+          // Expand children if parent OR child active
+          const shouldExpand = hasChildren && isParentActive
+
           return (
-            <Link
-              key={item.href}
-              href={item.href}
-              className={cn(
-                "flex items-center gap-3 px-3 py-2 rounded-lg text-sm transition-colors",
-                isActive
-                  ? "bg-primary text-primary-foreground"
-                  : "text-muted-foreground hover:bg-secondary hover:text-foreground"
+            <div key={item.href}>
+              {/* Parent */}
+
+              <Link
+                href={item.href}
+                className={cn(
+                  "flex items-center gap-3 px-3 py-2 rounded-lg text-sm transition-colors",
+                  isParentActive
+                    ? "bg-primary text-primary-foreground"
+                    : "text-muted-foreground hover:bg-secondary hover:text-foreground"
+                )}
+              >
+                <item.icon className="w-4 h-4" />
+                {item.title}
+              </Link>
+
+              {/* Children */}
+              {hasChildren && (
+                <div
+                  className={cn(
+                    "flex flex-col p-1 text-sm relative ml-3 gap-1",
+                    shouldExpand ? "" : "hidden"
+                  )}
+                >
+                  {item.pages?.map((page, index) => {
+                    const isActiveChild = pathname === page.href
+
+                    return (
+                      <Link
+                        key={page.href}
+                        href={page.href}
+                        className={cn(
+                          "flex items-center gap-3 px-2 py-1 rounded-lg text-sm transition-colors",
+                          isActiveChild
+                            ? "bg-primary/80 text-primary-foreground"
+                            : "text-muted-foreground hover:bg-secondary hover:text-foreground"
+                        )}
+                      >
+                        {<span className={cn("absolute border-l borderlb border-gray-400 w-10 rounded-full z-5  top-[0] left-[-5]")} style={{ height: `${(index + 1) * 1.8}rem` }} ></span>}
+
+                        {page.title}
+                      </Link>
+                    )
+                  })}
+                </div>
               )}
-            >
-              <item.icon className="w-4 h-4" />
-              {item.title}
-            </Link>
+            </div>
           )
         })}
       </nav>
@@ -121,7 +202,7 @@ export function AdminSidebar() {
           Sign Out
         </Button>
       </div>
-    </aside>
+    </aside >
 
   )
 }

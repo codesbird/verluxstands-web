@@ -3,12 +3,17 @@ import type { Metadata, Viewport } from 'next'
 import { Inter, Playfair_Display } from 'next/font/google'
 import { Analytics } from '@vercel/analytics/next'
 import './globals.css'
-import Tracker from "@/components/analytics/Tracker"
+import Tracker from "@/components/admin/analytics/Tracker"
+import ScrollToTop from "@/components/common/scroll-to-top"
+import WhatsAppButton from "@/components/common/whatsapp-button"
+import { PopupProvider } from "@/context/popup-context"
+
 
 const _inter = Inter({ subsets: ["latin"] });
 const _playfair = Playfair_Display({ subsets: ["latin"] });
 
 let baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "https://verluxstands-web.vercel.app";
+
 export const metadata: Metadata = {
 
   metadataBase: new URL(baseUrl),
@@ -93,17 +98,23 @@ export const viewport: Viewport = {
   initialScale: 1,
 }
 
+
+
 export default function RootLayout({
   children,
 }: Readonly<{
-    children: React.ReactNode
-  }>) {
+  children: React.ReactNode
+}>) {
   return (
     <html lang="en">
       <body className={`font-sans antialiased`}>
         <Tracker />
-        {children}
+        <PopupProvider>  {/* ✅ one line, covers every page */}
+          {children}
+        </PopupProvider >
         <Analytics />
+        <WhatsAppButton />
+        <ScrollToTop />
       </body>
     </html>
   )

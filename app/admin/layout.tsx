@@ -1,6 +1,8 @@
 import { Metadata } from "next"
+import "./global-admin.css"
+import AdminLayoutClient from "@/app/admin/layout-client"
 
-// Server-side metadata: prevent Google indexing of admin panel
+// prevent indexing
 export const metadata: Metadata = {
   robots: {
     index: false,
@@ -12,14 +14,14 @@ export const metadata: Metadata = {
   description: "Private admin dashboard - not accessible to public",
 }
 
-import AdminLayoutClient from "@/app/admin/layout-client"
-
 export default function AdminLayout({
   children,
 }: {
   children: React.ReactNode
 }) {
   return (
-      <AdminLayoutClient>{children}</AdminLayoutClient>
+    <AdminLayoutClient>
+      {children}
+    </AdminLayoutClient>
   )
 }

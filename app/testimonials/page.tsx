@@ -1,9 +1,10 @@
 import { Metadata } from "next"
-import { Header } from "@/components/header"
-import { Footer } from "@/components/footer"
-import { PageHeader } from "@/components/page-header"
+import TopHeader  from "@/components/common/top-header"
+import Header  from "@/components/common/header"
+import Footer  from "@/components/common/footer"
+import PageHeader from "@/components/common/page-header"
 import { ReviewSchema, BreadcrumbSchema } from "@/components/structured-data"
-import { DynamicSchema } from "@/components/seo/schema"
+import { DynamicSchema } from "@/components/admin/seo/schema"
 import { getSEO, generateMetadataFromSEO } from "@/lib/seo"
 import { Star, Quote } from "lucide-react"
 import { Button } from "@/components/ui/button"
@@ -98,11 +99,12 @@ export default async function TestimonialsPage() {
       ]} />
       <ReviewSchema reviews={reviewsForSchema} />
       <main className="min-h-screen bg-background">
+        <TopHeader />
         <Header />
         <PageHeader
           subtitle="Client Stories"
           title="Trusted by Industry Leaders"
-          description="Don't just take our word for it. Here's what our clients have to say about working with Verlux Stands."
+          backgroundImage="https://www.exproglobal-europe.com/wp-content/uploads/2025/12/LUBREX.jpg"
         />
         
         <section className="py-20 md:py-28">

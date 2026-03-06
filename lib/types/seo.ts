@@ -161,11 +161,11 @@ export const defaultSEOPages: SEOPageData[] = [
     lastUpdated: null,
   },
   {
-    slug: "trade-show-calendar",
+    slug: "trade-shows",
     title: "Trade Show Calendar 2026 | Major Exhibitions & Events Worldwide",
     description: "Plan your exhibition presence with our 2026 trade show calendar. CES, Mobile World Congress, Hannover Messe & more.",
     keywords: ["trade show calendar 2026", "exhibition calendar", "upcoming trade shows"],
-    canonical: `${baseUrl}/trade-show-calendar`,
+    canonical: `${baseUrl}/trade-shows`,
     ogTitle: "Trade Show Calendar 2026 | Verlux Stands",
     ogDescription: "Explore major trade shows and exhibitions worldwide.",
     ogImage: "/images/hero-stand.jpg",

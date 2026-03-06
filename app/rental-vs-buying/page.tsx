@@ -1,9 +1,10 @@
 import { Metadata } from "next"
-import { Header } from "@/components/header"
-import { Footer } from "@/components/footer"
-import { PageHeader } from "@/components/page-header"
+import TopHeader  from "@/components/common/top-header"
+import Header  from "@/components/common/header"
+import Footer  from "@/components/common/footer"
+import PageHeader  from "@/components/common/page-header"
 import { FAQSchema, BreadcrumbSchema } from "@/components/structured-data"
-import { DynamicSchema } from "@/components/seo/schema"
+import { DynamicSchema } from "@/components/admin/seo/schema"
 import { getSEO, generateMetadataFromSEO } from "@/lib/seo"
 import { Check, ArrowRight } from "lucide-react"
 import { Button } from "@/components/ui/button"
@@ -79,11 +80,12 @@ export default async function RentalVsBuyingPage() {
       ]} />
       <FAQSchema faqs={rentalFaqs} />
       <main className="min-h-screen bg-background">
+        <TopHeader />
         <Header />
         <PageHeader
           subtitle="Making the Right Choice"
           title="Rental vs Buying: Which Is Right for You?"
-          description="Both options have their merits. Let us help you make an informed decision based on your specific needs, budget, and exhibition frequency."
+          backgroundImage="https://www.exproglobal-europe.com/wp-content/uploads/2025/12/LUBREX.jpg"
         />
         
         <section className="py-20 md:py-28">
