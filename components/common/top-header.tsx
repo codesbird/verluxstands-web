@@ -17,15 +17,15 @@ export default function TopHeader() {
           <div className="flex items-center gap-2">
             <Link href="/">
               <Image
-                src="https://verluxstands.com/assets/icons/logo2.png"
+                src="/verlux-logo.png"
                 alt="Verlux Stands Logo"
-                width={70}
-                height={40}
-                className="w-40 h-10 object-contain"
-                style={{ filter: "invert(6)" }}
+                width={140}
+                height={50}
+                className="h-12 w-auto object-contain"
+                priority
               />
             </Link>
-            <span className="font-semibold text-muted-foreground hidden md:flex lg:hidden xl:flex font-medium">Exhibition Stand Solutions</span>
+            <span className="font-semibold text-[#C4A066] hidden md:flex lg:hidden xl:flex font-medium text-sm">Exhibition Stand Solutions</span>
           </div>
 
           {/* Contact Info */}

@@ -15,19 +15,27 @@ const heroImages = [
 
 const heroTexts = [
   {
-    title: 'WORLD-CLASS EXHIBITION STAND BUILDERS & BOOTH DESIGNERS',
+    titlePart1: 'WORLD-CLASS EXHIBITION',
+    titlePart2: 'STAND BUILDERS &',
+    titlePart3: 'BOOTH DESIGNERS',
     subtitle: 'Welcome to Verlux Stands, your trusted global exhibition stand builder, offering complete and innovative exhibiting solutions with excellence.',
   },
   {
-    title: 'CREATIVE DESIGN & EXPERT EXECUTION',
+    titlePart1: 'CREATIVE DESIGN &',
+    titlePart2: 'EXPERT',
+    titlePart3: 'EXECUTION',
     subtitle: 'We craft exceptional exhibition stands that amplify your brand presence and captivate audiences through innovative design and precision.',
   },
   {
-    title: 'WORLDWIDE NETWORK, LOCAL EXCELLENCE',
+    titlePart1: 'WORLDWIDE NETWORK,',
+    titlePart2: 'LOCAL',
+    titlePart3: 'EXCELLENCE',
     subtitle: 'Serving clients globally with cutting-edge designs and dedicated on-site support for all your exhibition needs.',
   },
   {
-    title: 'VISION TO REALITY IN EVERY PROJECT',
+    titlePart1: 'VISION TO REALITY',
+    titlePart2: 'IN EVERY',
+    titlePart3: 'PROJECT',
     subtitle: 'Your exhibition dreams come true through our comprehensive design, manufacturing, and professional installation services.',
   },
 ];
@@ -44,9 +52,8 @@ const benefits = [
 export default function HeroAnimated() {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [currentTextIndex, setCurrentTextIndex] = useState(0);
-  const [displayedTitle, setDisplayedTitle] = useState('');
-  const [displayedSubtitle, setDisplayedSubtitle] = useState('');
-  const [isTyping, setIsTyping] = useState(true);
+  const [displayedTitlePart3, setDisplayedTitlePart3] = useState('');
+  const [isTyping, setIsTyping] = useState(false);
   const { openQuotePopup } = usePopup()
 
 
@@ -63,43 +70,27 @@ export default function HeroAnimated() {
     const textTimer = setInterval(() => {
       setCurrentTextIndex((prev) => (prev + 1) % heroTexts.length);
       setIsTyping(true);
+      setDisplayedTitlePart3('');
     }, 10000);
     return () => clearInterval(textTimer);
   }, []);
 
-  // Typing animation for title
+  // Typing animation for the last word only
   useEffect(() => {
     const currentText = heroTexts[currentTextIndex];
     let titleIndex = 0;
 
     const titleTimer = setInterval(() => {
-      if (titleIndex <= currentText.title.length) {
-        setDisplayedTitle(currentText.title.substring(0, titleIndex));
+      if (titleIndex <= currentText.titlePart3.length) {
+        setDisplayedTitlePart3(currentText.titlePart3.substring(0, titleIndex));
         titleIndex++;
       } else {
         clearInterval(titleTimer);
-      }
-    }, 60);
-
-    return () => clearInterval(titleTimer);
-  }, [currentTextIndex]);
-
-  // Typing animation for subtitle
-  useEffect(() => {
-    const currentText = heroTexts[currentTextIndex];
-    let subtitleIndex = 0;
-
-    const subtitleTimer = setInterval(() => {
-      if (subtitleIndex <= currentText.subtitle.length) {
-        setDisplayedSubtitle(currentText.subtitle.substring(0, subtitleIndex));
-        subtitleIndex++;
-      } else {
-        clearInterval(subtitleTimer);
         setIsTyping(false);
       }
-    }, 50);
+    }, 80);
 
-    return () => clearInterval(subtitleTimer);
+    return () => clearInterval(titleTimer);
   }, [currentTextIndex]);
 
   return (
@@ -128,16 +119,19 @@ export default function HeroAnimated() {
 
       {/* Content */}
       <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-20 text-center">
-        {/* Main Heading with Typing Animation */}
-        <h1 className="text-3xl sm:text-5xl lg:text-6xl font-serif font-bold text-white mb-6 md:mb-8 leading-tight min-h-20 text-balance tracking-wide">
-          {displayedTitle}
-          <span className="animate-pulse ml-1">|</span>
+        {/* Main Heading - Static title with animated last word */}
+        <h1 className="text-3xl sm:text-5xl lg:text-6xl font-serif font-bold text-white mb-6 md:mb-8 leading-tight text-balance tracking-wide">
+          <div>{heroTexts[currentTextIndex].titlePart1}</div>
+          <div>{heroTexts[currentTextIndex].titlePart2}</div>
+          <div className="text-[#C4A066]">
+            {displayedTitlePart3}
+            {isTyping && <span className="animate-pulse">|</span>}
+          </div>
         </h1>
 
-        {/* Subtitle with Typing Animation */}
-        <p className="text-base sm:text-lg lg:text-xl text-white/85 mb-10 md:mb-12 max-w-3xl mx-auto leading-relaxed min-h-16 font-sans">
-          {displayedSubtitle}
-          {isTyping && <span className="animate-pulse">|</span>}
+        {/* Subtitle - Static text */}
+        <p className="text-base sm:text-lg lg:text-xl text-white/85 mb-10 md:mb-12 max-w-3xl mx-auto leading-relaxed font-sans">
+          {heroTexts[currentTextIndex].subtitle}
         </p>
 
         {/* CTA Buttons */}
