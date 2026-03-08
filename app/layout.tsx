@@ -1,6 +1,6 @@
 import React from "react"
 import type { Metadata, Viewport } from 'next'
-import { Inter, Playfair_Display } from 'next/font/google'
+import { Open_Sans, Playfair_Display } from 'next/font/google'
 import { Analytics } from '@vercel/analytics/next'
 import './globals.css'
 import Tracker from "@/components/admin/analytics/Tracker"
@@ -9,8 +9,8 @@ import WhatsAppButton from "@/components/common/whatsapp-button"
 import { PopupProvider } from "@/context/popup-context"
 
 
-const _inter = Inter({ subsets: ["latin"] });
-const _playfair = Playfair_Display({ subsets: ["latin"] });
+const _openSans = Open_Sans({ subsets: ["latin"], variable: "--font-open-sans" });
+const _playfair = Playfair_Display({ subsets: ["latin"], variable: "--font-playfair" });
 
 let baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "https://verluxstands-web.vercel.app";
 
@@ -91,8 +91,8 @@ export const metadata: Metadata = {
 
 export const viewport: Viewport = {
   themeColor: [
-    { media: '(prefers-color-scheme: light)', color: '#37d473' },
-    { media: '(prefers-color-scheme: dark)', color: '#0a0a0a' },
+    { media: '(prefers-color-scheme: light)', color: '#C4A066' },
+    { media: '(prefers-color-scheme: dark)', color: '#111111' },
   ],
   width: 'device-width',
   initialScale: 1,
@@ -106,8 +106,8 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en">
-      <body className={`font-sans antialiased`}>
+    <html lang="en" style={{ colorScheme: 'dark' }}>
+      <body className={`${_openSans.className} ${_playfair.variable} font-sans antialiased bg-background text-foreground`}>
         <Tracker />
         <PopupProvider>  {/* ✅ one line, covers every page */}
           {children}

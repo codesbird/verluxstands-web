@@ -103,7 +103,7 @@ export default function HeroAnimated() {
   }, [currentTextIndex]);
 
   return (
-    <section className="relative w-full h-kscreen min-h-screen flex items-center justify-center overfklow-hidden">
+    <section className="relative w-full min-h-screen flex items-center justify-center overflow-hidden bg-[#111111]">
       {/* Background Image Slideshow */}
       <div className="absolute inset-0 -z-20">
         {heroImages.map((image, index) => (
@@ -123,61 +123,67 @@ export default function HeroAnimated() {
         ))}
       </div>
 
-      {/* Dark Overlay */}
-      <div className="absolute inset-0 -z-10 bg-black/75" />
+      {/* Premium Dark Overlay */}
+      <div className="absolute inset-0 -z-10 bg-gradient-to-r from-black/85 via-black/75 to-black/85" />
 
       {/* Content */}
-      <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 pt-6 md:pt-0 lg:pt-0 text-center">
+      <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-20 text-center">
         {/* Main Heading with Typing Animation */}
-        <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white mb-8 leading-tight min-h-20 text-balance">
+        <h1 className="text-3xl sm:text-5xl lg:text-6xl font-serif font-bold text-white mb-6 md:mb-8 leading-tight min-h-20 text-balance tracking-wide">
           {displayedTitle}
-          <span className="animate-pulse">|</span>
+          <span className="animate-pulse ml-1">|</span>
         </h1>
 
         {/* Subtitle with Typing Animation */}
-        <p className="text-lg sm:text-xl text-white/90 mb-12 max-w-3xl mx-auto leading-relaxed min-h-16">
+        <p className="text-base sm:text-lg lg:text-xl text-white/85 mb-10 md:mb-12 max-w-3xl mx-auto leading-relaxed min-h-16 font-sans">
           {displayedSubtitle}
           {isTyping && <span className="animate-pulse">|</span>}
         </p>
 
-        {/* Benefits Grid */}
-        <div className="flex justify-start md:justify-center flex-wrap gap-4 mb-12 px-4">
-          {benefits.map((benefit, index) => (
-            <div
-              key={index}
-              className={`flex items-center ${index < 5 && "md:border-e pe-2"} gap-1 max-w-xl text-white/90 text-sm hover:text-white transition-colors`}
-            >
-              <span className="text-xl font-bold text-white/70"><Award size={15} /></span>
-              <span className="font-medium">{benefit.title}</span>
-              <span className="font-medium">{benefit.icon}</span>
-            </div>
-          ))}
-        </div>
-
         {/* CTA Buttons */}
-        <div className="flex flex-col mb-20 md:mb-0 lg:mb-0 sm:flex-row items-center justify-center gap-4">
+        <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-12 md:mb-16">
           <Button
             onClick={openQuotePopup}
-            className="px-8 py-6 bg-primary hover:bg-primary/90 text-accent-foreground font-bold text-lg rounded-lg">
+            className="px-8 sm:px-10 py-3 sm:py-4 border-2 border-[#C4A066] bg-transparent text-[#C4A066] hover:bg-[#C4A066] hover:text-[#111111] font-sans font-bold text-base sm:text-lg rounded-md transition-all duration-300"
+          >
             Get Free Quote
           </Button>
           <Button
             variant="outline"
-            className="px-8 py-6 border-2 border-white bg-black/30 text-white/80 hover:bg-white/10 font-bold text-lg rounded-lg"
+            className="px-8 sm:px-10 py-3 sm:py-4 border-2 border-[#E5D5B8] bg-transparent text-[#E5D5B8] hover:bg-[#E5D5B8] hover:text-[#111111] font-sans font-bold text-base sm:text-lg rounded-md transition-all duration-300"
           >
             View Portfolio
           </Button>
         </div>
+
+        {/* Benefits Grid */}
+        <div className="flex flex-wrap justify-center gap-3 md:gap-4 px-2 md:px-4 text-center">
+          {benefits.map((benefit, index) => (
+            <div
+              key={index}
+              className={`flex items-center gap-2 text-white/80 text-xs sm:text-sm font-sans hover:text-white transition-colors ${
+                index < benefits.length - 1 ? 'border-r border-white/30 pr-3 md:pr-4' : ''
+              }`}
+            >
+              <Award size={16} className="text-[#C4A066] flex-shrink-0" />
+              <span className="font-medium">{benefit.title}</span>
+            </div>
+          ))}
+        </div>
       </div>
 
       {/* Image Indicator Dots */}
-      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-20 flex gap-2">
+      <div className="absolute bottom-6 md:bottom-8 left-1/2 -translate-x-1/2 z-20 flex gap-2">
         {heroImages.map((_, index) => (
           <button
             key={index}
             onClick={() => setCurrentImageIndex(index)}
-            className={`w-2 h-2 rounded-full transition-all ${index === currentImageIndex ? 'bg-accent w-8' : 'bg-white/50 hover:bg-white/80'
-              }`}
+            className={`transition-all duration-300 rounded-full ${
+              index === currentImageIndex 
+                ? 'bg-[#C4A066] w-8 h-2' 
+                : 'bg-white/40 hover:bg-white/60 w-2 h-2'
+            }`}
+            aria-label={`Go to slide ${index + 1}`}
           />
         ))}
       </div>
