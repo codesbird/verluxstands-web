@@ -1,156 +1,86 @@
-import { Mail, Phone, MapPin } from 'lucide-react';
-import Image from 'next/image';
+import Link from 'next/link'
+import { Mail, Phone, MapPin } from 'lucide-react'
+
+const services = [
+  'Custom Exhibition Stand',
+  'Double Decker Stands',
+  'Outdoor Exhibition Stands',
+  'Country Pavilion Stands',
+  'Sustainable Stands',
+]
+
+const quickLinks = [
+  { label: 'About Us', href: '/about' },
+  { label: 'Services', href: '/services' },
+  { label: 'Portfolio', href: '/portfolio' },
+  { label: 'Trade Shows', href: '/trade-shows' },
+  { label: 'Contact Us', href: '/contact' },
+]
+
+const locations = ['Germany', 'Spain', 'France', 'Italy', 'Dubai']
 
 export default function Footer() {
-  const currentYear = new Date().getFullYear();
+  const currentYear = new Date().getFullYear()
 
   return (
-    <footer className="bg-primary text-primary-foreground">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16">
-        {/* Main Content */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-8 sm:gap-10 mb-12">
-          {/* Company Info */}
-          <div className="lg:col-span-2">
-            <div className="flex items-start justify-center flex-col gap-0 mb-4">
-              <Image
-                src="https://verluxstands.com/assets/icons/logo2.png"
-                alt="Verlux Stands Logo"
-                width={40}
-                height={40}
-                className="w-30 h-10 object-contain"
-              />
-              <span className="text-sm font-bold">Private Limited.</span>
-            </div>
-            <p className="text-primary-foreground/80 mb-6 leading-relaxed">
-              Your trusted exhibition stand builder, offering creative and customized exhibiting solutions globally since 2008.
+    <footer className="px-3 pb-8 pt-16 sm:px-6 lg:px-10">
+      <div className="brand-shell mx-auto max-w-7xl overflow-hidden rounded-[1.75rem] px-6 py-10 sm:px-8 lg:px-10 lg:py-12">
+        <div className="grid gap-10 lg:grid-cols-[1.35fr_1fr_1fr_1fr]">
+          <div>
+            <div className="font-serif text-4xl font-bold tracking-[0.18em] text-secondary">VERLUX</div>
+            <div className="mt-2 text-xs uppercase tracking-[0.45em] text-secondary/60">Stands</div>
+            <p className="mt-6 max-w-md text-sm leading-7 text-white/70">
+              Your trusted exhibition stand builder, delivering elegant design systems, tailored fabrication, and global execution with a premium Verlux finish.
             </p>
-            <div className="space-y-3">
-              <div className="flex items-center gap-3">
-                <Phone className="w-4 h-4 text-secondary flex-shrink-0" />
-                <a href="tel:+15551234567" className="hover:text-secondary transition-colors">
-                  +1 (555) 123-4567
-                </a>
-              </div>
-              <div className="flex items-center gap-3">
-                <Mail className="w-4 h-4 text-secondary flex-shrink-0" />
-                <a href="mailto:info@verluxstands.com" className="hover:text-secondary transition-colors">
-                  info@verluxstands.com
-                </a>
-              </div>
-              <div className="flex items-start gap-3">
-                <MapPin className="w-4 h-4 text-secondary flex-shrink-0 mt-1" />
-                <div>
-                  <p className="text-sm">Global Exhibition Solutions</p>
-                  <p className="text-sm">Multiple Locations Worldwide</p>
-                </div>
+            <div className="mt-6 space-y-3 text-sm text-secondary/80">
+              <a href="tel:+15551234567" className="flex items-center gap-3 transition-colors hover:text-white">
+                <Phone className="h-4 w-4 text-primary" />
+                +1 (555) 123-4567
+              </a>
+              <a href="mailto:info@verluxstands.com" className="flex items-center gap-3 transition-colors hover:text-white">
+                <Mail className="h-4 w-4 text-primary" />
+                info@verluxstands.com
+              </a>
+              <div className="flex items-start gap-3 text-white/70">
+                <MapPin className="mt-0.5 h-4 w-4 text-primary" />
+                <span>Global exhibition stand solutions with worldwide event coverage.</span>
               </div>
             </div>
           </div>
 
-          {/* Services */}
           <div>
-            <h4 className="font-bold mb-4 text-2xl">Services</h4>
-            <ul className="space-y-2 text-sm">
-              <li>
-                <a href="#" className="hover:text-secondary transition-colors">
-                  Custom Exhibition Stand
-                </a>
-              </li>
-              <li>
-                <a href="#" className="hover:text-white/90 hover:scale-10 transition-colors">
-                  Double Decker Stands
-                </a>
-              </li>
-              <li>
-                <a href="#" className="hover:text-secondary transition-colors">
-                  Outdoor Exhibition Stands
-                </a>
-              </li>
-              <li>
-                <a href="#" className="hover:text-secondary transition-colors">
-                  Country Pavilion Stands
-                </a>
-              </li>
-              <li>
-                <a href="#" className="hover:text-secondary transition-colors">
-                  Sustainable Stands
-                </a>
-              </li>
-            </ul>
+            <h4 className="text-xl text-secondary">Services</h4>
+            <div className="mt-5 space-y-3 text-sm text-white/72">
+              {services.map((service) => (
+                <div key={service}>{service}</div>
+              ))}
+            </div>
           </div>
 
-          {/* Quick Links */}
           <div>
-            <h4 className="font-bold mb-4 text-lg">Quick Links</h4>
-            <ul className="space-y-2 text-sm">
-              <li>
-                <a href="#about" className="hover:text-secondary transition-colors">
-                  About Us
-                </a>
-              </li>
-              <li>
-                <a href="#services" className="hover:text-secondary transition-colors">
-                  Exhibition Stands
-                </a>
-              </li>
-              <li>
-                <a href="#portfolio" className="hover:text-secondary transition-colors">
-                  Portfolio
-                </a>
-              </li>
-              <li>
-                <a href="#global" className="hover:text-secondary transition-colors">
-                  Our Global Presence
-                </a>
-              </li>
-              <li>
-                <a href="#" className="hover:text-secondary transition-colors">
-                  Contact Us
-                </a>
-              </li>
-            </ul>
+            <h4 className="text-xl text-secondary">Quick Links</h4>
+            <div className="mt-5 space-y-3 text-sm text-white/72">
+              {quickLinks.map((item) => (
+                <Link key={item.href} href={item.href} className="block transition-colors hover:text-secondary">
+                  {item.label}
+                </Link>
+              ))}
+            </div>
           </div>
 
-          {/* Locations */}
           <div>
-            <h4 className="font-bold mb-4 text-lg">Locations</h4>
-            <ul className="space-y-2 text-sm">
-              <li>
-                <a href="#" className="hover:text-secondary transition-colors">
-                  Germany
-                </a>
-              </li>
-              <li>
-                <a href="#" className="hover:text-secondary transition-colors">
-                  Spain
-                </a>
-              </li>
-              <li>
-                <a href="#" className="hover:text-secondary transition-colors">
-                  Italy
-                </a>
-              </li>
-              <li>
-                <a href="#" className="hover:text-secondary transition-colors">
-                  France
-                </a>
-              </li>
-              <li>
-                <a href="#" className="hover:text-secondary transition-colors">
-                  Netherlands
-                </a>
-              </li>
-            </ul>
+            <h4 className="text-xl text-secondary">Locations</h4>
+            <div className="mt-5 space-y-3 text-sm text-white/72">
+              {locations.map((location) => (
+                <div key={location}>{location}</div>
+              ))}
+            </div>
           </div>
         </div>
 
-        {/* Divider */}
-        <div className="border-t border-primary-foreground/20 pt-8 sm:pt-10">
-          <p className="text-center text-sm text-primary-foreground/70">
-            Copyright © {currentYear} Verlux Stands Private Limited | All Rights Reserved
-          </p>
-        </div>
+        <div className="mt-10 h-px brand-divider" />
+        <p className="mt-6 text-center text-sm text-white/55">Copyright {currentYear} Verlux Stands. All rights reserved.</p>
       </div>
     </footer>
-  );
+  )
 }

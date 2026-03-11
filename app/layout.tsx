@@ -1,31 +1,48 @@
 import React from "react"
-import type { Metadata, Viewport } from 'next'
-import { Inter, Playfair_Display } from 'next/font/google'
-import { Analytics } from '@vercel/analytics/next'
-import './globals.css'
+import type { Metadata, Viewport } from "next"
+import { Open_Sans, Playfair_Display } from "next/font/google"
+import { Analytics } from "@vercel/analytics/next"
+import "./globals.css"
 import Tracker from "@/components/admin/analytics/Tracker"
 import ScrollToTop from "@/components/common/scroll-to-top"
 import WhatsAppButton from "@/components/common/whatsapp-button"
 import { PopupProvider } from "@/context/popup-context"
 
+const openSans = Open_Sans({
+  subsets: ["latin"],
+  variable: "--font-open-sans",
+})
 
-const _inter = Inter({ subsets: ["latin"] });
-const _playfair = Playfair_Display({ subsets: ["latin"] });
+const playfair = Playfair_Display({
+  subsets: ["latin"],
+  variable: "--font-playfair",
+})
 
-let baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "https://verluxstands-web.vercel.app";
+const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "https://verluxstands-web.vercel.app"
 
 export const metadata: Metadata = {
-
   metadataBase: new URL(baseUrl),
   title: {
-    default: 'Verlux Stands | Premium Exhibition Stand Design & Build Company',
-    template: '%s | Verlux Stands'
+    default: "Verlux Stands | Premium Exhibition Stand Design & Build Company",
+    template: "%s | Verlux Stands",
   },
-  description: 'Award-winning exhibition stand design and build company. Custom trade show booths, modular displays & bespoke exhibition solutions worldwide. 15+ years experience, 500+ projects delivered.',
-  keywords: ['exhibition stands', 'trade show booths', 'exhibition stand design', 'custom exhibition stands', 'modular exhibition stands', 'trade show displays', 'exhibition stand builders', 'booth design', 'stand rental', 'exhibition contractors'],
-  authors: [{ name: 'Verlux Stands' }],
-  creator: 'Verlux Stands',
-  publisher: 'Verlux Stands',
+  description:
+    "Award-winning exhibition stand design and build company. Custom trade show booths, modular displays & bespoke exhibition solutions worldwide. 15+ years experience, 500+ projects delivered.",
+  keywords: [
+    "exhibition stands",
+    "trade show booths",
+    "exhibition stand design",
+    "custom exhibition stands",
+    "modular exhibition stands",
+    "trade show displays",
+    "exhibition stand builders",
+    "booth design",
+    "stand rental",
+    "exhibition contractors",
+  ],
+  authors: [{ name: "Verlux Stands" }],
+  creator: "Verlux Stands",
+  publisher: "Verlux Stands",
   formatDetection: {
     email: false,
     address: false,
@@ -35,26 +52,28 @@ export const metadata: Metadata = {
     canonical: baseUrl,
   },
   openGraph: {
-    type: 'website',
-    locale: 'en_GB',
+    type: "website",
+    locale: "en_GB",
     url: baseUrl,
-    siteName: 'Verlux Stands',
-    title: 'Verlux Stands | Premium Exhibition Stand Design & Build Company',
-    description: 'Award-winning exhibition stand design and build company. Custom trade show booths, modular displays & bespoke exhibition solutions worldwide.',
+    siteName: "Verlux Stands",
+    title: "Verlux Stands | Premium Exhibition Stand Design & Build Company",
+    description:
+      "Award-winning exhibition stand design and build company. Custom trade show booths, modular displays & bespoke exhibition solutions worldwide.",
     images: [
       {
-        url: '/images/hero-stand.jpg',
+        url: "/images/hero-stand.jpg",
         width: 1200,
         height: 630,
-        alt: 'Verlux Stands - Premium Exhibition Solutions',
+        alt: "Verlux Stands - Premium Exhibition Solutions",
       },
     ],
   },
   twitter: {
-    card: 'summary_large_image',
-    title: 'Verlux Stands | Premium Exhibition Stand Design & Build',
-    description: 'Award-winning exhibition stand design and build company. Custom trade show booths & bespoke exhibition solutions worldwide.',
-    images: ['/images/hero-stand.jpg'],
+    card: "summary_large_image",
+    title: "Verlux Stands | Premium Exhibition Stand Design & Build",
+    description:
+      "Award-winning exhibition stand design and build company. Custom trade show booths & bespoke exhibition solutions worldwide.",
+    images: ["/images/hero-stand.jpg"],
   },
   robots: {
     index: true,
@@ -62,43 +81,41 @@ export const metadata: Metadata = {
     googleBot: {
       index: true,
       follow: true,
-      'max-video-preview': -1,
-      'max-image-preview': 'large',
-      'max-snippet': -1,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
     },
   },
   icons: {
     icon: [
       {
-        url: '/icon-light-32x32.png',
-        media: '(prefers-color-scheme: light)',
+        url: "/icon-light-32x32.png",
+        media: "(prefers-color-scheme: light)",
       },
       {
-        url: '/icon-dark-32x32.png',
-        media: '(prefers-color-scheme: dark)',
+        url: "/icon-dark-32x32.png",
+        media: "(prefers-color-scheme: dark)",
       },
       {
-        url: '/icon.svg',
-        type: 'image/svg+xml',
+        url: "/icon.svg",
+        type: "image/svg+xml",
       },
     ],
-    apple: '/apple-icon.png',
+    apple: "/apple-icon.png",
   },
   verification: {
-    google: '39eNGD1V-facSa8H4Ay34p8yBjGCTFjH_JvIbjqTtKA',
+    google: "39eNGD1V-facSa8H4Ay34p8yBjGCTFjH_JvIbjqTtKA",
   },
 }
 
 export const viewport: Viewport = {
   themeColor: [
-    { media: '(prefers-color-scheme: light)', color: '#37d473' },
-    { media: '(prefers-color-scheme: dark)', color: '#0a0a0a' },
+    { media: "(prefers-color-scheme: light)", color: "#111111" },
+    { media: "(prefers-color-scheme: dark)", color: "#111111" },
   ],
-  width: 'device-width',
+  width: "device-width",
   initialScale: 1,
 }
-
-
 
 export default function RootLayout({
   children,
@@ -106,12 +123,10 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en">
-      <body className={`font-sans antialiased`}>
+    <html lang="en" className={`${openSans.variable} ${playfair.variable}`}>
+      <body className="verlux-theme font-sans antialiased">
         <Tracker />
-        <PopupProvider>  {/* ✅ one line, covers every page */}
-          {children}
-        </PopupProvider >
+        <PopupProvider>{children}</PopupProvider>
         <Analytics />
         <WhatsAppButton />
         <ScrollToTop />

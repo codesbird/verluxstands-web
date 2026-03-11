@@ -1,40 +1,35 @@
-'use client';
+'use client'
 
-import { useState } from 'react';
-import { Menu, X, ChevronDown, Phone, Mail } from 'lucide-react';
-import Link from "next/link"
+import { useState } from 'react'
+import Link from 'next/link'
+import { Menu, X, ChevronDown } from 'lucide-react'
+import { usePathname } from 'next/navigation'
 
+const navItems = [
+  { label: 'Home', href: '/' },
+  { label: 'About Us', href: '/about' },
+  { label: 'Portfolio', href: '/portfolio' },
+  { label: 'Services', href: '/services' },
+  { label: 'Trade Shows', href: '/trade-shows' },
+  {
+    label: 'Global Presence',
+    href: '/global',
+    submenu: ['India', 'Dubai', 'Germany', 'France', 'Italy'],
+  },
+  { label: 'Contact Us', href: '/contact' },
+]
 
 export default function Header() {
-  const [isOpen, setIsOpen] = useState(false);
-  const [openDropdown, setOpenDropdown] = useState<string | null>(null);
-
-  const navItems = [
-    { label: 'HOME', href: '/' },
-    // {
-    //   label: 'EXHIBITION STANDS',
-    //   href: '/services',
-    //   submenu: ['Double Decker', 'Custom Design', 'Outdoor', 'Country Pavilion', 'Sustainable'],
-    // },
-    { label: 'ABOUT US', href: '/about' },
-    { label: 'PORTFOLIO', href: '/portfolio' },
-    { label: 'SERVICES', href: '/services' },
-    { label: 'TRADE SHOWS', href: '/trade-shows' },
-    {
-      label: 'GLOBAL PRESENCE',
-      href: '/global',
-      submenu: ['India', 'Dubai','Germany','France','Italy'],
-    },
-    { label: 'CONTACT US', href: '/contact' },
-
-  ];
+  const [isOpen, setIsOpen] = useState(false)
+  const [openDropdown, setOpenDropdown] = useState<string | null>(null)
+  const pathname = usePathname()
 
   return (
-    <header className="sticky top-0 z-40 bg-primary text-white">
+    <header className="sticky top-0 z-40 bg-gradient-to-r from-primary/5 via-black/40 to-black/30 text-white gradient-border">
       <div className="max-w-full">
-        <div className="flex items-center justify-start md:justify-center h-10 px-4 sm:px-6 lg:px-8">
+        <div className="flex hidden md:flex lg:flex items-center justify-start md:justify-center h-7 px-4 sm:px-6 lg:px-8">
           {/* Desktop Navigation */}
-          <nav className="hidden lg:flex items-center justify-center gap-1">
+          <nav className="flex items-center justify-center gap-1">
             {navItems.map((item) => (
               <div
                 key={item.label}
@@ -44,20 +39,19 @@ export default function Header() {
               >
                 <Link
                   href={item.href}
-                  className="px-4 py-2 text-sm font-bold scale-animation transition-colors whitespace-nowrap flex items-center gap-1 h-10"
+                  className={`px-4 py-2 text-sm font-bold hover:border-b-3 hover:border-primary transition-colors whitespace-nowrap flex items-center gap-1 h-10 ${item.href === pathname && 'border-b-3 border-primary'}`}
                 >
                   {item.label}
                   {item.submenu && <ChevronDown className="w-3 h-3" />}
                 </Link>
 
-                {/* Submenu */}
-                {item.submenu && (
-                  <div className="absolute overflow-hidden left-0 mt-0 w-48 bg-white text-primary rounded-b shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 py-2">
+                {item.submenu && openDropdown === item.label && (
+                  <div className="brand-panel absolute left-0 top-full mt-1 font-semibold w-56 overflow-hidden rounded-sm border border-primary/25 py-2 shadow-[0_24px_60px_rgba(0,0,0,0.35)]">
                     {item.submenu.map((subitem) => (
                       <Link
                         key={subitem}
-                        href={`${item.href + "/" + subitem.toLowerCase()}`}
-                        className="block scale-animation-short px-4 py-0 hover:bg-muted text-lg hover:bg-primary hover:text-white transition-colors"
+                        href={`${item.href}/${subitem.toLowerCase()}`}
+                        className="block px-4 py-2.5 text-sm uppercase tracking-[0.12em] text-white/60 transition-colors hover:bg-primary/30 hover:text-white"
                       >
                         {subitem}
                       </Link>
@@ -65,38 +59,43 @@ export default function Header() {
                   </div>
                 )}
               </div>
-            ))}
+            )
+            )}
           </nav>
 
-          {/* Mobile Menu Button */}
+        </div>
+
+        <div className="flex items-center justify-between px-2 lg:hidden md:hidden">
           <button
-            onClick={() => setIsOpen(!isOpen)}
-            className="lg:hidden p-2 text-white me-auto"
+            onClick={() => setIsOpen((value) => !value)}
+            className="inline-flex items-center justify-center rounded-sm border border-primary/25 bg-card/70 p-2 text-secondary transition-colors hover:border-primary/60 hover:text-white"
+            aria-label="Toggle navigation"
           >
-            {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-8 h-8" />}
+            {isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
           </button>
-          <div className="lg:hidden flex  text-sm flex-col">
-            <div className="flex items-center gap-2"><Mail size={15} /> marketing@verluxstands.com</div>
-            <div className="flex items-center gap-2"><Phone size={15} />+91 758696812</div>
+
+          <div className="text-right text-[11px] uppercase tracking-[0.2em] text-secondary/70">
+            <div>Verlux Stands</div>
+            <div className="mt-1 text-[10px] tracking-[0.28em] text-secondary/45">Global Stand Design</div>
           </div>
         </div>
 
-        {/* Mobile Menu */}
         {isOpen && (
-          <nav className="lg:hidden pb-4 space-y-2 px-4">
+          <nav className="grid gap-1 border-t border-primary/15 px-2 pb-3 pt-2 lg:hidden">
             {navItems.map((item) => (
-              <a
+              <Link
                 key={item.label}
                 href={item.href}
-                className="block px-4 py-2 text-white hover:bg-white/10 rounded transition-colors font-medium"
+                onClick={() => setIsOpen(false)}
+                className={`rounded-sm px-4 py-3 text-sm uppercase tracking-[0.14em] transition-colors ${pathname === item.href ? 'bg-primary/12 text-secondary' : 'text-foreground/80 hover:bg-primary/8 hover:text-white'}`}
               >
                 {item.label}
-
-              </a>
+              </Link>
             ))}
           </nav>
         )}
       </div>
     </header>
-  );
+  )
 }
+

@@ -104,9 +104,9 @@ export default function CounterTiles() {
             <div
               key={stat.key}
               className={`flex items-center gap-4 px-6 py-6 
-              bg-[#A3202A] text-white 
+              bg-primary/70 text-white 
               ${index !== stats.length - 1 ? "lg:border-r lg:border-white/20" : ""}
-              hover:bg-[#8B1B23] transition-all duration-300`}
+              hover:bg-primary/80 transition-all duration-300`}
             >
               {/* Icon */}
               <div className="opacity-90">{stat.icon}</div>

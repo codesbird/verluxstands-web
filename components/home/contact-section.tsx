@@ -42,9 +42,9 @@ export default function ContactSection() {
   };
 
   return (
-    <section className="py-16 sm:py-24 bg-muted/30">
+    <section className="py-16 bg-muted/30">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        
+
         <CounterTiles />
 
         <div className="mx-auto bg-card grid grid-cols-1 md:grid-cols-3 gap-3 lg-grid-cols-3 rounded-b-lg border border-border p-8 sm:p-12">
@@ -88,7 +88,7 @@ export default function ContactSection() {
             {/* Row 1 */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
               <div>
-                <div className="flex px-2 gap-1 items-center bg-white rounded-lg border border-border bg-background transition-all">
+                <div className="flex px-2 gap-1 items-center bg-primary/10 rounded-lg border border-border bg-background transition-all">
                   <User className="text-primary" />
                   <input
                     type="text"
@@ -103,7 +103,7 @@ export default function ContactSection() {
                 </div>
               </div>
               <div>
-                <div className="flex px-2 gap-1 items-center bg-white rounded-lg border border-border bg-background transition-all">
+                <div className="flex px-2 gap-1 items-center bg-primary/10 rounded-lg border border-border bg-background transition-all">
                   <Building className="text-primary" />
                   <input
                     type="text"
@@ -122,7 +122,7 @@ export default function ContactSection() {
             {/* Row 2 */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
               <div>
-                <div className="flex px-2 gap-1 items-center bg-white rounded-lg border border-border bg-background transition-all">
+                <div className="flex px-2 gap-1 items-center bg-primary/10 rounded-lg border border-border bg-background transition-all">
                   <Mail className="text-primary" />
                   <input
                     type="email"
@@ -137,7 +137,7 @@ export default function ContactSection() {
                 </div>
               </div>
               <div>
-                <div className="flex px-2 gap-1 items-center bg-white rounded-lg border border-border bg-background transition-all">
+                <div className="flex px-2 gap-1 items-center bg-primary/10 rounded-lg border border-border bg-background transition-all">
                   <Phone className="text-primary" />
                   <input
                     type="tel"
@@ -156,7 +156,7 @@ export default function ContactSection() {
             {/* Row 3 */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
               <div>
-                <div className="flex px-2 gap-1 items-center bg-white rounded-lg border border-border bg-background transition-all">
+                <div className="flex px-2 gap-1 items-center bg-primary/10 rounded-lg border border-border bg-background transition-all">
                   <Tag className="text-primary" />
                   <input
                     type="text"
@@ -171,7 +171,7 @@ export default function ContactSection() {
                 </div>
               </div>
               <div>
-                <div className="flex px-2 gap-1 items-center bg-white rounded-lg border border-border bg-background transition-all">
+                <div className="flex px-2 gap-1 items-center bg-primary/10 rounded-lg border border-border bg-background transition-all">
                   <Tent className="text-primary" />
                   <select
                     id="standSize"
@@ -192,7 +192,7 @@ export default function ContactSection() {
 
             {/* Message */}
             <div>
-              <div className="flex px-2 gap-1 bg-white items-start rounded-lg border border-border bg-background transition-all">
+              <div className="flex px-2 gap-1 items-start rounded-lg border border-border bg-primary/10 transition-all">
                 <MessageCircle className="text-primary mt-3" />
                 <textarea
                   id="message"
@@ -200,7 +200,7 @@ export default function ContactSection() {
                   value={formData.message}
                   onChange={handleChange}
                   rows={5}
-                  className="w-full py-3 text-foreground bg-white placeholder:text-muted-foreground focus:outline-none text-lg"
+                  className="w-full py-3 text-foreground placeholder:text-muted-foreground focus:outline-none text-lg"
                   placeholder="Tell us about your exhibition stand requirements..."
                 ></textarea>
               </div>
@@ -209,7 +209,7 @@ export default function ContactSection() {
             {/* Row 3 */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
               <div>
-                <div className="flex px-2 gap-1 items-center bg-white rounded-lg border border-border bg-background transition-all">
+                <div className="flex px-2 gap-1 items-center bg-primary/10 rounded-lg border border-border bg-background transition-all">
                   <Upload className="text-primary" />
                   <input
                     type="file"
@@ -237,7 +237,7 @@ export default function ContactSection() {
             {/* Submit Button */}
             <Button
               type="submit"
-              className="w-full bg-primary text-secondary-foreground hover:bg-primary/90 py-6 text-base font-semibold"
+              className="w-full bg-primary text-white/60 hover:bg-primary/90 py-6 text-base font-semibold"
             >
               Send Message
             </Button>

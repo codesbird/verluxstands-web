@@ -42,11 +42,11 @@ export default function PortfolioEnhanced() {
   ];
 
   return (
-    <section className="py-16 sm:py-24 bg-background">
+    <section className="bg-background">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Title */}
         <div className="text-center mb-16 sm:mb-20">
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-[#A02D38] mb-6">
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-primary mb-6">
             OUR PORTFOLIO
           </h2>
           <p className="text-muted-foreground text-lg max-w-3xl mx-auto leading-relaxed">
@@ -68,16 +68,14 @@ export default function PortfolioEnhanced() {
                 src={item.image}
                 alt={item.title}
                 fill
-                className={`object-cover transition-all duration-500 ${
-                  hoveredIndex === index ? 'scale-110 blur-sm' : 'scale-100 blur-0'
-                }`}
+                className={`object-cover transition-all duration-500 ${hoveredIndex === index ? 'scale-110 blur-sm' : 'scale-100 blur-0'
+                  }`}
               />
 
               {/* Dark Overlay */}
               <div
-                className={`absolute inset-0 bg-black transition-opacity duration-300 ${
-                  hoveredIndex === index ? 'opacity-40' : 'opacity-20'
-                }`}
+                className={`absolute inset-0 bg-black transition-opacity duration-300 ${hoveredIndex === index ? 'opacity-40' : 'opacity-20'
+                  }`}
               />
 
               {/* Title - Always Visible */}

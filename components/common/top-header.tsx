@@ -1,69 +1,49 @@
-'use client';
+'use client'
 
-import { Phone, Mail, Download } from 'lucide-react';
-import { Button } from '@/components/ui/button';
-import Image from 'next/image';
-import Link from 'next/link';
-import { usePopup } from "@/context/popup-context"
+import Link from 'next/link'
+import { Mail, Phone, Download } from 'lucide-react'
+import { Button } from '@/components/ui/button'
+import { usePopup } from '@/context/popup-context'
 
 export default function TopHeader() {
   const { openBrochurePopup, openQuotePopup } = usePopup()
 
   return (
-    <div className="bg-background border-b border-border">
-      <div className="max-w-8lxl mx-auto px-4 sm:px-3 lg:px-10">
-        <div className="flex items-center justify-between h-15">
-          {/* Logo */}
-          <div className="flex items-center gap-2">
-            <Link href="/">
-              <Image
-                src="https://verluxstands.com/assets/icons/logo2.png"
-                alt="Verlux Stands Logo"
-                width={70}
-                height={40}
-                className="w-40 h-10 object-contain"
-                style={{ filter: "invert(6)" }}
-              />
-            </Link>
-            <span className="font-semibold text-muted-foreground hidden md:flex lg:hidden xl:flex font-medium">Exhibition Stand Solutions</span>
-          </div>
+    <div className="relative z-40">
+      <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 rounded-t-[1.75rem] rounded-b-none border-b-0 px-4 py-2 sm:px-6 lg:px-8">
+        <Link href="/" className="flex shrink-0 flex-col items-start justify-center leading-none text-secondary transition-colors hover:text-white">
+          <span className="font-serif text-3xl font-bold tracking-[0.2em] sm:text-4xl">VERLUX</span>
+          <span className="mt-1 flex items-center gap-2 text-[11px] uppercase tracking-[0.45em] text-secondary/80 sm:text-xs">
+            <span className="h-px w-7 bg-primary/50" />
+            STANDS
+            <span className="h-px w-7 bg-primary/50" />
+          </span>
+        </Link>
 
-          {/* Contact Info */}
-          <div className="hidden lg:flex items-center gap-3">
-            <div className="flex items-center gap-2 text-muted-foreground hover:text-primary transition-colors">
-              <Phone className="w-4 h-4 text-accent" />
-              <span className="text-lg font-medium">+1 (555) 123-4567</span>
-            </div>
-            <div className="flex items-center gap-2 text-muted-foreground hover:text-primary transition-colors">
-              <Mail className="w-4 h-4 text-accent" />
-              <span className="text-lg font-medium">info@verluxstands.com</span>
-            </div>
-          </div>
+        <div className="hidden items-center gap-6 text-sm text-secondary/85 lg:flex">
+          <a href="tel:+15551234567" className="flex items-center gap-2 transition-colors hover:text-white">
+            <Phone className="h-4 w-4 text-primary" />
+            <span>+1 (555) 123-4567</span>
+          </a>
+          <a href="mailto:info@verluxstands.com" className="flex items-center gap-2 transition-colors hover:text-white">
+            <Mail className="h-4 w-4 text-primary" />
+            <span>info@verluxstands.com</span>
+          </a>
+        </div>
 
-          {/* CTA Buttons */}
-          <div className="items-center hidden sm:flex gap-3">
-            <Button
-              variant="outline"
-              onClick={openQuotePopup}
-              className="border-primary text-primay hover:bg-primary hover:text-primary-foreground"
-            >
-              Get Free Quote
-            </Button>
-            <Button
-              variant="outline"
-              onClick={openBrochurePopup}
-              className="border-primary hover:bg-primary/90 text-primary"
-            >
-              Download Brochure
-            </Button>
-          </div>
-          <Button
-            onClick={openBrochurePopup}
-            variant="outline" size="sm" className="px-1 h-8 md:hidden sm:hidden lg:hidden flex border-primary text-primary">
-            Brochure <Download size={12} />
+        <div className="flex items-center gap-2 sm:gap-3">
+          <Button onClick={openQuotePopup} size="lg" className="hidden sm:inline-flex">
+            Get Free Quote
+          </Button>
+          <Button onClick={openBrochurePopup} variant="outline" size="sm" className="hidden md:inline-flex">
+            Download Brochure
+          </Button>
+          <Button onClick={openBrochurePopup} variant="outline" size="icon" className="md:hidden" aria-label="Download brochure">
+            <Download className="h-4 w-4" />
           </Button>
         </div>
       </div>
-    </div >
-  );
+    </div>
+  )
 }
+

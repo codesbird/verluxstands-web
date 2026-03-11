@@ -98,7 +98,7 @@ export default function ServicePartners() {
 
   return (
     <div className="">
-      <h3 className="text-2xl sm:text-3xl font-bold text-[#A02D38] text-center mb-8">
+      <h3 className="mb-8 text-center font-serif text-2xl font-bold text-secondary sm:text-3xl">
         SERVICE PARTNERS
       </h3>
 
@@ -110,14 +110,14 @@ export default function ServicePartners() {
         {/* Buttons */}
         <button
           onClick={prev}
-          className="absolute -left-4 top-1/2 -translate-y-1/2 bg-white shadow-md p-2 rounded-full z-10"
+          className="absolute -left-4 top-1/2 z-10 -translate-y-1/2 rounded-full border border-primary/25 bg-card/90 p-2 text-secondary shadow-[0_14px_30px_rgba(0,0,0,0.25)] transition-colors hover:border-primary/55 hover:text-white"
         >
           <ChevronLeft size={18} />
         </button>
 
         <button
           onClick={next}
-          className="absolute -right-4 top-1/2 -translate-y-1/2 bg-white shadow-md p-2 rounded-full z-10"
+          className="absolute -right-4 top-1/2 z-10 -translate-y-1/2 rounded-full border border-primary/25 bg-card/90 p-2 text-secondary shadow-[0_14px_30px_rgba(0,0,0,0.25)] transition-colors hover:border-primary/55 hover:text-white"
         >
           <ChevronRight size={18} />
         </button>

@@ -50,10 +50,10 @@ export default function GlobalPresenceRedesigned() {
   ];
 
   return (
-    <section id="global" className="py-16 sm:py-20 bg-white">
+    <section id="global" className="py-16 sm:py-20">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Heading */}
-        <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-center mb-6 text-[#A02D38] leading-tight">
+        <h2 className="text-2xl sm:text-3xl lg:text-5xl font-bold text-center mb-6 text-primary leading-tight">
           LEADING GLOBAL EXHIBITION BOOTH DESIGN & BUILD COMPANY
         </h2>
 
@@ -108,8 +108,8 @@ export default function GlobalPresenceRedesigned() {
         {/* Benefits Section */}
         <div className="mt-16 sm:mt-20 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
           <div className="text-center">
-            <div className="w-12 h-12 rounded-full bg-[#A02D38]/10 flex items-center justify-center mx-auto mb-4">
-              <svg className="w-6 h-6 text-[#A02D38]" fill="currentColor" viewBox="0 0 24 24">
+            <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-4">
+              <svg className="w-6 h-6 text-primary" fill="currentColor" viewBox="0 0 24 24">
                 <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z" />
               </svg>
             </div>
@@ -118,8 +118,8 @@ export default function GlobalPresenceRedesigned() {
           </div>
 
           <div className="text-center">
-            <div className="w-12 h-12 rounded-full bg-[#A02D38]/10 flex items-center justify-center mx-auto mb-4">
-              <svg className="w-6 h-6 text-[#A02D38]" fill="currentColor" viewBox="0 0 24 24">
+            <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-4">
+              <svg className="w-6 h-6 text-primary" fill="currentColor" viewBox="0 0 24 24">
                 <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z" />
               </svg>
             </div>
@@ -128,8 +128,8 @@ export default function GlobalPresenceRedesigned() {
           </div>
 
           <div className="text-center">
-            <div className="w-12 h-12 rounded-full bg-[#A02D38]/10 flex items-center justify-center mx-auto mb-4">
-              <svg className="w-6 h-6 text-[#A02D38]" fill="currentColor" viewBox="0 0 24 24">
+            <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-4">
+              <svg className="w-6 h-6 text-primary" fill="currentColor" viewBox="0 0 24 24">
                 <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67z" />
               </svg>
             </div>

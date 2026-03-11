@@ -2,7 +2,7 @@ import { Metadata } from "next"
 
 
 import { getSEO, generateMetadataFromSEO } from "@/lib/seo"
-import { DynamicSchema } from "@/components/seo/schema"
+import { DynamicSchema } from "@/components/admin/seo/schema"
 import { OrganizationSchema, LocalBusinessSchema, FAQSchema } from "@/components/structured-data"
 
 
@@ -67,7 +67,7 @@ export default async function Home() {
         <CTASection />
         <Process />
         <PortfolioEnhanced />
-        <div className="px-8 md:px-15 text-center">
+        <div className="px-8 md:px-15 text-center mt-20">
           <div
             className="relative rounded-3xl overflow-hidden bg-cover bg-center"
             style={{
@@ -88,7 +88,7 @@ export default async function Home() {
           </div>
         </div>
         <Testimonials />
-        <GeomapNetwork />
+        {/* <GeomapNetwork /> */}
         {/* <ServicePartners /> */}
         <ContactSection />
         <Footer />
