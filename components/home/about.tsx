@@ -1,5 +1,3 @@
-import { Button } from '@/components/ui/button';
-import Link from "next/link";
 import Image from 'next/image';
 import QuoteButton from "@/components/common/quote-button"
 
@@ -12,22 +10,25 @@ export default function About() {
           {/* Content */}
           <div>
             <h2 className="text-xl sm:text-2xl lg:text-3xl font-bold  mb-6 leading-tight">
-              Verlux Stands, <span className="text-primary">Your Global Exhibition Stand Solution Partner</span>
+              Join Hands with the <span className="text-primary">Best Exhibition Stand Builders in India</span>
             </h2>
             <div className="space-y-4 text-muted-foreground text-base sm:text-lg leading-relaxed">
               <p>
-                Verlux Stands is a leading exhibition stand builder offering comprehensive and innovative exhibiting solutions worldwide. We empower brands to create unforgettable event experiences and build lasting market presence.
+                Verlux Stands is the most trusted and experienced exhibition stand builder that provide you with precise guidance from ideas to delivery of your exhibition stands, whether you want a custom stand or a modular one, along with complete exhibit management solution.
               </p>
               <p>
-                Since 2008, we have been delivering excellence as expert exhibition stand contractors with specialization in custom exhibition stand design, construction, and creating memorable brand displays.
+                Verlux Stands assists clients in organizing and carrying out high-quality projects under the guidance of professionals. Our wide range of exhibiting services in Europe and India is second to none. Our stand designers and builders cover everything under one roof.
               </p>
               <p>
-                Our complete exhibition solutions include expert consultation, strategic planning, 3D design visualization, professional construction, graphic design, on-site installation, logistics management, and comprehensive support.
+                We work hard to satisfy our clients by paying close attention to every little detail and maximizing their investment. We work within your budget without sacrificing the project's quality. We supply exhibition stands in many places simultaneously thanks to our worldwide connections and in-house production capabilities.
+              </p>
+              <p>
+                We think that every brand deserves to shine on the display floor. Our team of architects, designers, and stand builders combines accuracy and inventiveness to create powerful exhibition stands across Asia and Europe.
               </p>
             </div>
             <div className="flex justify-around gap-5 mt-10 flex-wrap w-full">
-              <QuoteButton name="GET FREE QUOTE" type="button" />
-              <QuoteButton name="OUR WORK" type="link" link="/portfolio" />
+              <QuoteButton name="REQUEST A FREE QUOTE" type="button" />
+              <QuoteButton name="SPEAK TO OUR TEAM" type="link" link="/contact" />
 
               
             </div>
@@ -36,10 +37,10 @@ export default function About() {
           {/* Image */}
           <div className="lg:block z-2 relative rounded-3xl">
             <Image
-              src="https://www.exproglobal-europe.com/wp-content/uploads/2025/12/ALARM_GERMANY.jfif_.jpg"
-              alt="Verlux Stands manufacturing and design facility"
-              width={100}
-              height={150}
+              src="/images/hero-stand.jpg"
+              alt="Exhibition stand build company"
+              width={900}
+              height={1100}
               className="w-full max-h-100 object-cover rounded-4xl"
               priority
             />
@@ -50,20 +51,20 @@ export default function About() {
         {/* Stats Row */}
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-6 sm:gap-8 mt-16 sm:mt-20 pt-16 sm:pt-20 border-t border-border">
           <div className="text-center">
-            <div className="text-3xl sm:text-4xl font-bold text-accent mb-2">15+</div>
-            <p className="text-sm sm:text-base text-muted-foreground">Years of Experience</p>
+            <div className="text-3xl sm:text-4xl font-bold text-accent mb-2">98%</div>
+            <p className="text-sm sm:text-base text-muted-foreground">Client Satisfaction</p>
           </div>
           <div className="text-center">
-            <div className="text-3xl sm:text-4xl font-bold text-accent mb-2">6+</div>
+            <div className="text-3xl sm:text-4xl font-bold text-accent mb-2">5+</div>
             <p className="text-sm sm:text-base text-muted-foreground">Countries Served</p>
           </div>
           <div className="text-center">
-            <div className="text-3xl sm:text-4xl font-bold text-accent mb-2">450+</div>
+            <div className="text-3xl sm:text-4xl font-bold text-accent mb-2">150+</div>
             <p className="text-sm sm:text-base text-muted-foreground">Projects Completed</p>
           </div>
           <div className="text-center">
-            <div className="text-3xl sm:text-4xl font-bold text-accent mb-2">1100+</div>
-            <p className="text-sm sm:text-base text-muted-foreground">No. of Designs</p>
+            <div className="text-3xl sm:text-4xl font-bold text-accent mb-2">120+</div>
+            <p className="text-sm sm:text-base text-muted-foreground">Exhibition Served</p>
           </div>
         </div>
       </div>

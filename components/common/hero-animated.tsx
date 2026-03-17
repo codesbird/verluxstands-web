@@ -62,10 +62,10 @@ export default function HeroAnimated() {
 
             <div className="mt-5 flex flex-col items-center gap-4 sm:flex-row">
               <Button onClick={openQuotePopup} size="lg" className="min-w-[240px]">
-                Get Free Quote
+                Request a Free Quote
               </Button>
               <Button asChild variant="outline" size="lg" className="min-w-[240px]">
-                <Link href="/portfolio">View Portfolio</Link>
+                <Link href="/contact">Speak to Our Team</Link>
               </Button>
             </div>
 
@@ -84,4 +84,3 @@ export default function HeroAnimated() {
     </section>
   )
 }
-

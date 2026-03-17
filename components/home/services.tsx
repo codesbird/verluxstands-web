@@ -1,36 +1,34 @@
-import Image from 'next/image';
-
 export default function Services() {
   const services = [
     {
       title: 'Double Decker Exhibition Stands',
-      description: 'Multi-level stands that maximize your brand visibility and engage visitors from multiple perspectives.',
-      image: '/images/modular-stand.jpg',
+      description: 'Double decker exhibition stands are a smart way to increase space and make your brand presence more impressive at the exhibition ground.',
+      image: '/live/services/double-decker.webp',
     },
     {
       title: 'Outdoor Exhibition Stands',
-      description: 'Weather-resistant designs perfect for outdoor events and trade shows across Europe.',
-      image: '/images/outdoor-stand.jpg',
+      description: 'Outdoor exhibition stands are designed to create strong brand visibility and support your display requirements for open event spaces.',
+      image: '/live/services/outdoor.webp',
     },
     {
       title: 'Custom Exhibition Stands',
-      description: 'Fully tailored stands designed to reflect your unique brand identity and messaging.',
-      image: '/images/custom-design.jpg',
+      description: 'Custom exhibition stands are designed according to your brand standards, business goals, and exhibition brief.',
+      image: '/live/services/custom.webp',
     },
     {
       title: 'Country Pavilion Exhibition Stand',
-      description: 'Large-scale pavilions ideal for representing countries and major brand initiatives.',
-      image: '/images/digital-stand.jpg',
+      description: 'Country pavilion exhibition stands are planned to manage large display areas and present a strong brand or national presence.',
+      image: '/live/services/country-pavilion.webp',
     },
     {
       title: 'Sustainable Exhibition Stands',
-      description: 'Eco-friendly stands built with sustainable materials and responsible manufacturing.',
-      image: '/images/sustainable-stand.jpg',
+      description: 'Sustainable exhibition stands help brands exhibit responsibly while maintaining strong design quality and practical use.',
+      image: '/live/services/sustainable.webp',
     },
     {
-      title: 'Outdoor Exhibition Stands',
-      description: 'Weather-resistant designs perfect for outdoor events and trade shows across Europe.',
-      image: '/images/outdoor-stand.jpg',
+      title: 'Modular Exhibition Stands',
+      description: 'Modular exhibition stands are practical for brands looking for flexible display solutions with strong visibility and efficient setup.',
+      image: '/live/services/modular.webp',
     },
   ];
 
@@ -39,10 +37,10 @@ export default function Services() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12 sm:mb-16">
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-primary mb-4 leading-tight">
-            End-to-End Exhibition Stand Design and Build Solutions Across Europe
+            Exhibition Stand Design Company with Complete Exhibit Solutions
           </h2>
           <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
-            We are a reliable exhibition stand builder company in Europe known for our commitment to creativity, precision, and reliability.
+            Our stand designers and builders cover everything under one roof. We work hard to satisfy our clients by paying close attention to every little detail and maximizing their investment.
           </p>
         </div>
 
@@ -63,7 +61,7 @@ export default function Services() {
                 <h3 className="text-lg sm:text-xl font-bold text-white mb-3 leading-tight">
                   {service.title}
                 </h3>
-                <button className="bg-primary duration-1000 ease-out h-0 group-hover:h-10 p-1 px-3 hidden group-hover:block rounded-full text-white/70 hover:text-white cursor-pointer">Learn more</button>
+                <button className="bg-primary duration-1000 ease-out h-0 group-hover:h-10 p-1 px-3 hidden group-hover:block rounded-full text-white/70 hover:text-white cursor-pointer">Explore service</button>
               </div>
             </div>
           ))}

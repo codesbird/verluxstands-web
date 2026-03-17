@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { adminAuth, adminDB, isAdminInitialized } from '@/lib/firebase-admin'
-import { uploadFileToDrive } from '@/lib/server/google-drive'
+import { uploadSubmissionAttachmentToBlob } from '@/lib/server/submission-attachments'
 import { buildSubmissionEmailHtml, buildSubmissionEmailText } from '@/lib/server/submission-email'
 import { getAdminNotificationEmail, getSmtpSender, getSmtpTransporter } from '@/lib/server/smtp'
 import type { SubmissionRecord, SubmissionStatus, SubmissionType } from '@/lib/types/submissions'
@@ -81,21 +81,25 @@ function buildSubmissionRecord(id: string, formData: FormData, attachment: Submi
     status: 'new',
     createdAt: now,
     updatedAt: now,
-    sourcePage,
+    sourcePage: sourcePage || undefined,
     contactName,
     companyName,
     email,
     phone,
-    countryCode,
-    message,
-    exhibition,
-    standSize,
-    eventType,
-    budget,
-    attachment,
+    countryCode: countryCode || undefined,
+    message: message || undefined,
+    exhibition: exhibition || undefined,
+    standSize: standSize || undefined,
+    eventType: eventType || undefined,
+    budget: budget || undefined,
+    attachment: attachment || null,
     notes: '',
     answeredAt: null,
   }
+}
+
+function sanitizeSubmissionRecord(submission: SubmissionRecord) {
+  return JSON.parse(JSON.stringify(submission)) as SubmissionRecord
 }
 
 async function sendAdminNotification(submission: SubmissionRecord) {
@@ -137,11 +141,16 @@ export async function POST(request: NextRequest) {
 
     const fileEntry = formData.get('file')
     const file = fileEntry instanceof File && fileEntry.size > 0 ? fileEntry : null
-    const attachment = file ? await uploadFileToDrive(file) : null
-    const submission = buildSubmissionRecord(submissionRef.key, formData, attachment)
+    const attachment = file ? await uploadSubmissionAttachmentToBlob(submissionRef.key, file) : null
+    const submission = sanitizeSubmissionRecord(buildSubmissionRecord(submissionRef.key, formData, attachment))
 
     await submissionRef.set(submission)
-    await sendAdminNotification(submission)
+
+    try {
+      await sendAdminNotification(submission)
+    } catch (error) {
+      console.error('Submission saved but notification email failed:', error)
+    }
 
     return NextResponse.json({ success: true, submission })
   } catch (error) {
@@ -192,4 +201,3 @@ export async function PATCH(request: NextRequest) {
     )
   }
 }
-

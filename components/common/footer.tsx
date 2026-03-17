@@ -33,17 +33,21 @@ export default function Footer() {
               Your trusted exhibition stand builder, delivering elegant design systems, tailored fabrication, and global execution with a premium Verlux finish.
             </p>
             <div className="mt-6 space-y-3 text-sm text-secondary/80">
-              <a href="tel:+15551234567" className="flex items-center gap-3 transition-colors hover:text-white">
+              <a href="tel:+917303531447" className="flex items-center gap-3 transition-colors hover:text-white">
                 <Phone className="h-4 w-4 text-primary" />
-                +1 (555) 123-4567
+                +91 7303531447
               </a>
-              <a href="mailto:info@verluxstands.com" className="flex items-center gap-3 transition-colors hover:text-white">
+              <a href="tel:+918920253275" className="flex items-center gap-3 transition-colors hover:text-white">
+                <Phone className="h-4 w-4 text-primary" />
+                +91 8920253275
+              </a>
+              <a href="mailto:marketing@verluxstands.com" className="flex items-center gap-3 transition-colors hover:text-white">
                 <Mail className="h-4 w-4 text-primary" />
-                info@verluxstands.com
+                marketing@verluxstands.com
               </a>
               <div className="flex items-start gap-3 text-white/70">
                 <MapPin className="mt-0.5 h-4 w-4 text-primary" />
-                <span>Global exhibition stand solutions with worldwide event coverage.</span>
+                <span>No. 1, Manikam Market, Unchi Dankaur, Greater Noida, Gautam Buddha Nagar, Uttar Pradesh - 201110</span>
               </div>
             </div>
           </div>

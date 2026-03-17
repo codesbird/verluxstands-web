@@ -1,0 +1,6 @@
+# robots.txt for verluxstands.github.io/verluxstands and future domain verluxstands.com
+
+User-agent: *
+Allow: /
+
+Sitemap: https://verluxstands.github.io/verluxstands/sitemap.xml

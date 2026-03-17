@@ -59,7 +59,7 @@ function makeBlock(type) {
   const defaults = {
     text: { html: "", placeholder: "start writing here..." },
     heading: { text: "", level: "h2", align: "left" },
-    image: { url: "", caption: "", alt: "", width: "full" },
+    image: { url: "", mediaId: "", caption: "", alt: "", width: "full" },
     video: { url: "", caption: "" },
     quote: { text: "An inspiring quote or key message about this event.", author: "", role: "" },
     stats: { items: [{ value: "1,200+", label: "Exhibitors" }, { value: "54", label: "Countries" }, { value: "31,000+", label: "Visitors" }, { value: "3", label: "Days" }] },
@@ -183,12 +183,32 @@ function HeadingEditor({ block, onChange }) {
   );
 }
 
-function ImageEditor({ block, onChange }) {
+function ImageEditor({ block, onChange, onUploadImage }) {
+  const [uploading, setUploading] = useState(false);
+  const [uploadError, setUploadError] = useState("");
+
+  const handleFileChange = async (e) => {
+    const file = e.target.files?.[0];
+    if (!file || !onUploadImage) return;
+
+    try {
+      setUploading(true);
+      setUploadError("");
+      const media = await onUploadImage(file);
+      onChange({ url: media.url, mediaId: media.id, alt: block.alt || file.name });
+    } catch (error) {
+      setUploadError(error?.message || "Failed to upload image.");
+    } finally {
+      setUploading(false);
+      e.target.value = "";
+    }
+  };
+
   return (
     <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
-      <input value={block.url} onChange={e => onChange({ url: e.target.value })}
-        placeholder="Image URL (https://...)"
-        style={inputStyle} />
+      <input type="file" accept="image/*" onChange={handleFileChange} style={inputStyle} />
+      {uploading && <div style={{ color: "#cc9f53", fontSize: 12 }}>Uploading image...</div>}
+      {uploadError && <div style={{ color: "#ff6b6b", fontSize: 12 }}>{uploadError}</div>}
       {block.url && (
         <img src={block.url} alt="preview"
           style={{ maxHeight: 200, objectFit: "cover", borderRadius: 6, border: "1px solid #2a2a2a" }} />
@@ -203,10 +223,11 @@ function ImageEditor({ block, onChange }) {
           <option value="medium">Medium</option>
         </select>
       </div>
+      <input value={block.alt || ""} onChange={e => onChange({ alt: e.target.value })}
+        placeholder="Alt text" style={inputStyle} />
     </div>
   );
 }
-
 function VideoEditor({ block, onChange }) {
   const getEmbedUrl = (url) => {
     if (!url) return null;
@@ -609,14 +630,14 @@ const inputStyle = {
 };
 
 // ─── Block Card ───────────────────────────────────────────────────────────────
-function BlockCard({ block, index, total, onChange, onDelete, onMove, onDuplicate }) {
+function BlockCard({ block, index, total, onChange, onDelete, onMove, onDuplicate, onUploadImage }) {
   const [expanded, setExpanded] = useState(true);
   const label = BLOCK_TYPES.find(b => b.type === block.type)?.label || block.type;
 
   const editors = {
     text: <TextEditor block={block} onChange={onChange} />,
     heading: <HeadingEditor block={block} onChange={onChange} />,
-    image: <ImageEditor block={block} onChange={onChange} />,
+    image: <ImageEditor block={block} onChange={onChange} onUploadImage={onUploadImage} />,
     video: <VideoEditor block={block} onChange={onChange} />,
     quote: <QuoteEditor block={block} onChange={onChange} />,
     stats: <StatsEditor block={block} onChange={onChange} />,
@@ -733,7 +754,7 @@ function AddBlockPanel({ onAdd }) {
 }
 
 // ─── Main Component ───────────────────────────────────────────────────────────
-export default function EventPageBuilder({ initialBlocks = [], onChange, onSave }) {
+export default function EventPageBuilder({ initialBlocks = [], onChange, onSave, onUploadImage, saving = false }) {
   const [blocks, setBlocks] = useState(initialBlocks.length > 0 ? initialBlocks : [
     makeBlock("heading"),
     makeBlock("text"),
@@ -845,7 +866,7 @@ export default function EventPageBuilder({ initialBlocks = [], onChange, onSave 
 
         <button
           key="save changes"
-          onClick={() => onSave(blocks)}
+          onClick={() => onSave(blocks)} disabled={saving}
           style={{
             padding: "6px 14px", border: "none", cursor: "pointer",
             background: "#cc2222",
@@ -854,7 +875,7 @@ export default function EventPageBuilder({ initialBlocks = [], onChange, onSave 
             borderRadius: 6
           }}>
           <span style={{ display: "flex", alignItems: "center", gap: 4, }}>
-            Save Content
+            {saving ? "Saving..." : "Save Content"}
           </span>
         </button>
 
@@ -879,7 +900,7 @@ export default function EventPageBuilder({ initialBlocks = [], onChange, onSave 
             </div>
 
             {blocks.map((block, i) => (
-              <BlockCard key={block.id} block={block} index={i} total={blocks.length}
+              <BlockCard key={block.id} block={block} index={i} total={blocks.length} onUploadImage={onUploadImage}
                 onChange={(data) => update(block.id, data)}
                 onDelete={() => remove(block.id)}
                 onMove={(dir) => move(block.id, dir)}
@@ -926,3 +947,6 @@ export default function EventPageBuilder({ initialBlocks = [], onChange, onSave 
     </div>
   );
 }
+
+
+

@@ -4,14 +4,13 @@ import Image from 'next/image';
 
 export default function GeomapNetwork() {
   const locations = [
-    { name: 'Germany', color: '#A02D38' },
-    { name: 'Switzerland', color: '#A02D38' },
-    { name: 'Spain', color: '#A02D38' },
-    { name: 'France', color: '#A02D38' },
-    { name: 'Poland', color: '#A02D38' },
-    { name: 'Italy', color: '#A02D38' },
-    { name: 'Portugal', color: '#A02D38' },
-    { name: 'Romania', color: '#A02D38' },
+    { name: 'Delhi/NCR', color: '#A02D38' },
+    { name: 'Mumbai', color: '#A02D38' },
+    { name: 'Bengaluru', color: '#A02D38' },
+    { name: 'Kolkata', color: '#A02D38' },
+    { name: 'Chennai', color: '#A02D38' },
+    { name: 'Hyderabad', color: '#A02D38' },
+    { name: 'Ahmedabad', color: '#A02D38' },
   ];
 
   return (
@@ -20,8 +19,11 @@ export default function GeomapNetwork() {
         {/* Section Title */}
         <div className="text-center mb-12 sm:mb-16">
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-primary mb-4">
-            Verlux Stands NETWORK
+            Major Exhibiting Cities
           </h2>
+          <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
+            Major destination cities host world-class exhibitions that attract international audiences and deliver strong ROI for exhibitors.
+          </p>
         </div>
 
         {/* World Map with Locations */}
@@ -51,81 +53,71 @@ export default function GeomapNetwork() {
 
             {/* Location Pins - Red Badges */}
             <div className="absolute inset-0">
-              {/* Germany */}
+              {/* Delhi/NCR */}
               <div className="absolute top-[25%] left-[38%] transform -translate-x-1/2 -translate-y-1/2">
                 <div className="flex flex-col items-center">
                   <div className="bg-[#A02D38] text-white text-xs font-bold px-3 py-1 rounded-full mb-2 whitespace-nowrap">
-                    GERMANY
+                    DELHI/NCR
                   </div>
                   <div className="w-4 h-4 bg-[#A02D38] rounded-full border-2 border-white shadow-lg" />
                 </div>
               </div>
 
-              {/* Switzerland */}
+              {/* Mumbai */}
               <div className="absolute top-[28%] left-[42%] transform -translate-x-1/2 -translate-y-1/2">
                 <div className="flex flex-col items-center">
                   <div className="bg-[#A02D38] text-white text-xs font-bold px-2 py-1 rounded-full mb-2 whitespace-nowrap">
-                    SWITZERLAND
+                    MUMBAI
                   </div>
                   <div className="w-4 h-4 bg-[#A02D38] rounded-full border-2 border-white shadow-lg" />
                 </div>
               </div>
 
-              {/* Spain */}
+              {/* Bengaluru */}
               <div className="absolute top-[35%] left-[30%] transform -translate-x-1/2 -translate-y-1/2">
                 <div className="flex flex-col items-center">
                   <div className="bg-[#A02D38] text-white text-xs font-bold px-3 py-1 rounded-full mb-2 whitespace-nowrap">
-                    SPAIN
+                    BENGALURU
                   </div>
                   <div className="w-4 h-4 bg-[#A02D38] rounded-full border-2 border-white shadow-lg" />
                 </div>
               </div>
 
-              {/* France */}
+              {/* Kolkata */}
               <div className="absolute top-[32%] left-[35%] transform -translate-x-1/2 -translate-y-1/2">
                 <div className="flex flex-col items-center">
                   <div className="bg-[#A02D38] text-white text-xs font-bold px-3 py-1 rounded-full mb-2 whitespace-nowrap">
-                    FRANCE
+                    KOLKATA
                   </div>
                   <div className="w-4 h-4 bg-[#A02D38] rounded-full border-2 border-white shadow-lg" />
                 </div>
               </div>
 
-              {/* Poland */}
+              {/* Chennai */}
               <div className="absolute top-[28%] left-[44%] transform -translate-x-1/2 -translate-y-1/2">
                 <div className="flex flex-col items-center">
                   <div className="bg-[#A02D38] text-white text-xs font-bold px-3 py-1 rounded-full mb-2 whitespace-nowrap">
-                    POLAND
+                    CHENNAI
                   </div>
                   <div className="w-4 h-4 bg-[#A02D38] rounded-full border-2 border-white shadow-lg" />
                 </div>
               </div>
 
-              {/* Italy */}
+              {/* Hyderabad */}
               <div className="absolute top-[38%] left-[42%] transform -translate-x-1/2 -translate-y-1/2">
                 <div className="flex flex-col items-center">
                   <div className="bg-[#A02D38] text-white text-xs font-bold px-3 py-1 rounded-full mb-2 whitespace-nowrap">
-                    ITALY
+                    HYDERABAD
                   </div>
                   <div className="w-4 h-4 bg-[#A02D38] rounded-full border-2 border-white shadow-lg" />
                 </div>
               </div>
 
-              {/* Portugal */}
+              {/* Ahmedabad */}
               <div className="absolute top-[40%] left-[28%] transform -translate-x-1/2 -translate-y-1/2">
                 <div className="flex flex-col items-center">
                   <div className="bg-[#A02D38] text-white text-xs font-bold px-2 py-1 rounded-full mb-2 whitespace-nowrap">
-                    PORTUGAL
-                  </div>
-                  <div className="w-4 h-4 bg-[#A02D38] rounded-full border-2 border-white shadow-lg" />
-                </div>
-              </div>
-
-              {/* Romania */}
-              <div className="absolute top-[35%] left-[50%] transform -translate-x-1/2 -translate-y-1/2">
-                <div className="flex flex-col items-center">
-                  <div className="bg-[#A02D38] text-white text-xs font-bold px-3 py-1 rounded-full mb-2 whitespace-nowrap">
-                    ROMANIA
+                    AHMEDABAD
                   </div>
                   <div className="w-4 h-4 bg-[#A02D38] rounded-full border-2 border-white shadow-lg" />
                 </div>

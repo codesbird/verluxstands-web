@@ -1,3 +1,4 @@
+import Image from "next/image"
 import { Metadata } from "next"
 
 
@@ -32,19 +33,19 @@ import ServicePartners from '@/components/common/service-partners';
 const homeFaqs = [
   {
     question: "How much does an exhibition stand cost?",
-    answer: "Exhibition stand costs vary based on size, design complexity, and materials. Custom stands typically range from $10,000 to $100,000+. Contact us for a free quote tailored to your specific requirements."
+    answer: "The cost of an exhibition stand depends on stand size, design requirements, materials, and the services you need. Share your brief with us and we will provide a proposal as per your exhibition requirements."
   },
   {
     question: "How long does it take to design and build an exhibition stand?",
-    answer: "We recommend starting 4-6 months before your event for custom stands. This allows time for concept development, design refinement, fabrication, and logistics. Rush projects can be accommodated with 8-12 weeks notice."
+    answer: "The timeline depends on the stand design, size, and exhibition requirements. Our team guides you from ideas to delivery and plans the process according to your event schedule."
   },
   {
     question: "Do you offer exhibition stand rental?",
-    answer: "Yes, we offer both rental and purchase options. Rental is ideal for companies exhibiting 1-3 times per year, while purchasing becomes more cost-effective for 4+ events annually."
+    answer: "Yes, we offer custom stand and modular stand solutions according to your exhibition requirements, business goals, and budget."
   },
   {
     question: "What locations do you serve?",
-    answer: "We deliver exhibition stands worldwide with teams in London, Frankfurt, Las Vegas, Dubai, Singapore, and other major trade show destinations across Europe, North America, Middle East, and Asia Pacific."
+    answer: "We provide exhibition stand services across Europe and India and supply exhibition stands in many places simultaneously through our worldwide connections and in-house production capabilities."
   }
 ]
 
@@ -62,33 +63,32 @@ export default async function Home() {
         <Header />
         <HeroAnimated />
         <About />
+        {/* <GeomapNetwork /> */}
         <Services />
         <GlobalPresenceRedesigned />
         <CTASection />
         <Process />
         <PortfolioEnhanced />
         <div className="px-8 md:px-15 text-center mt-20">
-          <div
-            className="relative rounded-3xl overflow-hidden bg-cover bg-center"
-            style={{
-              backgroundImage:
-                "url(https://www.exproglobal-europe.com/wp-content/uploads/2025/10/Italy-img.jpg)",
-            }}
-          >
-            {/* Gradient Overlay */}
-            <div className="absolute inset-0 bg-gradient-to-r from-primary/80 via-primary/60 to-black/80"></div>
+          <div className="relative min-h-[240px] rounded-3xl overflow-hidden">
+            <Image
+              src="/live/cta/brand-floor.webp"
+              alt="Exhibition stand background"
+              fill
+              className="object-cover"
+              sizes="100vw"
+            />
+            <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(196,160,102,0.82),rgba(25,25,25,0.58)),linear-gradient(180deg,rgba(0,0,0,0.08),rgba(0,0,0,0.18))]" />
 
-            {/* Content */}
-            <div className="relative z-10 flex flex-col justify-center items-center w-full  gap-4 h-full p-6">
-              <h2 className="text-4xl text-white">Why choose us: We are the gateway to a successful and seamless exhibit</h2>
+            <div className="relative z-10 flex min-h-[240px] flex-col justify-center items-center w-full gap-4 p-6 sm:p-10">
+              <h2 className="text-4xl text-white">We think that every brand deserves to shine on the display floor</h2>
               <p className="text-white/80 text-lg">
-                We have years of experience in exhibition stand designing and building, which is one of the major reasons why we are one of the most favourite exhibitions stand builders in Europe for the exhibitors. With our experience in the exhibition industry, we have built a number of exhibitions stands that not just pull the crowd to the displays for the bands but also generate sales leads, and help them in boosting their brand presence on the crowded display ground. This has helped us in earning a strong reputation as the best place for the exhibition stands that are of high-quality, tailor-made and help brands to stand out in the sea of exhibitors. Being a popular exhibition stand contractor in Europe, we ensure that every stand we create is unique, creative, customised, embodies excellence, and craftsmanship that tells your brand story and conveys the desired brand message to your target audience.
+                Our team of architects, designers, and stand builders combines accuracy and inventiveness to create powerful exhibition stands across Asia and Europe. We manage the planning and construction of your exhibition stand with complete exhibit solutions so you can stay focused on your show objectives and brand presence.
               </p>
             </div>
           </div>
         </div>
         <Testimonials />
-        {/* <GeomapNetwork /> */}
         {/* <ServicePartners /> */}
         <ContactSection />
         <Footer />

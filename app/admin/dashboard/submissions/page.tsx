@@ -336,7 +336,7 @@ export default function AdminSubmissionsPage() {
                       <Copy size={16} /> <span className="label">Phone</span>
                     </div>
                   </button>
-                  {!selectedSubmission.attachment && <button onClick={(e) => downloadAttachment(e.target, 'https://www.expoexhibitionstands.co.in/wp-content/uploads/2021/03/exhibition-stall-design-catalogue-2021.pdf')}
+                  {selectedSubmission.attachment && <button onClick={(e) => downloadAttachment(e.target, selectedSubmission.attachment?.downloadUrl || selectedSubmission.attachment?.url || '')}
                     className="bg-black/30 hover:bg-black/60 px-5 py-1 rounded-full flex gap-2 items-center">
                     <div className="pointer-events-none flex gap-2 items-center">
                       <Download size={16} /> <span className="label">Attachment</span>
@@ -365,4 +365,5 @@ function StatCard({ title, value }: { title: string; value: number }) {
     </Card>
   )
 }
+
 

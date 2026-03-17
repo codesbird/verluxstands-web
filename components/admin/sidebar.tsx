@@ -17,8 +17,8 @@ import {
   X,
   Menu,
   Calendar,
-  BriefcaseBusiness,
   Inbox,
+  FolderOpen,
 } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import useSidebarToggle from '@/lib/sidebar-toggle'
@@ -45,21 +45,9 @@ const navItems = [
     icon: Inbox,
   },
   {
-    title: 'Portfolio',
-    href: '/admin/dashboard/portfolios',
-    icon: BriefcaseBusiness,
-    pages: [
-      {
-        title: 'Library',
-        href: '/admin/dashboard/portfolios/library',
-        icon: Search,
-      },
-      {
-        title: 'Category',
-        href: '/admin/dashboard/portfolios/categories',
-        icon: Search,
-      },
-    ],
+    title: 'Storage',
+    href: '/admin/dashboard/storage',
+    icon: FolderOpen,
   },
   {
     title: 'Create Page',

@@ -12,6 +12,8 @@ export interface SubmissionAttachment {
   fileSize: number
   mimeType: string
   url: string
+  downloadUrl?: string
+  pathname?: string
   fileId?: string
 }
 

@@ -1,29 +1,23 @@
 "use client"
 
 import { AdminSidebar, AdminSidebarToggleButton } from "@/components/admin/sidebar"
-import { Plus } from "lucide-react"
+import { Plus, ArrowUp, ArrowDown, Download, ChevronDown, Loader2 } from "lucide-react"
 import EventCard from "@/components/admin/events/eventsCard"
-import { useState, useEffect } from "react"
+import { useEffect, useState } from "react"
 import ConfirmModal from "@/components/common/Confirm"
-import { ArrowUp, ArrowDown, Download, Upload, ChevronDown, Loader2 } from "lucide-react";
-import {
-    createEvent,
-    getAllEvents,
-    deleteEventBySlug,
-    updateEventBySlug,
-} from "@/lib/server/events"
-
-import AddEvent from "@/components/admin/events/addEvent"
-import EventPageBuilder from "@/components/admin/events/EventPageBuilder"
-
+import { createEvent, getAllEvents, deleteEventBySlug, updateEventBySlug } from "@/lib/server/events"
+import AddEvent, { EventFormData } from "@/components/admin/events/addEvent"
+import { uploadMediaFile, deleteMediaFile } from "@/lib/media-client"
+import { useAuth } from "@/lib/auth-context"
 
 export default function Events() {
+    const { user, loading: authLoading } = useAuth()
     const [eventsData, setEventsData] = useState<any[]>([])
     const [loading, setLoading] = useState(false)
     const [isExportOpen, setIsExportOpen] = useState(false)
-
     const [isModalOpen, setModalOpen] = useState(false)
     const [selectedEvent, setSelectedEvent] = useState<any | null>(null)
+    const [uploadProgress, setUploadProgress] = useState(0)
     const [confirmState, setConfirmState] = useState<{
         title: string
         message: string
@@ -35,7 +29,7 @@ export default function Events() {
     const [sortConfig, setSortConfig] = useState({
         field: "createdAt",
         order: "desc",
-    });
+    })
 
     const [filters, setFilters] = useState({
         category: "all",
@@ -44,14 +38,13 @@ export default function Events() {
         attendees: "all",
         search: "",
         eventStatus: "all"
-    });
+    })
 
     const categories = new Set(eventsData.map((item) => item.category))
 
-    // Fetch events
     useEffect(() => {
         (async () => {
-            setLoading(true);
+            setLoading(true)
             try {
                 const res = await getAllEvents()
                 if (res.success) {
@@ -60,135 +53,158 @@ export default function Events() {
             } catch (e) {
                 console.log("events fetch error: ", e)
             } finally {
-                setLoading(false);
+                setLoading(false)
             }
         })()
     }, [])
 
     function getEventStatus(startDate: string, endDate: string) {
-        const now = new Date();
-        const start = new Date(startDate);
-        const end = new Date(endDate);
+        const now = new Date()
+        const start = new Date(startDate)
+        const end = new Date(endDate)
 
-        if (end < now) return "past";
-        if (start > now) return "upcoming";
-        return "ongoing";
+        if (end < now) return "past"
+        if (start > now) return "upcoming"
+        return "ongoing"
     }
 
     const filteredEvents = eventsData.filter((event) => {
-        if (filters.category !== "all" && event.category !== filters.category)
-            return false;
-
+        if (filters.category !== "all" && event.category !== filters.category) return false
         if (filters.status !== "all") {
-            const status = getEventStatus(event.startDate, event.endDate);
-            if (status !== filters.status) return false;
+            const status = getEventStatus(event.startDate, event.endDate)
+            if (status !== filters.status) return false
         }
-
-        if (filters.eventStatus !== "all") {
-            if (event.status !== filters.eventStatus) return false;
-        }
-
-        if (
-            filters.location !== "all" &&
-            !event.location.toLowerCase().includes(filters.location.toLowerCase())
-        )
-            return false;
-
+        if (filters.eventStatus !== "all" && event.status !== filters.eventStatus) return false
+        if (filters.location !== "all" && !event.location.toLowerCase().includes(filters.location.toLowerCase())) return false
         if (filters.attendees !== "all") {
-            const num = Number(event.attendees || 0);
-            if (filters.attendees === "small" && num >= 10000) return false;
-            if (filters.attendees === "medium" && (num < 10000 || num > 50000)) return false;
-            if (filters.attendees === "large" && num <= 50000) return false;
+            const num = Number(event.attendees || 0)
+            if (filters.attendees === "small" && num >= 10000) return false
+            if (filters.attendees === "medium" && (num < 10000 || num > 50000)) return false
+            if (filters.attendees === "large" && num <= 50000) return false
         }
-
-        if (filters.search && !event.title.toLowerCase().includes(filters.search.toLowerCase()))
-            return false;
-
-        return true;
-    });
+        if (filters.search && !event.title.toLowerCase().includes(filters.search.toLowerCase())) return false
+        return true
+    })
 
     const sortedEvents = [...filteredEvents].sort((a, b) => {
-        const { field, order } = sortConfig;
-
-        let valueA = a[field];
-        let valueB = b[field];
+        const { field, order } = sortConfig as { field: string; order: string }
+        let valueA = a[field]
+        let valueB = b[field]
 
         if (field === "createdAt" || field === "updatedAt") {
-            valueA = Number(valueA || 0);
-            valueB = Number(valueB || 0);
+            valueA = Number(valueA || 0)
+            valueB = Number(valueB || 0)
         }
-
         if (field === "startDate" || field === "bookingDeadline") {
-            valueA = valueA ? new Date(valueA).getTime() : 0;
-            valueB = valueB ? new Date(valueB).getTime() : 0;
+            valueA = valueA ? new Date(valueA).getTime() : 0
+            valueB = valueB ? new Date(valueB).getTime() : 0
         }
-
         if (field === "title") {
-            valueA = valueA?.toLowerCase() || "";
-            valueB = valueB?.toLowerCase() || "";
+            valueA = valueA?.toLowerCase() || ""
+            valueB = valueB?.toLowerCase() || ""
         }
 
-        if (valueA < valueB) return order === "asc" ? -1 : 1;
-        if (valueA > valueB) return order === "asc" ? 1 : -1;
-        return 0;
-    });
+        if (valueA < valueB) return order === "asc" ? -1 : 1
+        if (valueA > valueB) return order === "asc" ? 1 : -1
+        return 0
+    })
 
-    // ------------------------
-    // CREATE OR UPDATE EVENT
-    // ------------------------
-    async function handleSubmit(data: any, updatedAt: any) {
+    async function uploadEventCover(file: File, title: string) {
+        const token = await user?.getIdToken()
+        if (!token) {
+            throw new Error("You must be signed in to upload event images.")
+        }
+
+        return uploadMediaFile({
+            token,
+            file,
+            scope: "shared",
+            category: "Events Files",
+            title: title || file.name,
+            description: "Event cover image",
+            onProgress: setUploadProgress,
+        })
+    }
+
+    async function cleanupUploadedMedia(mediaId?: string) {
+        if (!mediaId || !user) return
+        try {
+            const token = await user.getIdToken()
+            await deleteMediaFile(mediaId, token)
+        } catch (error) {
+            console.warn("Failed to cleanup uploaded event media:", error)
+        }
+    }
+
+    async function handleSubmit(data: EventFormData, updatedAt: number) {
+        let uploadedMedia: { id: string; url: string } | null = null
         setLoading(true)
+        setUploadProgress(0)
 
-        if (selectedEvent) {
-            // EDIT MODE — use slug as the identifier
-            const res = await updateEventBySlug(selectedEvent.slug, data)
+        try {
+            const payload: any = {
+                category: data.category,
+                title: data.title,
+                startDate: data.startDate,
+                endDate: data.endDate,
+                location: data.location,
+                attendees: data.attendees,
+                bookingDeadline: data.bookingDeadline,
+                image: data.image || "",
+                imageMediaId: data.imageMediaId || "",
+                status: data.status,
+            }
 
-            if (res.success) {
+            if (data.imageFile) {
+                const media = await uploadEventCover(data.imageFile, data.title)
+                uploadedMedia = { id: media.id, url: media.url }
+                payload.image = media.url
+                payload.imageMediaId = media.id
+            }
+
+            if (selectedEvent) {
+                const res = await updateEventBySlug(selectedEvent.slug, payload)
+
+                if (!res.success) {
+                    throw new Error(res.message)
+                }
+
                 setEventsData((prev) =>
                     prev.map((item) =>
                         item.slug === selectedEvent.slug
                             ? {
                                 ...item,
-                                ...data,
+                                ...payload,
                                 updatedAt,
-                                // if the title changed the slug may have changed too
                                 slug: res.newSlug ?? item.slug,
                                 id: res.newSlug ?? item.slug,
                             }
-                            : item
-                    )
+                            : item,
+                    ),
                 )
             } else {
-                alert(res.message)
+                const res = await createEvent(payload)
+
+                if (!res.success) {
+                    throw new Error(res.message)
+                }
+
+                setEventsData((prev) => [...prev, { id: res.slug, slug: res.slug, ...payload, createdAt: updatedAt, updatedAt }])
             }
-        } else {
-            // CREATE MODE
-            const res = await createEvent(data)
 
-            if (res.success) {
-                setEventsData((prev) => [
-                    ...prev,
-                    { id: res.slug, slug: res.slug, ...data },
-                ])
-            } else {
-                // Show slug conflict or other errors to the user
-                alert(res.message)
-            }
-        }
-
-        setLoading(false)
-
-        if (!selectedEvent) {
-            setModalOpen(false)
-        } else {
             setModalOpen(false)
             setSelectedEvent(null)
+        } catch (error: any) {
+            if (uploadedMedia?.id) {
+                await cleanupUploadedMedia(uploadedMedia.id)
+            }
+            alert(error?.message || "Failed to save event.")
+        } finally {
+            setLoading(false)
+            setUploadProgress(0)
         }
     }
 
-    // ------------------------
-    // DELETE EVENT
-    // ------------------------
     async function onEventDelete(event: any) {
         setConfirmState({
             title: "Delete Event",
@@ -198,14 +214,11 @@ export default function Events() {
             onConfirm: async () => {
                 try {
                     setLoading(true)
-
-                    // Use slug instead of id
                     const res = await deleteEventBySlug(event.slug)
-
                     if (res.success) {
-                        setEventsData((prev) =>
-                            prev.filter((item) => item.slug !== event.slug)
-                        )
+                        setEventsData((prev) => prev.filter((item) => item.slug !== event.slug))
+                    } else {
+                        alert(res.message)
                     }
                 } finally {
                     setLoading(false)
@@ -216,10 +229,7 @@ export default function Events() {
     }
 
     function toggleSortOrder() {
-        setSortConfig((prev) => ({
-            ...prev,
-            order: prev.order === "asc" ? "desc" : "asc",
-        }));
+        setSortConfig((prev) => ({ ...prev, order: prev.order === "asc" ? "desc" : "asc" }))
     }
 
     function formatTimestamp(timestamp?: number) {
@@ -236,48 +246,24 @@ export default function Events() {
     function handleExportCSV() {
         if (!eventsData.length) return
 
-        const headers = [
-            "slug",
-            "category",
-            "title",
-            "startDate",
-            "endDate",
-            "location",
-            "attendees",
-            "bookingDeadline",
-            "createdAt",
-            "updatedAt",
-        ]
-
+        const headers = ["slug", "category", "title", "startDate", "endDate", "location", "attendees", "bookingDeadline", "createdAt", "updatedAt"]
         const rows = eventsData.map((event) => {
-            return headers
-                .map((header) => {
-                    let value = event[header]
-
-                    if (header === "createdAt" || header === "updatedAt") {
-                        value = formatTimestamp(value)
-                    }
-
-                    if (header === "startDate" || header === "endDate") {
-                        value = value
-                            ? new Date(value).toLocaleDateString("en-US", {
-                                year: "numeric",
-                                month: "short",
-                                day: "numeric",
-                            })
-                            : ""
-                    }
-
-                    return `"${value || ""}"`
-                })
-                .join(",")
+            return headers.map((header) => {
+                let value = event[header]
+                if (header === "createdAt" || header === "updatedAt") {
+                    value = formatTimestamp(value)
+                }
+                if (header === "startDate" || header === "endDate") {
+                    value = value ? new Date(value).toLocaleDateString("en-US", { year: "numeric", month: "short", day: "numeric" }) : ""
+                }
+                return `"${value || ""}"`
+            }).join(",")
         })
 
         const csvContent = headers.join(",") + "\n" + rows.join("\n")
         const blob = new Blob([csvContent], { type: "text/csv;charset=utf-8;" })
         const url = URL.createObjectURL(blob)
         const link = document.createElement("a")
-
         link.href = url
         link.setAttribute("download", `Verlux Stands Events ${new Date().toDateString()}.csv`)
         document.body.appendChild(link)
@@ -285,47 +271,13 @@ export default function Events() {
         document.body.removeChild(link)
     }
 
-    async function handleImportCSV(e: React.ChangeEvent<HTMLInputElement>) {
-        const file = e.target.files?.[0]
-        if (!file) return
-
-        const text = await file.text()
-        const lines = text.split("\n").filter(Boolean)
-        const headers = lines[0].split(",")
-
-        const importedEvents = lines.slice(1).map((line) => {
-            const values = line.split(",")
-            const event: any = {}
-            headers.forEach((header, index) => {
-                event[header.replace(/"/g, "")] = values[index]?.replace(/"/g, "") || ""
-            })
-            return event
-        })
-
-        const validEvents = importedEvents.filter(
-            (e) => e.title && e.startDate && e.endDate
-        )
-
-        for (const event of validEvents) {
-            const res = await createEvent(event)
-            // Skip duplicates silently during bulk import
-            if (!res.success) {
-                console.warn(`Skipped "${event.title}": ${res.message}`)
-            }
-        }
-
-        // Refresh from DB to get accurate slugs
-        const res = await getAllEvents()
-        if (res.success) setEventsData(res.data || [])
-    }
-
-    if (loading) {
+    if (loading || authLoading) {
         return (
             <div className="flex min-h-screen items-center justify-center bg-background">
                 <AdminSidebar />
                 <main className="flex-1 items-center justify-center flex flex-col">
                     <Loader2 className="w-10 h-10 text-primary animate-spin" />
-                    <span>Loading events...</span>
+                    <span>{authLoading ? "Checking admin session..." : "Loading events..."}</span>
                 </main>
             </div>
         )
@@ -334,7 +286,6 @@ export default function Events() {
     return (
         <div className="min-h-screen bg-background flex justify-start max-h-[80vh] overflow-hidden">
             <AdminSidebar />
-
 
             <AddEvent
                 isOpen={isModalOpen}
@@ -345,6 +296,8 @@ export default function Events() {
                 onSubmit={handleSubmit}
                 isEditMode={!!selectedEvent}
                 event={selectedEvent}
+                submitting={loading}
+                uploadProgress={uploadProgress}
             />
 
             <ConfirmModal
@@ -357,8 +310,7 @@ export default function Events() {
                 onClose={() => setConfirmState(null)}
             />
 
-
-            <main className="w-full p-2 md:p-8 lg:p-8 lg:pt-0 overflow-y-auto">
+            <main className="w-full p-2 md:p-8 lg:p-8 lg:pt-0 overflow-y-auto" onClick={() => isExportOpen && setIsExportOpen(false)}>
                 <div className="mb-3 pt-4">
                     <div className="flex items-center justify-between w-full">
                         <div>
@@ -370,47 +322,21 @@ export default function Events() {
                         </div>
 
                         <div className="flex relative bg-primary rounded">
-                            <button
-                                onClick={() => {
-                                    setSelectedEvent(null)
-                                    setModalOpen(true)
-                                }}
-                                className="flex gap-1 items-center border-e p-2 px-2 border-yellow-300 hover:bg-yellow-500 rounded"
-                            >
+                            <button onClick={() => { setSelectedEvent(null); setModalOpen(true) }} className="flex gap-1 items-center border-e p-2 px-2 border-yellow-300 hover:bg-yellow-500 rounded">
                                 <Plus className="w-4 h-4" />
                                 New
                             </button>
 
-                            <button
-                                className="p-2 hover:bg-yellow-500 rounded"
-                                onClick={() => setIsExportOpen((prev) => !prev)}
-                            >
+                            <button className="p-2 hover:bg-yellow-500 rounded" onClick={() => setIsExportOpen((prev) => !prev)}>
                                 <ChevronDown className="w-5 h-5" />
                             </button>
 
                             {isExportOpen && (
-                                <div className="absolute right-0 mt-8 w-48 bg-[#111] border border-[#222] rounded shadow-lg z-50">
-                                    <button
-                                        onClick={() => {
-                                            handleExportCSV()
-                                            setIsExportOpen(false)
-                                        }}
-                                        className="flex items-center gap-2 w-full px-4 py-2 text-sm hover:bg-[#222]"
-                                    >
+                                <div className="absolute right-0 mt-11 w-48 border border-[#222] rounded shadow-2xl shadow-[#111] z-50">
+                                    <button onClick={() => { handleExportCSV(); setIsExportOpen(false) }} className="flex items-center gap-2 w-full px-4 py-2 text-sm hover:bg-[#222]">
                                         <Download size={16} />
                                         Export CSV
                                     </button>
-
-                                    <label className="flex items-center gap-2 w-full px-4 py-2 text-sm hover:bg-[#222] cursor-pointer">
-                                        <Upload size={16} />
-                                        Import CSV
-                                        <input
-                                            type="file"
-                                            accept=".csv"
-                                            hidden
-                                            onChange={handleImportCSV}
-                                        />
-                                    </label>
                                 </div>
                             )}
                         </div>
@@ -418,67 +344,37 @@ export default function Events() {
                 </div>
 
                 <div className="flex flex-wrap gap-3 mb-2 w-full sticky top-0 z-1 bg-background py-2">
-                    <input
-                        type="text"
-                        placeholder="Search by event name..."
-                        className="px-3 py-2 rounded bg-[#111] text-sm"
-                        value={filters.search}
-                        onChange={(e) => setFilters({ ...filters, search: e.target.value })}
-                    />
+                    <input type="text" placeholder="Search by event name..." className="px-3 py-2 rounded bg-[#111] text-sm" value={filters.search} onChange={(e) => setFilters({ ...filters, search: e.target.value })} />
 
-                    <select
-                        className="px-3 py-2 rounded bg-[#111] text-sm"
-                        value={filters.category}
-                        onChange={(e) => setFilters({ ...filters, category: e.target.value })}
-                    >
+                    <select className="px-3 py-2 rounded bg-[#111] text-sm" value={filters.category} onChange={(e) => setFilters({ ...filters, category: e.target.value })}>
                         <option value="all">All</option>
                         {[...categories].map((category) => (
-                            <option key={category} value={category}>
-                                {category.slice(0, 1).toUpperCase()}{category.slice(1)}
-                            </option>
+                            <option key={category} value={category}>{category.slice(0, 1).toUpperCase()}{category.slice(1)}</option>
                         ))}
                     </select>
 
-                    <select
-                        className="px-3 py-2 rounded bg-[#111] text-sm"
-                        value={filters.status}
-                        onChange={(e) => setFilters({ ...filters, status: e.target.value })}
-                    >
+                    <select className="px-3 py-2 rounded bg-[#111] text-sm" value={filters.status} onChange={(e) => setFilters({ ...filters, status: e.target.value })}>
                         <option value="all">All Status</option>
                         <option value="upcoming">Upcoming</option>
                         <option value="past">Past</option>
                         <option value="ongoing">Ongoing</option>
                     </select>
 
-                    <select
-                        className="px-3 py-2 rounded bg-[#111] text-sm"
-                        value={filters.eventStatus}
-                        onChange={(e) => setFilters({ ...filters, eventStatus: e.target.value })}
-                    >
+                    <select className="px-3 py-2 rounded bg-[#111] text-sm" value={filters.eventStatus} onChange={(e) => setFilters({ ...filters, eventStatus: e.target.value })}>
                         <option value="all">All Type</option>
                         <option value="published">Published</option>
                         <option value="draft">Draft</option>
                     </select>
 
-                    <select
-                        className="px-2 py-2 rounded bg-[#111] text-sm"
-                        value={filters.attendees}
-                        onChange={(e) => setFilters({ ...filters, attendees: e.target.value })}
-                    >
+                    <select className="px-2 py-2 rounded bg-[#111] text-sm" value={filters.attendees} onChange={(e) => setFilters({ ...filters, attendees: e.target.value })}>
                         <option value="all">All Sizes</option>
                         <option value="small">Small (&lt;10k)</option>
-                        <option value="medium">Medium (10k–50k)</option>
+                        <option value="medium">Medium (10k-50k)</option>
                         <option value="large">Large (50k+)</option>
                     </select>
 
                     <div className="flex items-center gap-2 bg-[#111] rounded">
-                        <select
-                            className="px-1 py-2 rounded bg-[#111] text-sm border-e"
-                            value={sortConfig.field}
-                            onChange={(e) =>
-                                setSortConfig((prev) => ({ ...prev, field: e.target.value }))
-                            }
-                        >
+                        <select className="px-1 py-2 rounded bg-[#111] text-sm border-e" value={sortConfig.field} onChange={(e) => setSortConfig((prev) => ({ ...prev, field: e.target.value }))}>
                             <option value="createdAt">Created Date</option>
                             <option value="updatedAt">Updated Date</option>
                             <option value="startDate">Event Date</option>
@@ -486,11 +382,7 @@ export default function Events() {
                             <option value="title">Title</option>
                         </select>
 
-                        <button
-                            title="Ascending or Descending"
-                            onClick={toggleSortOrder}
-                            className="p-2 rounded bg-[#111] hover:bg-[#222] transition"
-                        >
+                        <button title="Ascending or Descending" onClick={toggleSortOrder} className="p-2 rounded bg-[#111] hover:bg-[#222] transition">
                             {sortConfig.order === "asc" ? <ArrowUp size={16} /> : <ArrowDown size={16} />}
                         </button>
                     </div>

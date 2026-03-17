@@ -6,37 +6,37 @@ export default function Process() {
       number: '01',
       title: 'Know Your Needs',
       description:
-        'We begin with a consultation to understand your goals, target audience, and brand requirements.',
+        'We begin by understanding your exhibition goals, brand standards, display needs, and the message you want to deliver.',
     },
     {
       number: '02',
       title: '3D Creative Stand Designing',
       description:
-        'We present you with creative options tailored to your needs, ensuring your stand design aligns perfectly with your brand identity.',
+        'We present creative stand design options according to your brief so the concept fits your brand identity and exhibition objectives.',
     },
     {
       number: '03',
       title: 'Your Approval is a Must!',
       description:
-        'We take your feedback, modify designs and layouts until the concept not just meets but exceeds your expectations.',
+        'We take your feedback seriously and refine the design and layout until it matches your approval and exhibition requirements.',
     },
     {
       number: '04',
       title: 'In-House Manufacturing Unit',
       description:
-        'Once you approve the design, our skilled stand builders start transforming the 3D into reality.',
+        'Once the design is approved, our in-house production team starts building your exhibition stand with attention to every detail.',
     },
     {
       number: '05',
       title: 'Stand Installation, Dismantling, and Storage',
       description:
-        'Our experienced technicians manage the stand shipping, onsite installation, dismantling, storage and other post show services.',
+        'We manage shipping, installation, dismantling, storage, and other post-show services so you can focus on the event itself.',
     },
     {
       number: '06',
       title: 'On-Site Management & Supervision',
       description:
-        'We will be assigning you a dedicated project manager who will be with you from the start to the end.',
+        'A dedicated project manager stays with you from start to finish to ensure smooth execution on the exhibition ground.',
     },
   ];
 
@@ -48,7 +48,7 @@ export default function Process() {
             Steps to a Guaranteed Successful Brand Display at the Exhibition Ground
           </h2>
           <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
-            As a trusted exhibition booth builders in Europe, we have a structured, transparent, and creative approach to deliver exceptional results on the show floor.
+            The design of your exhibition stand is entirely determined by your brand standards and brief needs. We handle setup, dismantling, delivery, and more so your exhibiting process stays clear and well managed.
           </p>
         </div>
 

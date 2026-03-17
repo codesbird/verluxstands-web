@@ -1,114 +1,127 @@
-"use client"
+'use client'
 
-import { useEffect, useState } from "react";
-import { getAllEvents } from "@/lib/server/events"
-import { Calendar, MapPin, Users, ArrowRight, Search } from "lucide-react"
-import { Button } from "@/components/ui/button"
-import Link from "next/link"
-import Events from "@/components/trade-show/events"
-import CTASection from "@/components/common/quick-actions"
-import ContactSection from '@/components/home/contact-section';
+import { useEffect, useMemo, useState } from 'react'
+import { getAllEvents } from '@/lib/server/events'
+import { Search, Sparkles } from 'lucide-react'
+import Link from 'next/link'
+import Events from '@/components/trade-show/events'
+import CTASection from '@/components/common/quick-actions'
+import ContactSection from '@/components/home/contact-section'
 
+function formatDateRange(start: string, end: string) {
+  const startDate = new Date(start)
+  const endDate = new Date(end)
 
+  const options: Intl.DateTimeFormatOptions = {
+    month: 'short',
+    day: 'numeric',
+  }
+
+  const startFormatted = startDate.toLocaleDateString('en-US', options)
+  const endFormatted = endDate.toLocaleDateString('en-US', {
+    ...options,
+    year: 'numeric',
+  })
+
+  return `${startFormatted} - ${endFormatted}`
+}
+
+function getMonthDay(date: string) {
+  const value = new Date(date)
+  return {
+    day: value.toLocaleString('en-US', { day: '2-digit' }),
+    month: value.toLocaleString('en-US', { month: 'short' }).toUpperCase(),
+  }
+}
 
 export default function ClientEvents() {
+  const [eventsData, setEventsData] = useState<any[]>([])
+  const [searchQuery, setSearchQuery] = useState('')
 
-    const [eventsData, setEventsData] = useState<any[]>([])
-    const [seachQuery, setSearchQuery] = useState("")
+  useEffect(() => {
+    ;(async () => {
+      const res = await getAllEvents()
+      if (res.success) {
+        setEventsData(res.data || [])
+      }
+    })()
+  }, [])
 
-    // Fetch events
-    useEffect(() => {
-        (async () => {
-            const res = await getAllEvents()
-            if (res.success) {
-                setEventsData(res.data || [])
-            }
-        })()
-    }, [])
+  const quickResults = useMemo(() => {
+    const normalized = searchQuery.trim().toLowerCase()
+    if (!normalized) return []
 
-    function formatDateRange(start: string, end: string) {
-        const startDate = new Date(start);
-        const endDate = new Date(end);
+    return [...eventsData]
+      .filter((item) => item.status === 'published')
+      .filter((item) => String(`${item.title} ${item.startDate} ${item.location}`).toLowerCase().includes(normalized))
+      .slice(0, 6)
+  }, [eventsData, searchQuery])
 
-        const options: Intl.DateTimeFormatOptions = {
-            month: "short",
-            day: "numeric",
-        };
+  return (
+    <div className="space-y-14">
+      <div className="relative rounded-[2.25rem] border border-primary/20 bg-[radial-gradient(circle_at_top,#3b2a15_0%,#1b1712_38%,#111111_100%)] p-5 shadow-[0_28px_80px_rgba(0,0,0,0.35)] md:p-8">
+        <div className="absolute rounded-[2.25rem] inset-0 bg-[linear-gradient(135deg,rgba(196,160,102,0.16),transparent_35%,transparent_65%,rgba(229,213,184,0.08))]" />
+        <div className="relative">
+          <div className="mb-6 flex flex-col gap-5 lg:flex-row lg:items-end lg:justify-between">
+            <div className="max-w-2xl">
+              <div className="mb-3 inline-flex items-center gap-2 rounded-full border border-primary/25 bg-black/20 px-3 py-1 text-[11px] uppercase tracking-[0.28em] text-primary/85">
+                <Sparkles className="h-3.5 w-3.5" />
+                Event Finder
+              </div>
+              <h2 className="font-serif text-3xl text-white md:text-4xl">Find the right exhibition calendar, faster</h2>
+              <p className="mt-3 text-base leading-7 text-white/68">
+                Search upcoming trade shows, browse event dates, and jump straight to the exhibition pages with the same Verlux premium experience used across the website.
+              </p>
+            </div>
+          </div>
 
-        const startFormatted = startDate.toLocaleDateString("en-US", options);
-        const endFormatted = endDate.toLocaleDateString("en-US", {
-            ...options,
-            year: "numeric",
-        });
-
-        return `${startFormatted} – ${endFormatted}`;
-    }
-
-    function getDate(date: string) {
-        const dateObj = new Date(date);
-
-        // Get day (numeric) and month (short name)
-        const formattedDate = dateObj.toLocaleString('en-GB', {
-            day: 'numeric',
-            month: 'short',
-            year: "numeric"
-        });
-        console.log("new date  ", formattedDate)
-        return formattedDate.split(" ")
-
-    }
-
-    return (
-
-        <div>
-
-            <div className="w-full bg-primary mb-20 rounded-3xl p-3 md:p-5 lg:p-10 relative">
-                <div className="border wk-2xl flex flex-start gap-3 rounded-2xl p-3 text-white items-center">
-                    <Search />
-                    <input onChange={(e) => setSearchQuery(e.target.value)} type="search" className="bg-black/20 w-full p-1 px-2 rounded text-lg text-white/70" placeholder="search event to explore" />
-                </div>
-                {seachQuery.length > 0 &&
-                    <div className="bg-primary max-h-60 border border-t-0 overflow-auto short-scroller px-2 rounded-b-2xl w-2kxl shadow-lg z-10 pt-4 pb-3 relative bottom-4 z-10">
-                        {[...eventsData]
-                            .filter((item) => seachQuery.length > 0 && String(item.title + item.startDate + item.location).toLowerCase().includes(seachQuery.toLowerCase()))
-                            .map((item) => (
-                                item &&
-                                <Link
-                                    href={`/trade-shows/${item.slug}`} key={item.id + item.title}
-                                    className="block p-3 py-2 border-b border-white/20 kack/50 my-2 text-white/80 ">
-                                    <div className="flex justify-start gap-5">
-                                        <div className="flex flex-col">
-                                            <div className="text-5xl font-semibold text-cyan-500">
-                                                {getDate(item.startDate)[0]}
-                                            </div>
-                                            <div>
-                                                {getDate(item.startDate)[1]}
-                                            </div>
-
-                                        </div>
-                                        <div className="me-auto">
-                                            <div className="text-sm">{formatDateRange(item.startDate, item.endDate)}</div>
-                                            <div className="text-xl my-1 font-bold">{item.title} {getDate(item.startDate)[2]}</div>
-                                            <div className="text-sm text-white/60 font-semibold">{item.location}</div>
-                                        </div>
-                                        <div className="h-20 rounded-2xl overflow-hidden w-30">
-                                            {item.image && <img src={item.image} />}
-                                        </div>
-                                    </div>
-                                </Link>
-                            ))
-                        }
-                    </div>
-                }
+          <div className="relative">
+            <div className="flex items-center gap-3 rounded-[1.4rem] border border-white/10 bg-black/25 px-4 py-4 shadow-inner shadow-black/20">
+              <Search className="h-5 w-5 text-primary" />
+              <input
+                value={searchQuery}
+                onChange={(event) => setSearchQuery(event.target.value)}
+                type="search"
+                className="w-full bg-transparent text-base text-white outline-none placeholder:text-white/35"
+                placeholder="Search event, city, or month"
+              />
             </div>
 
-            <div>
-                <Events />
-            </div>
-
-            <CTASection />
-            <ContactSection />
+            {quickResults.length > 0 && (
+              <div className="absolute left-0 right-0 top-[calc(100%+14px)] z-20 overflow-hidden rounded-[1.4rem] border border-primary/20 bg-[#171717] p-3 shadow-[0_26px_70px_rgba(0,0,0,0.38)]">
+                {quickResults.map((item) => {
+                  const dateParts = getMonthDay(item.startDate)
+                  return (
+                    <Link
+                      href={`/trade-shows/${item.slug}`}
+                      key={item.id}
+                      className="flex items-center gap-4 rounded-[1.1rem] px-3 py-3 transition hover:bg-white/5"
+                    >
+                      <div className="min-w-[64px] rounded-2xl border border-primary/20 bg-black/25 px-3 py-2 text-center">
+                        <div className="text-2xl font-semibold leading-none text-primary">{dateParts.day}</div>
+                        <div className="mt-1 text-[11px] uppercase tracking-[0.24em] text-white/55">{dateParts.month}</div>
+                      </div>
+                      <div className="min-w-0 flex-1">
+                        <div className="text-xs uppercase tracking-[0.18em] text-primary/70">{formatDateRange(item.startDate, item.endDate)}</div>
+                        <div className="mt-1 truncate font-serif text-xl text-white">{item.title}</div>
+                        <div className="mt-1 text-sm text-white/50">{item.location}</div>
+                      </div>
+                      <div className="flex h-16 w-16 shrink-0 items-center justify-center overflow-hidden rounded-2xl border border-white/10 bg-white p-2">
+                        {item.image ? <img src={item.image} alt={item.title} className="max-h-full w-full object-contain" /> : null}
+                      </div>
+                    </Link>
+                  )
+                })}
+              </div>
+            )}
+          </div>
         </div>
+      </div>
 
-    )
+      <Events searchQuery={searchQuery} />
+
+      <CTASection />
+      <ContactSection />
+    </div>
+  )
 }

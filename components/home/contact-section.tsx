@@ -16,6 +16,14 @@ const initialForm = {
   message: '',
 }
 
+const valuePoints = [
+  'Precise guidance from ideas to delivery of your exhibition stand.',
+  'Custom stand or modular stand solutions for your requirements.',
+  'Complete exhibit management solution under one roof.',
+  'Instant guidance for your exhibition needs.',
+  'A proposal as per your exhibition requirements within 24 hours.',
+]
+
 export default function ContactSection() {
   const [formData, setFormData] = useState(initialForm)
   const [file, setFile] = useState<File | null>(null)
@@ -70,21 +78,18 @@ export default function ContactSection() {
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <CounterTiles />
 
-        <div className="brand-shell grid grid-cols-1 gap-6 rounded-[1.75rem] border border-primary/20 p-8 md:grid-cols-3 sm:p-10">
+        <div className="brand-shell grid grid-cols-1 gap-6 rounded-b-[1.75rem] border border-primary/20 p-8 md:grid-cols-3 sm:p-10">
           <div>
             <h2 className="text-3xl font-semibold">
-              Choose Verlux Stands for your <span className="brand-gold-text">next trade show event</span>
+              Have the exhibiting experts by your side for the <span className="brand-gold-text">best brand presence at display ground</span>
             </h2>
-            <h3 className="mt-5 text-xl font-semibold text-secondary">Get a custom booth design & quote</h3>
+            <h3 className="mt-5 text-xl font-semibold text-secondary">Request a free quote for your future exhibition</h3>
             <div className="mt-5 space-y-3 text-foreground/82">
-              {[
-                'We will get back to you soon.',
-                'Our team is always ready to assist you.',
-                'We provide our services globally.',
-                'No automated responses, only personal support.',
-                'Get a customized quotation for your project.',
-              ].map((item) => (
-                <p key={item} className="flex items-start gap-2"><span className="mt-1 text-primary">�</span> <span>{item}</span></p>
+              {valuePoints.map((item) => (
+                <p key={item} className="flex items-start gap-2">
+                  <span className="mt-1 text-primary">+</span>
+                  <span>{item}</span>
+                </p>
               ))}
             </div>
             <div className="mt-8 space-y-5 text-sm">
@@ -92,21 +97,24 @@ export default function ContactSection() {
                 <Mail className="mt-1 text-primary" />
                 <div>
                   <h6 className="font-semibold text-secondary">Email</h6>
-                  <a className="text-foreground/80 hover:text-secondary" href="mailto:info@verluxstands.com">info@verluxstands.com</a>
+                  <a className="text-foreground/80 hover:text-secondary" href="mailto:marketing@verluxstands.com">marketing@verluxstands.com</a>
                 </div>
               </div>
               <div className="flex gap-3">
                 <Phone className="mt-1 text-primary" />
                 <div>
                   <h6 className="font-semibold text-secondary">Phone</h6>
-                  <a className="text-foreground/80 hover:text-secondary" href="tel:+91789685248">+91 789685248</a>
+                  <a className="text-foreground/80 hover:text-secondary" href="tel:+917303531447">+91 7303531447</a>
+                  <div>
+                    <a className="text-foreground/80 hover:text-secondary" href="tel:+918920253275">+91 8920253275</a>
+                  </div>
                 </div>
               </div>
               <div className="flex gap-3">
                 <MapPin className="mt-1 text-primary" />
                 <div>
-                  <h6 className="font-semibold text-secondary">Delhi</h6>
-                  <p className="text-foreground/75">Unchi Dankaur, Greater Noida, Gautam Buddha Nagar, Uttar Pradesh - 201110</p>
+                  <h6 className="font-semibold text-secondary">Address</h6>
+                  <p className="text-foreground/75">No. 1, Manikam Market, Unchi Dankaur, Greater Noida, Gautam Buddha Nagar, Uttar Pradesh - 201110</p>
                 </div>
               </div>
             </div>
@@ -127,26 +135,26 @@ export default function ContactSection() {
                 <input type="email" name="email" value={formData.email} onChange={handleChange} required className="w-full bg-transparent py-3 text-foreground placeholder:text-muted-foreground focus:outline-none" placeholder="your.email@company.com" />
               </Field>
               <Field icon={<Phone className="text-primary" />}>
-                <input type="tel" name="phone" value={formData.phone} onChange={handleChange} required className="w-full bg-transparent py-3 text-foreground placeholder:text-muted-foreground focus:outline-none" placeholder="+39 XXX XXX XXXX" />
+                <input type="tel" name="phone" value={formData.phone} onChange={handleChange} required className="w-full bg-transparent py-3 text-foreground placeholder:text-muted-foreground focus:outline-none" placeholder="Your contact number" />
               </Field>
             </div>
 
             <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
               <Field icon={<Tag className="text-primary" />}>
-                <input type="text" name="exhibition" value={formData.exhibition} onChange={handleChange} className="w-full bg-transparent py-3 text-foreground placeholder:text-muted-foreground focus:outline-none" placeholder="Trade show name" />
+                <input type="text" name="exhibition" value={formData.exhibition} onChange={handleChange} className="w-full bg-transparent py-3 text-foreground placeholder:text-muted-foreground focus:outline-none" placeholder="Exhibition name" />
               </Field>
               <Field icon={<Tent className="text-primary" />}>
                 <select name="standSize" value={formData.standSize} onChange={handleChange} className="w-full bg-transparent py-3 text-foreground focus:outline-none">
-                  <option value="">Select stand size</option>
-                  <option value="Small (up to 3x3m)">Small (up to 3x3m)</option>
-                  <option value="Medium (3x3m to 6x6m)">Medium (3x3m to 6x6m)</option>
-                  <option value="Large (6x6m+)">Large (6x6m+)</option>
+                  <option className="bg-background" value="">Select stand size</option>
+                  <option className="bg-background" value="Small (up to 3x3m)">Small (up to 3x3m)</option>
+                  <option className="bg-background" value="Medium (3x3m to 6x6m)">Medium (3x3m to 6x6m)</option>
+                  <option className="bg-background" value="Large (6x6m+)">Large (6x6m+)</option>
                 </select>
               </Field>
             </div>
 
             <Field icon={<MessageCircle className="mt-3 text-primary" />} align="start">
-              <textarea name="message" value={formData.message} onChange={handleChange} rows={5} required className="w-full resize-none bg-transparent py-3 text-foreground placeholder:text-muted-foreground focus:outline-none" placeholder="Tell us about your exhibition stand requirements..." />
+              <textarea name="message" value={formData.message} onChange={handleChange} rows={5} required className="w-full resize-none bg-transparent py-3 text-foreground placeholder:text-muted-foreground focus:outline-none" placeholder="Please share your stand brief or exhibition requirements" />
             </Field>
 
             <label className="flex cursor-pointer items-center gap-3 rounded-2xl border border-dashed border-primary/20 bg-black/10 px-4 py-4 transition-colors hover:border-primary/45 hover:bg-primary/8">

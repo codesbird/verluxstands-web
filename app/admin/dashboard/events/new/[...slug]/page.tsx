@@ -1,8 +1,10 @@
 "use client"
 
-import React, { useState, useEffect } from "react"
+import React, { useEffect, useState } from "react"
 import EventPageBuilder from "@/components/admin/events/EventPageBuilder"
 import { saveEventContent, getEventContent } from "@/lib/server/events"
+import { uploadMediaFile } from "@/lib/media-client"
+import { useAuth } from "@/lib/auth-context"
 
 interface PageProps {
     params: Promise<{ slug: string[] }>
@@ -11,12 +13,12 @@ interface PageProps {
 export default function EventContentEditor({ params }: PageProps) {
     const { slug } = React.use(params)
     const eventSlug = slug[0]
+    const { user, loading: authLoading } = useAuth()
 
     const [initialBlocks, setInitialBlocks] = useState<any[]>([])
     const [loading, setLoading] = useState(true)
     const [saving, setSaving] = useState(false)
 
-    // Fetch existing content once on mount
     useEffect(() => {
         getEventContent(eventSlug)
             .then((res) => {
@@ -27,6 +29,22 @@ export default function EventContentEditor({ params }: PageProps) {
             .finally(() => setLoading(false))
     }, [eventSlug])
 
+    async function uploadBlockImage(file: File) {
+        const token = await user?.getIdToken()
+        if (!token) {
+            throw new Error("You must be signed in to upload event content images.")
+        }
+
+        return uploadMediaFile({
+            token,
+            file,
+            scope: "shared",
+            category: "Event Content Files",
+            title: file.name,
+            description: `Event content image for ${eventSlug}`,
+        })
+    }
+
     async function saveContent(blocks: any[]) {
         setSaving(true)
         try {
@@ -34,7 +52,6 @@ export default function EventContentEditor({ params }: PageProps) {
             if (res.success) {
                 alert("Content saved successfully")
             } else {
-                // alert() only accepts a string — can't pass a second arg
                 alert("Error: " + res.message)
             }
         } catch (err: any) {
@@ -44,13 +61,10 @@ export default function EventContentEditor({ params }: PageProps) {
         }
     }
 
-    if (loading) {
+    if (loading || authLoading) {
         return (
-            <div style={{
-                display: "flex", alignItems: "center", justifyContent: "center",
-                minHeight: "100vh", background: "#080808", color: "#666", fontSize: 14
-            }}>
-                Loading content...
+            <div style={{ display: "flex", alignItems: "center", justifyContent: "center", minHeight: "100vh", background: "#080808", color: "#666", fontSize: 14 }}>
+                {authLoading ? "Checking admin session..." : "Loading content..."}
             </div>
         )
     }
@@ -59,6 +73,7 @@ export default function EventContentEditor({ params }: PageProps) {
         <EventPageBuilder
             initialBlocks={initialBlocks}
             onSave={saveContent}
+            onUploadImage={uploadBlockImage}
             saving={saving}
         />
     )

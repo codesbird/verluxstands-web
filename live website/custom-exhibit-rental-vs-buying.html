@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Custom Exhibit | Verlux Stands – Exhibition Stand Design & Booth Builder</title>
+    <meta name="description"
+        content="Verlux Stands is a leading exhibition stand design company in India & Europe that builds luxury yet functional modern exhibition stands across India and Europe. We create memorable stands that attract people. Book your exhibition stand with us today.">
+    <meta name="keywords"
+        content="exhibition stand design company in India, exhibition stand design company in Europe, exhibition stand builders in India, exhibition stand builders in Europe, custom exhibition stands, trade show booth design, modular exhibition stands, luxury exhibition stands, modern exhibition stands, exhibition stand rental, exhibition stand construction, exhibition booth design services, exhibition stand fabrication, exhibition stand installation, exhibition stand project management">
+    <meta name="author" content="Verlux Stands">
+    <meta name="robots" content="index, follow">
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://www.verluxstands.com/">
+    <meta property="og:title" content="Verlux Stands – Exhibition Stand Design & Booth Builder in Europe & India">
+    <meta property="og:description" content="Luxury & modern exhibition stand designs across Europe and India. Custom stands that attract and convert.">
+    <meta property="og:image" content="https://verluxstands.github.io/verluxstands/assets/icons/WhatsApp%20Image%202025-09-19%20at%2013.54.04_30e78042.jpg">
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://www.verluxstands.com/">
+    <meta name="twitter:title" content="Verlux Stands – Exhibition Stand Design & Booth Builder in Europe & India">
+    <meta name="twitter:description" content="Luxury & modern exhibition stand designs across Europe and India. Custom stands that attract and convert.">
+    <meta name="twitter:image" content="https://verluxstands.github.io/verluxstands/assets/icons/WhatsApp%20Image%202025-09-19%20at%2013.54.04_30e78042.jpg">
+    
+    <meta name="msapplication-config" content="/browserconfig.xml">
+    <!-- Theme -->
+    <meta name="theme-color" content="#0D0D0D">
+    <meta name="msapplication-TileColor" content="#D4AF37">
+    
+    <!-- Icons -->
+    <link rel="apple-touch-icon" sizes="180x180" href="./assets/icons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="./assets/icons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="./assets/icons/favicon-16x16.png">
+    <link rel="manifest" href="./assets/icons/site.webmanifest">
+
+
+    <!-- Google Fonts: Playfair Display + Open Sans -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="dns-prefetch" href="https://fonts.gstatic.com">
+    <link rel="preload"href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Open+Sans:wght@400;600&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    
+    <noscript>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Open+Sans:wght@400;600&display=swap">
+    </noscript>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" media="print" onload="this.media='all'">
+    <link rel="stylesheet" href="./style.css">
+
+    <!-- Preload LCP image -->
+    <link rel="preload" as="image" href="./assets/icons/WhatsApp Image 2025-09-19 at 13.54.04_30e78042.jpg">
+    
+    <!-- Tailwind (replace with local build for production) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body>
+
+    <header class="sticky top-[1px]" style="z-index: 1000 !important;">
+        <div class="px-[3%]">
+            <nav class="navbar">
+                <div class="navbar_half">
+                    <div class="container_menu">
+                        <div class="logo py-2">
+                            <a href="./index.html">
+                                <img src="./assets/icons/logo2.png" width="150px" alt="">
+                            </a>
+                        </div>
+                        <input type="checkbox" name="check" id="check">
+
+                        <div class="nav-btn">
+                            <div class="nav-links">
+                                <ul>
+                                    <li class="nav-link" style="--i: .3s">
+                                        <a href="./trade-show-calender.html">Trade Show Calender</a>
+                                    </li>
+                                    <li class="nav-link" style="--i: .3s">
+                                        <a href="./custom-exhibit-rental-vs-buying.html">Custom Exhibit</a>
+                                    </li>
+                                    <li id="dropdownToggle" class="relative nav-link" style="--i: .55s">
+                                        <a role="button" type="button">
+                                            <span>Resources</span>
+                                            <i class="fas fa-caret-down"></i>
+                                        </a>
+                                        <!-- Dropdown Menu -->
+                                        <div id="dropdownMenu"
+                                            class="dropdownMenu left-0 top-full mt-2 hidden rounded-lg shadow-lg ">
+                                            <ul class="py-2">
+                                                <li>
+                                                    <a href="./aboutus.html" class="block px-4 py-2 ">About Us</a>
+                                                </li>
+                                                <li>
+                                                    <a href="./client-testimonials.html"
+                                                        class="block px-4 py-2">Testimonial</a>
+                                                </li>
+
+                                                <li>
+                                                    <a href="./major-exhibiting-City.html" class="block px-4 py-2">Major
+                                                        trade Shows Cities</a>
+                                                </li>
+
+                                            </ul>
+                                        </div>
+                                    </li>
+
+                                    <script>
+                                        const toggleBtn = document.getElementById('dropdownToggle');
+                                        const dropdownMenu = document.getElementById('dropdownMenu');
+
+                                        // Toggle on button click
+                                        toggleBtn.addEventListener('click', () => {
+                                            dropdownMenu.classList.toggle('hidden');
+                                        });
+
+                                        // Close on outside click
+                                        document.addEventListener('click', (event) => {
+                                            if (!toggleBtn.contains(event.target) && !dropdownMenu.contains(event.target)) {
+                                                dropdownMenu.classList.add('hidden');
+                                            }
+                                        });
+
+                                        // Close on Escape key
+                                        document.addEventListener('keydown', (event) => {
+                                            if (event.key === 'Escape') {
+                                                dropdownMenu.classList.add('hidden');
+                                            }
+                                        });
+                                    </script>
+
+                                    <li class="nav-link" style="--i: 0.7s">
+                                        <a href="./portfolio.html">Portfolio</a>
+                                    </li>
+                                    <li class="nav-link" style="--i: 0.9s">
+                                        <a href="./contact_us.html">Contact</a>
+                                    </li>
+                                </ul>
+                            </div>
+
+                        </div>
+
+                        <div class="hamburger-menu-container">
+                            <div class="hamburger-menu">
+                                <div></div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="custom_banner custom-exhibit-rental">
+            <div class="px-[5%] py-5">
+                <div class="md:grid grid-cols-2 gap-20">
+                    <div class="col-lg-7">
+                        <div class="about-two__content">
+                            <div class="block-title text-left">
+                                <h1
+                                    class="block-title__tag-line my-5 head-1 leading-[1em] pt-[20px] md:text-6xl text-4xl pb-5 inline-block">
+                                    Custom Exhibition Stands by Verlux Stands </h1>
+                                <a href="./contact_us.html"
+                                    class="relative inline-flex items-center justify-start px-6 py-3 overflow-hidden font-medium transition-all stands-background rounded-xl group md:mt-10">
+                                    <span
+                                        class="absolute top-0 right-0 inline-block w-4 h-4 transition-all duration-500 ease-in-out bg-[#eaeaea] rounded group-hover:-mr-4 group-hover:-mt-4">
+                                        <span
+                                            class="absolute top-0 right-0 w-5 h-5 rotate-45 translate-x-1/2 -translate-y-1/2 bg-white"></span>
+                                    </span>
+                                    <span
+                                        class="absolute bottom-0 left-0 w-full h-full transition-all duration-500 ease-in-out delay-200 -translate-x-full translate-y-full bg-white rounded-2xl group-hover:mb-12 group-hover:translate-x-0"></span>
+                                    <span
+                                        class="relative w-full text-left text-black transition-colors duration-200 ease-in-out group-hover:text-[#ffc506]">Get
+                                        In Touch</span>
+                                </a>
+                                <p class="my-20 text-gray-200">Verlux Stands is an elite <strong>exhibition stands
+                                        builder</strong> for creating and constructing <strong>custom exhibition
+                                        stands</strong> throughout Europe and Asia. We provide innovative, useful, and
+                                    environmentally responsible stands from conception to completion that optimize ROI
+                                    and brand awareness. We assist exhibitors in developing immersive experiences that
+                                    excites audience and enhance brand visibility through skilled project management.
+                                    Call us today!</p>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div style="backdrop-filter: blur(5px);"
+                        class="col-lg-4 opacity-80 d-flex align-items-end justify-content-center wow fadeInRight"
+                        data-wow-duration="1500ms">
+                        <div class="about-two__image relative opacity-80">
+                            <img src="./assets/img/about-section-scatch.png" class="about-two__image--2 z-0 rounded-2xl"
+                                alt="Awesome Image">
+                        </div>
+                    </div>
+                </div>
+        </section>
+
+        <section>
+            <div class="px-[3%]">
+                <div class="md:grid grid-cols-1  ">
+
+                    <h2 class="text-start my-4 md:mt-20  md:text-5xl text-4xl mb-10 text-[#22092C] ">Custom Exhibition
+                        Stands for Your Brand </h2>
+
+                </div>
+                <div class="gap-4">
+                    <div class="p-8 flex flex-col">
+                        <p
+                            class="md:text-[16px] text-[14px] mx-[0] golden-border-light-1 my-4 [box-shadow:#ffd7ab_0px_2px_8px_0px] p-4 m-4 rounded-2xl">
+                            Exhibitors looking for a showcasing solution that can help you in positioning your brand in
+                            the market and showcasing industry relevance & inventiveness of your business, then you must
+                            customize your exhibition stand with us. Every exhibitor requires a strong platform to
+                            highlight their skills, and we at Verlux Stands are aware of this. A <strong
+                                class="strong-dark-opacity">custom exhibition stands</strong> are different from other
+                            pre-made displays. Our <strong class="strong-dark-opacity">custom stand design</strong>
+                            provides an infinite amount of versatility in incorporating immersive experiences. You can
+                            set distinctive narrative and brand values with our custom stands. If you want to stand out
+                            while exhibiting a Europe or Asia, you must connect with Verlux Stands to customize an
+                            exhibition stand for you.
+
+                            <span class="mt-3 block">We go above and beyond aesthetics as a reputable <strong
+                                    class="strong-dark-opacity">exhibition stand builder in Aisa & Europe</strong> to
+                                produce designs that increase interaction and return on investment. Our custom stand
+                                lets you to emphasize your offerings and engage with your target audience on a deeper
+                                way. When you work with us, your booth transforms from a simple building into a
+                                lead-driven tool that distinguishes your company and help you make more profit.</span>
+                        </p>
+
+
+                        <h2 class="md:text-4xl  text-3xl golden-text-light py-10 text-center block ">Expertise in Custom
+                            Exhibition Stand Design & Build</h2>
+
+
+                        <div class="md:grid grid-cols-2 gap-10">
+                            <figure
+                                class="effect-hera relative float-left overflow-hidden mx-[1%] my-[10px] w-[100%] h-auto bg-[#3085a3] text-center cursor-pointer rounded-2xl">
+                                <img src="./assets/img/custom-exhibition-stands.webp" alt="img17"
+                                    class="relative block min-h-full max-w-full opacity-80 rounded-2xl" />
+                                <figcaption
+                                    class="p-[2em] text-[#fff] uppercase text-[1.25em] [backface-visibility:hidden] before:absolute before:top-2/4 before:left-2/4 before:w-[200px] before:h-[200px] before:border-[2px] before:border-[solid] before:border-[#fff] before:content-[''] before:opacity-0 before:[transition:opacity_0.35s,_transform_0.35s] before:[transform:translate3d(-50%,-50%,0)_rotate3d(0,0,1,-45deg)_scale3d(0,0,1)] before:origin-[50%]">
+                                    <h2>Tender <span>Hera</span></h2>
+                                    <p>
+                                        <a href="#" class="absolute top-[0] left-[0] w-full h-full"><i
+                                                class="fa fa-fw fa-file-pdf-o"></i></a>
+                                        <a href="#" class="absolute top-[0] left-[0] w-full h-full"><i
+                                                class="fa fa-fw fa-file-image-o"></i></a>
+                                        <a href="#" class="absolute top-[0] left-[0] w-full h-full"> <i
+                                                class="fa fa-fw fa-file-archive-o"></i></a>
+                                        <a href="#" class="absolute top-[0] left-[0] w-full h-full"><i
+                                                class="fa fa-fw fa-file-code-o"></i></a>
+                                    </p>
+                                </figcaption>
+                            </figure>
+
+                            <figure
+                                class="effect-hera relative float-left overflow-hidden mx-[1%] my-[10px] w-[100%] h-auto bg-[#3085a3] text-center cursor-pointer rounded-2xl">
+                                <img src="./assets/img/modular-booths.webp" alt="img17"
+                                    class="relative block min-h-full max-w-full opacity-80" />
+                                <figcaption
+                                    class="p-[2em] text-[#fff] uppercase text-[1.25em] [backface-visibility:hidden] before:absolute before:top-2/4 before:left-2/4 before:w-[200px] before:h-[200px] before:border-[2px] before:border-[solid] before:border-[#fff] before:content-[''] before:opacity-0 before:[transition:opacity_0.35s,_transform_0.35s] before:[transform:translate3d(-50%,-50%,0)_rotate3d(0,0,1,-45deg)_scale3d(0,0,1)] before:origin-[50%]">
+                                    <p>
+                                        <a href="#" class="absolute top-[0] left-[0] w-full h-full"><i
+                                                class="fa fa-fw fa-file-pdf-o"></i></a>
+                                        <a href="#" class="absolute top-[0] left-[0] w-full h-full"><i
+                                                class="fa fa-fw fa-file-image-o"></i></a>
+                                        <a href="#" class="absolute top-[0] left-[0] w-full h-full"> <i
+                                                class="fa fa-fw fa-file-archive-o"></i></a>
+                                        <a href="#" class="absolute top-[0] left-[0] w-full h-full"><i
+                                                class="fa fa-fw fa-file-code-o"></i></a>
+                                    </p>
+                                </figcaption>
+                            </figure>
+
+                            <p
+                                class="text-[16px] mx-[0] golden-border-light-1 my-4 [box-shadow:#ffd7ab_0px_2px_8px_0px] p-4 m-4 rounded-2xl">
+                                Verlux Stands has been designing and building custom exhibition stands for global
+                                markets for over 8+ years. Our in-house team of architects, designers, and builders make
+                                sure that every stand is a real expression of your business. For this we blend
+                                creativity with utility. We are the best <strong class="strong-dark-opacity">exhibition
+                                    stand contractor in Europe and Asia</strong> because of our expertise in turnkey
+                                solutions, which include design, manufacture, logistics, installation, on-site
+                                assistance, etc. Our portfolio exhibits quality and diversity. You can choose from
+                                large-scale custom builds for international expos to elegant modular solutions when you
+                                need.
+                            </p>
+                            <p
+                                class="text-[16px] mx-[0] golden-border-light-1 my-4 [box-shadow:#ffd7ab_0px_2px_8px_0px] p-4 m-4 rounded-2xl">
+                                You get the an aesthetically pleasing and long-lasting display by utilizing high-quality
+                                materials and advanced technologies. Exhibitors rely on us for immersive AV
+                                integrations, 3D concept drawings, and environmentally conscious design techniques that
+                                align with sustainability objectives. Our goal as your <strong
+                                    class="strong-dark-opacity">exhibition stand build company in UK and Aisa</strong>
+                                is always to maximize visibility and effect on the trade show floor while providing
+                                value within your budget. Verlux Stands offers marketing tool and not merely a custom
+                                exhibition stand.
+                            </p>
+
+
+                        </div>
+                        <p
+                            class="text-[16px] mx-[0] golden-border-light-1 my-4 [box-shadow:#ffd7ab_0px_2px_8px_0px] p-4 m-4 rounded-2xl">
+                            Verlux Stands believes that every brand deserves its own distinctive voice in the exhibition
+                            hall. For this reason, our <strong class="strong-dark-opacity">exhibition stands
+                                designers</strong> create <strong class="strong-dark-opacity">custom exhibition
+                                stands</strong> that complement your marketing objectives. Plus, we build them to be
+                            highly engaging and interactive. We turn concepts into tangible booths, whether you are
+                            looking for multi-level layouts, multimedia displays, bold graphics, or sophisticated
+                            lighting. Our R&D experts capture brand DNA and help our designers convert it into a 3D
+                            custom display mock-up. </p>
+
+
+                        <!-- ====== Call To Action Section End -->
+
+                        <h3 class="py-10 md:text-5xl text-3xl text-[#22092C] playfair-font">Innovative Designs that
+                            Improve Your Brand Presence</h3>
+                        <p
+                            class="text-[16px] mx-[0] golden-border-light-1 my-4 [box-shadow:#ffd7ab_0px_2px_8px_0px] p-4 m-4 rounded-2xl">
+                            Our vast experience constructing exhibition stands in Asia and Europe has given us a
+                            thorough awareness of cultural differences and event dynamics, which allows us to design
+                            displays that appeal to a broad spectrum of individuals. Plus, our worldwide logistics
+                            network helps you in prompt delivery and easy setup at international exhibition venues. We
+                            are among the rarest <strong class="strong-dark-opacity">exhibition stand builders</strong>
+                            with knowledge of ROI.
+
+                            <span class="block mt-3">Verlux Stands is an exhibition stand design company that oversees
+                                every stage of your display process. Our project managers guarantee a stress-free
+                                experience from the first consultation to the dismantling after the exhibition. We offer
+                                unique exhibition stands concurrently to several sites in Europe and Asia. Our in-house
+                                production capabilities and team is always there for. Hire Verlux Stands for
+                                budget-friendly yet luxurious <strong class="strong-dark-opacity">custom exhibition
+                                    stands in UK</strong> and India.</span>
+                        </p>
+
+                    </div>
+
+                </div>
+        </section>
+    </main>
+
+    <footer class="relative">
+        <div class="pt-10 px-[8%] footer-container">
+            <div class="mx-auto max-w-full px-4 sm:px-6 lg:px-8">
+                <div class="flex flex-col sm:flex-row  justify-between pb-3 border-b border-gray-200 gap-8">
+                    <a href="./index.html"> <span class="logo md:text-5xl text-3xl text-white playfair-font"> VERLUX
+                            STANDS </span></a>
+
+
+                </div>
+                <div class="py-14 flex flex-col lg:flex-row justify-between gap-8 border-b border-gray-200">
+                    <div
+                        class="w-full max-lg:mx-auto flex flex-col sm:flex-row max-lg:justify-between gap-4 md:gap-12 lg:gap-24 justify-around">
+                        <div>
+                            <h4 class="text-[#fff] mb-7 font-bold ">Usefull Links</h4>
+                            <ul class="flex flex-col gap-4">
+                                <li>
+                                    <a href="./portfolio.html"
+                                        class="md:text-2xl text-xl font-normal max-lg:text-center whitespace-nowrap transition-all duration-300 ">
+                                        Portfolio</a>
+                                </li>
+                                <li>
+                                    <a href="./contact_us.html"
+                                        class="md:text-2xl text-xl font-normal max-lg:text-center whitespace-nowrap transition-all duration-300 ">
+                                        Contact Us</a>
+                                </li>
+                                <li>
+                                    <a href="./custom-exhibit-rental-vs-buying.html"
+                                        class="md:text-2xl text-xl font-normal max-lg:text-center whitespace-nowrap transition-all duration-300 ">
+                                        Custom Exhibits</a>
+                                </li>
+                                <li>
+                                    <a href="./trade-show-calender.html"
+                                        class="md:text-2xl text-xl font-normal max-lg:text-center whitespace-nowrap transition-all duration-300 ">Trade
+                                        Shows Calender</a>
+                                </li>
+
+                            </ul>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-[#fff] mb-7 ">Resources</h4>
+                            <ul class="flex flex-col gap-4 ">
+
+                                <li>
+                                    <a href="./aboutus.html"
+                                        class="md:text-2xl text-xl font-normal whitespace-nowrap transition-all duration-300 ">About
+                                        Us</a>
+                                </li>
+
+                                <li>
+                                    <a href="./client-testimonials.html"
+                                        class="md:text-2xl text-xl font-normal whitespace-nowrap transition-all duration-300 ">Testimonials</a>
+                                </li>
+
+                                <li>
+                                    <a href="./major-exhibiting-City.html"
+                                        class="md:text-2xl text-xl font-normal whitespace-nowrap transition-all duration-300 ">Major
+                                        Trade Show Cities</a>
+                                </li>
+
+                            </ul>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-[#fff] mb-7 ">Contact Details</h4>
+                            <ul class="flex flex-col gap-4 ">
+                                <li class="text-xl font-medium text-gray-100">
+                                    <p class="elementor-icon-list-item elementor-inline-item  flex gap-3 text-white">
+                                        <span class="elementor-icon-list-icon">
+                                            <i class="fa-solid fa-location-dot"></i>
+                                        </span>
+                                        No. 1, Manikam Market, Unchi Dankaur<br>
+                                        Greater Noida, Gautam Buddha Nagar,<br>
+                                        Uttar Pradesh – 201110
+                                    </p>
+                                </li>
+                                <li><a href="mailto:marketing@verluxstands.com" target="_blank" class="flex">
+                                        <span class="elementor-icon-list-icon">
+                                            <i class="fa-solid fa-envelope-circle-check"></i></span>
+                                        &nbsp;
+                                        <span class="elementor-icon-list-text text-xl">marketing@verluxstands.com</span>
+                                    </a></li>
+                                <li class="elementor-icon-list-item elementor-inline-item  flex gap-3">
+                                    <a href="tel:+917303531447" class="flex">
+                                        <span class="elementor-icon-list-icon ">
+                                            <i class="fa-solid fa-phone-volume"></i></span>
+                                        &nbsp;
+                                        <span class="elementor-icon-list-text text-xl">+91 7303531447</span>
+                                    </a>
+                                    <a href="tel:+918920253275" class="flex">
+                                        <span class="elementor-icon-list-icon ">
+                                            <i class="fa-solid fa-phone-volume"></i></span>
+                                        &nbsp;
+                                        <span class="elementor-icon-list-text text-xl">+91 8920253275</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+
+                    </div>
+
+                </div>
+                <div class="flex text-[15px] flex-col-reverse sm:flex-row items-center justify-center gap-5 pt-7">
+                    <p class="pt-5 py-5 text-white">Terms & Conditions
+                        Privacy Policy
+                        Disclaimer
+                        Contact</p>
+                    <p class="font-normal text-white">
+                        ©<span id="policy_year"></span> VERLUX STANDS PRIVATE LIMITED
+                    </p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Floating WhatsApp Chat Button -->
+    <div class="fixed bottom-4 left-4 z-50">
+        <!-- Chat Toggle Button -->
+        <a role="button" onclick="toggleChatBox()" id="contacti_button"
+            class="flex whats-app-btn items-center gap-2 bg-green-600 hover:bg-green-800 text-white p-4 rounded-full shadow-lg  transition">
+            <img src="./assets/icons/whatsapp.png" width="30px" alt="">
+        </a>
+        <!-- whatsapp Popup Box -->
+        <div id="chatBox" class="contact-hide">
+            <!-- whatsapp Toggle Button -->
+            <a role="button" href="mailto:marketing@verluxstands.com" target="_blank"
+                class="flex items-center gap-2 my-2 whats-app-btn bg-green-600 text-white p-4 rounded-full shadow-lg hover:bg-green-700 transition">
+                <img src="./assets/icons/mail-48.png" width="30px" alt=""> <span
+                    class="text-[14px]">marketing@verluxstands.com</span>
+            </a>
+
+            <a href="https://wa.me/+918920253275" target="_blank"
+                class="flex items-center whats-app-btn gap-1 my-2 bg-green-600 text-white p-4 rounded-full shadow-lg hover:bg-green-700 transition">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" width="30px" alt=""> <span
+                    class="text-[14px]">+91 8920253275
+                </span>
+            </a>
+
+            <div class="mt-3 bg-white border border-gray-200 rounded-xl shadow-lg overflow-hidden">
+                <!-- Header -->
+                <div class="bg-green-600 text-white flex items-center justify-between px-4 py-3">
+                    <div class="flex items-center gap-2">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp"
+                            class="w-[2.5rem] h-[2.5rem]">
+                        <span class="font-semibold">WhatsApp</span>
+                    </div>
+                    <a role="button" onclick="toggleChatBox()" title="Close"
+                        class="text-white hover:text-gray-200 w-8">✕</a>
+                </div>
+
+                <!-- Message Content -->
+                <div class="p-4 space-y-4">
+                    <p class="text-xl text-gray-700">👋 Hello! Can we help you?</p>
+                    <!-- QR Code -->
+                    <div class="flex justify-center flex-col items-center">
+                        <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://wa.me/+917303531447"
+                            alt="WhatsApp QR" class="mb-2 w-[13rem] h-[13rem]">
+                        <span class="text-[12px] mx-auto">+917303531447</span>
+                    </div>
+
+                    <!-- Quick Action Button -->
+
+                    <a href="https://wa.me/+917303531447" target="_blank"
+                        class="block w-full flex items-center justify-start gap-8 text-center bg-green-500 hover:bg-green-600 text-white font-semibold p-4 rounded-full transition">
+                        <!-- Paper Plane Icon (SVG) -->
+                        <svg class="animate-fly w-10 h-10 mx-2 text-white transform group-hover:translate-x-1 group-hover:-translate-y-1 transition duration-300 ease-out"
+                            fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z" />
+                        </svg>
+                        <span>Start Chat</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <a role="button" id="scrollToTopBtn" onclick="scrollToTop()"
+        class="flex scrolltotop items-center gap-2 bg-[#d1ac34] hover:bg-[#e7b71a] text-white p-4 rounded-full shadow-lg  transition">
+        <img src="./assets/icons/up.png" width="30px" alt="">
+    </a>
+
+
+    <script src="./script.js"></script>
+
+
+</body>
+
+</html>

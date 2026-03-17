@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+
+  <url>
+    <loc>https://verluxstands.github.io/verluxstands/</loc>
+    <priority>1.0</priority>
+    <changefreq>never</changefreq>
+  </url>
+
+  <url>
+    <loc>https://verluxstands.github.io/verluxstands/portfolio.html</loc>
+    <priority>0.9</priority>
+    <changefreq>never</changefreq>
+  </url>
+
+  <url>
+    <loc>https://verluxstands.github.io/verluxstands/contact_us.html</loc>
+    <priority>0.9</priority>
+    <changefreq>never</changefreq>
+  </url>
+
+  <url>
+    <loc>https://verluxstands.github.io/verluxstands/custom-exhibit-rental-vs-buying.html</loc>
+    <priority>0.8</priority>
+    <changefreq>never</changefreq>
+  </url>
+
+  <url>
+    <loc>https://verluxstands.github.io/verluxstands/trade-show-calender.html</loc>
+    <priority>0.8</priority>
+    <changefreq>never</changefreq>
+  </url>
+
+  <url>
+    <loc>https://verluxstands.github.io/verluxstands/major-exhibiting-City.html</loc>
+    <priority>0.7</priority>
+    <changefreq>never</changefreq>
+  </url>
+
+  <url>
+    <loc>https://verluxstands.github.io/verluxstands/aboutus.html</loc>
+    <priority>0.6</priority>
+    <changefreq>never</changefreq>
+  </url>
+
+  <url>
+    <loc>https://verluxstands.github.io/verluxstands/client-testimonials.html</loc>
+    <priority>0.6</priority>
+    <changefreq>never</changefreq>
+  </url>
+
+</urlset>

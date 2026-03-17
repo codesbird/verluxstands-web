@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Major Cities | Verlux Stands – Exhibition Stand Design & Booth Builder</title>
+    <meta name="description"
+        content="Verlux Stands is a leading exhibition stand design company in India & Europe that builds luxury yet functional modern exhibition stands across India and Europe. We create memorable stands that attract people. Book your exhibition stand with us today.">
+    <meta name="keywords"
+        content="exhibition stand design company in India, exhibition stand design company in Europe, exhibition stand builders in India, exhibition stand builders in Europe, custom exhibition stands, trade show booth design, modular exhibition stands, luxury exhibition stands, modern exhibition stands, exhibition stand rental, exhibition stand construction, exhibition booth design services, exhibition stand fabrication, exhibition stand installation, exhibition stand project management">
+    <meta name="author" content="Verlux Stands">
+    <meta name="robots" content="index, follow">
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://www.verluxstands.com/">
+    <meta property="og:title" content="Verlux Stands – Exhibition Stand Design & Booth Builder in Europe & India">
+    <meta property="og:description" content="Luxury & modern exhibition stand designs across Europe and India. Custom stands that attract and convert.">
+    <meta property="og:image" content="https://verluxstands.github.io/verluxstands/assets/icons/WhatsApp%20Image%202025-09-19%20at%2013.54.04_30e78042.jpg">
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://www.verluxstands.com/">
+    <meta name="twitter:title" content="Verlux Stands – Exhibition Stand Design & Booth Builder in Europe & India">
+    <meta name="twitter:description" content="Luxury & modern exhibition stand designs across Europe and India. Custom stands that attract and convert.">
+    <meta name="twitter:image" content="https://verluxstands.github.io/verluxstands/assets/icons/WhatsApp%20Image%202025-09-19%20at%2013.54.04_30e78042.jpg">
+    
+    <meta name="msapplication-config" content="/browserconfig.xml">
+    <!-- Theme -->
+    <meta name="theme-color" content="#0D0D0D">
+    <meta name="msapplication-TileColor" content="#D4AF37">
+
+    <!-- Icons -->
+    <link rel="apple-touch-icon" sizes="180x180" href="./assets/icons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="./assets/icons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="./assets/icons/favicon-16x16.png">
+    <link rel="manifest" href="./assets/icons/site.webmanifest">
+
+
+    <!-- Google Fonts: Playfair Display + Open Sans -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="dns-prefetch" href="https://fonts.gstatic.com">
+    <link rel="preload"href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Open+Sans:wght@400;600&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript>
+        <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Open+Sans:wght@400;600&display=swap">
+    </noscript>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" media="print" onload="this.media='all'">
+ 
+    <link rel="stylesheet" href="./style.css">
+
+    <!-- Preload LCP image -->
+    <link rel="preload" as="image" href="./assets/icons/WhatsApp Image 2025-09-19 at 13.54.04_30e78042.jpg">
+    
+    <!-- Tailwind (replace with local build for production) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+
+<body>
+
+    <header class="sticky top-[1px]" style="z-index: 1000 !important;">
+        <div class="px-[3%]">
+            <nav class="navbar">
+                <div class="navbar_half">
+                    <div class="container_menu">
+                        <div class="logo py-2">
+                            <a href="./index.html">
+                                 <img src="./assets/icons/logo2.png" width="150px" alt="">
+                            </a>
+                        </div>
+                        <input type="checkbox" name="check" id="check">
+
+                        <div class="nav-btn">
+                            <div class="nav-links">
+                                <ul>
+                                    <li class="nav-link" style="--i: .3s">
+                                        <a href="./trade-show-calender.html">Trade Show Calender</a>
+                                    </li>
+                                    <li class="nav-link" style="--i: .3s">
+                                        <a href="./custom-exhibit-rental-vs-buying.html">Custom Exhibit</a>
+                                    </li>
+                                    <li id="dropdownToggle" class="relative nav-link" style="--i: .55s">
+                                        <a role="button" type="button">
+                                            <span>Resources</span>
+                                            <i class="fas fa-caret-down"></i>
+                                        </a>
+                                        <!-- Dropdown Menu -->
+                                        <div id="dropdownMenu"
+                                            class="dropdownMenu left-0 top-full mt-2 hidden rounded-lg shadow-lg ">
+                                            <ul class="py-2">
+                                                <li>
+                                                    <a href="./aboutus.html" class="block px-4 py-2 ">About Us</a>
+                                                </li>
+                                                <li>
+                                                    <a href="./client-testimonials.html"
+                                                        class="block px-4 py-2">Testimonial</a>
+                                                </li>
+                                                 
+                                                <li>
+                                                    <a href="./major-exhibiting-City.html" class="block px-4 py-2">Major
+                                                        trade Shows Cities</a>
+                                                </li>
+
+                                            </ul>
+                                        </div>
+                                    </li>
+
+                                    <script>
+                                        const toggleBtn = document.getElementById('dropdownToggle');
+                                        const dropdownMenu = document.getElementById('dropdownMenu');
+
+                                        // Toggle on button click
+                                        toggleBtn.addEventListener('click', () => {
+                                            dropdownMenu.classList.toggle('hidden');
+                                        });
+
+                                        // Close on outside click
+                                        document.addEventListener('click', (event) => {
+                                            if (!toggleBtn.contains(event.target) && !dropdownMenu.contains(event.target)) {
+                                                dropdownMenu.classList.add('hidden');
+                                            }
+                                        });
+
+                                        // Close on Escape key
+                                        document.addEventListener('keydown', (event) => {
+                                            if (event.key === 'Escape') {
+                                                dropdownMenu.classList.add('hidden');
+                                            }
+                                        });
+                                    </script>
+
+                                    <li class="nav-link" style="--i: 0.7s">
+                                        <a href="./portfolio.html">Portfolio</a>
+                                    </li>
+                                    <li class="nav-link" style="--i: 0.9s">
+                                        <a href="./contact_us.html">Contact</a>
+                                    </li>
+                                </ul>
+                            </div>
+
+                        </div>
+
+                        <div class="hamburger-menu-container">
+                            <div class="hamburger-menu">
+                                <div></div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <section class="custom_banner trade-show-hero">
+        <div class="px-[5%] py-10">
+            <div class="md:grid grid-cols-2 gap-10">
+                <div class="col-lg-4 d-flex md:py-10 py-10 align-items-center justify-content-center wow fadeInLeft"
+                    style="visibility: visible; animation-name: fadeInLeft;">
+                    <div class="about-two__content mt-[40px]">
+                        <div class="block-title text-left">
+                            <h1
+                                class="block-title__tag-line m-0 text-[#fff] md:text-6xl text-4xl leading-[1em] pt-[20px] pb-5 inline-block">
+                                Major Exhibiting Cities</h1>
+                            <p class="my-20 text-gray-200">One of the best ways to market your business internationally
+                                is through exhibitions, but choosing a destination to exhibit in has gotten increasingly
+                                difficult. As your <strong>exhibition stand design company in India</strong> & Europe,
+                                we have compiled a list of the top exhibiting cities across the country that delivers
+                                the highest ROI in the industry. Major destinations cities host world-class exhibitions
+                                that attract international audiences. You can explore our detailed city guides to decide
+                                where to showcase your brand next. Once you choose, partner with us to book and design
+                                your next impactful stand. </p>
+                            <a href="./contact_us.html"
+                                class="relative inline-flex items-center justify-start px-6 py-3 overflow-hidden font-medium transition-all stands-background rounded-xl group md:mt-10">
+                                <span
+                                    class="absolute top-0 right-0 inline-block w-4 h-4 transition-all duration-500 ease-in-out bg-[#eaeaea] rounded group-hover:-mr-4 group-hover:-mt-4">
+                                    <span
+                                        class="absolute top-0 right-0 w-5 h-5 rotate-45 translate-x-1/2 -translate-y-1/2 bg-white"></span>
+                                </span>
+                                <span
+                                    class="absolute bottom-0 left-0 w-full h-full transition-all duration-500 ease-in-out delay-200 -translate-x-full translate-y-full bg-white rounded-2xl group-hover:mb-12 group-hover:translate-x-0"></span>
+                                <span
+                                    class="relative w-full text-left text-black transition-colors duration-200 ease-in-out group-hover:text-[#E6C547]">Get
+                                    In Touch</span>
+                            </a>
+
+
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-8 d-flex rounded-lg overflow-hidden border mt-20"
+                    style="background-size: contain;height:max-content;" data-wow-duration="1500ms ">
+                    <img src="./assets/img/photo-collage.png.webp" alt="">
+                </div>
+            </div>
+    </section>
+
+
+    <main>
+           
+            <!-- Our Locations Section -->
+            <section class="py-20 px-4">
+                <div class="md:px-20 mx-auto">
+        
+                    <!-- Cities Grid -->
+                    <div class="mb-24">
+                        <h3 class="text-3xl open-sans-font font-bold text-yellow-500 mb-12 text-center uppercase tracking-widest">
+                            <span class="inline-block w-2 h-2 bg-yellow-500 rounded-full mr-3"></span>
+                            Indian Cities
+                            <span class="inline-block w-2 h-2 bg-yellow-500 rounded-full ml-3"></span>
+                        </h3>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                            <!-- Delhi/NCR -->
+                            <div class="city-badge landmark-bg red-fort rounded-3xl h-60 flex items-end p-6 relative">
+                                <h4 class="text-white font-bold text-xl uppercase tracking-wide z-10 relative">Delhi/NCR</h4>
+                            </div>
+        
+                            <!-- Mumbai -->
+                            <div class="city-badge landmark-bg gateway-of-india rounded-3xl h-60 flex items-end p-6 relative">
+                                <h4 class="text-white font-bold text-xl uppercase tracking-wide z-10 relative">Mumbai</h4>
+                            </div>
+        
+                            <!-- Bengaluru -->
+                            <div class="city-badge landmark-bg bangalore-palace rounded-3xl h-60 flex items-end p-6 relative">
+                                <h4 class="text-white font-bold text-xl uppercase tracking-wide z-10 relative">Bengaluru</h4>
+                            </div>
+        
+                            <!-- Kolkata -->
+                            <div class="city-badge landmark-bg victoria-memorial rounded-3xl h-60 flex items-end p-6 relative">
+                                <h4 class="text-white font-bold text-xl uppercase tracking-wide z-10 relative">Kolkata</h4>
+                            </div>
+        
+                            <!-- Chennai -->
+                            <div class="city-badge landmark-bg marina-beach rounded-3xl h-60 flex items-end p-6 relative">
+                                <h4 class="text-white font-bold text-xl uppercase tracking-wide z-10 relative">Chennai</h4>
+                            </div>
+        
+                            <!-- Hyderabad -->
+                            <div class="city-badge landmark-bg charminar rounded-3xl h-60 flex items-end p-6 relative">
+                                <h4 class="text-white font-bold text-xl uppercase tracking-wide z-10 relative">Hyderabad</h4>
+                            </div>
+        
+                            <!-- Ahmedabad -->
+                            <div class="city-badge landmark-bg sabarmati rounded-3xl h-60 flex items-end p-6 relative">
+                                <h4 class="text-white font-bold text-xl uppercase tracking-wide z-10 relative">Ahmedabad</h4>
+                            </div>
+                        </div>
+                    </div>
+        
+                    <!-- Countries Section -->
+                    <div class="mb-16">
+                        <h3 class="text-3xl open-sans-font font-bold mb-12 text-center uppercase tracking-widest">
+                            <span class="inline-block w-2 h-2 bg-yellow-500 rounded-full mr-3"></span>
+                            International Markets
+                            <span class="inline-block w-2 h-2 bg-yellow-500 rounded-full ml-3"></span>
+                        </h3>
+                        
+                        <div class="flex flex-wrap justify-content-center gap-20">
+                            <!-- India -->
+                            <div class="country-tile rounded-2xl text-center min-w-[180px] mx-auto floating-animation country-bg india">
+                                <div class="bg-blur"> </div>
+                                <div class="tile-content ">
+                                    <div class="flag-circle india-flag mx-auto mb-4"></div>
+                                    <h4 class="text-white font-bold text-xl uppercase tracking-wide">India</h4>
+                                </div>
+                            </div>
+        
+                            <!-- Dubai -->
+                            <div class="country-tile rounded-2xl text-center min-w-[180px] mx-auto floating-animation country-bg dubai">
+                                <div class="bg-blur "> </div>
+                                <div class="tile-content">
+                                    <div class="flag-circle uae-flag mx-auto mb-4"></div>
+                                    <h4 class="text-white font-bold text-xl uppercase tracking-wide">Dubai</h4>
+                                </div>
+                            </div>
+        
+                            <!-- Germany -->
+                            <div class="country-tile rounded-2xl text-center min-w-[180px] mx-auto floating-animation country-bg germany">
+                                <div class="bg-blur"> </div>
+                                <div class="tile-content">
+                                    <div class="flag-circle germany-flag mx-auto mb-4"></div>
+                                    <h4 class="text-white font-bold text-xl uppercase tracking-wide">Germany</h4>
+                                </div>
+                            </div>
+        
+                            <!-- France -->
+                            <div class="country-tile rounded-2xl text-center min-w-[180px] mx-auto floating-animation country-bg france">
+                                <div class="bg-blur "> </div>
+                                <div class="tile-content">
+                                    <div class="flag-circle france-flag mx-auto mb-4"></div>
+                                    <h4 class="text-white font-bold text-xl uppercase tracking-wide">France</h4>
+                                </div>
+                            </div>
+        
+                            <!-- Italy -->
+                            <div class="country-tile rounded-2xl text-center min-w-[180px] mx-auto floating-animation country-bg italy">
+                                <div class="bg-blur "> </div>
+                                <div class="tile-content">
+                                    <div class="flag-circle italy-flag mx-auto mb-4"></div>
+                                    <h4 class="text-white font-bold text-xl uppercase tracking-wide">Italy</h4>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+        
+                    <!-- Stats Section -->
+                    <div class="text-center">
+                        <div class="inline-flex items-center space-x-8 bkg-gradient-to-r from-black via-gray-900 to-black rounded-full px-12 py-6 border-2 border-yellow-500">
+                            <div class="text-center">
+                                <div class="text-4xl font-bold text-yellow-500">7</div>
+                                <div class="text-xl text-gray-700 uppercase tracking-wide mt-2">Cities</div>
+                            </div>
+                            <div class="w-px h-12 bg-yellow-500"></div>
+                            <div class="text-center">
+                                <div class="text-4xl font-bold text-yellow-500">5</div>
+                                <div class="text-xl text-gray-700 uppercase tracking-wide mt-2">Countries</div>
+                            </div>
+                            <div class="w-px h-12 bg-yellow-500"></div>
+                            <div class="text-center">
+                                <div class="text-4xl font-bold text-yellow-500">120+</div>
+                                <div class="text-xl text-gray-700 uppercase tracking-wide mt-2">Projects</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+    </main>
+
+    <footer class="relative">
+        <div class="pt-10 px-[8%] footer-container">
+            <div class="mx-auto max-w-full px-4 sm:px-6 lg:px-8">
+                <div class="flex flex-col sm:flex-row  justify-between pb-3 border-b border-gray-200 gap-8">
+                    <a href="./index.html"> <span class="logo md:text-5xl text-3xl text-white playfair-font"> VERLUX STANDS </span></a>
+
+
+                </div>
+                <div class="py-14 flex flex-col lg:flex-row justify-between gap-8 border-b border-gray-200">
+                    <div
+                        class="w-full max-lg:mx-auto flex flex-col sm:flex-row max-lg:justify-between gap-4 md:gap-12 lg:gap-24 justify-around">
+                        <div>
+                            <h4 class="text-[#fff] mb-7 font-bold ">Usefull Links</h4>
+                            <ul class="flex flex-col gap-4">
+                                <li>
+                                    <a href="./portfolio.html"
+                                        class="md:text-2xl text-xl font-normal max-lg:text-center whitespace-nowrap transition-all duration-300 ">
+                                        Portfolio</a>
+                                </li>
+                                <li>
+                                    <a href="./contact_us.html"
+                                        class="md:text-2xl text-xl font-normal max-lg:text-center whitespace-nowrap transition-all duration-300 ">
+                                        Contact Us</a>
+                                </li>
+                                <li>
+                                    <a href="./custom-exhibit-rental-vs-buying.html"
+                                        class="md:text-2xl text-xl font-normal max-lg:text-center whitespace-nowrap transition-all duration-300 ">
+                                        Custom Exhibits</a>
+                                </li>
+                                <li>
+                                    <a href="./trade-show-calender.html"
+                                        class="md:text-2xl text-xl font-normal max-lg:text-center whitespace-nowrap transition-all duration-300 ">Trade
+                                        Shows Calender</a>
+                                </li>
+
+                            </ul>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-[#fff] mb-7 ">Resources</h4>
+                            <ul class="flex flex-col gap-4 ">
+                                
+                                <li>
+                                    <a href="./aboutus.html"
+                                    class="md:text-2xl text-xl font-normal whitespace-nowrap transition-all duration-300 ">About Us</a>
+                                </li>
+                                
+                                <li>
+                                    <a href="./client-testimonials.html"
+                                        class="md:text-2xl text-xl font-normal whitespace-nowrap transition-all duration-300 ">Testimonials</a>
+                                </li>
+
+                                <li>
+                                    <a href="./major-exhibiting-City.html"
+                                        class="md:text-2xl text-xl font-normal whitespace-nowrap transition-all duration-300 ">Major
+                                        Trade Show Cities</a>
+                                </li>
+
+                            </ul>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-[#fff] mb-7 ">Contact Details</h4>
+                            <ul class="flex flex-col gap-4 ">
+                                <li class="text-xl font-medium text-gray-100">
+                                    <p class="elementor-icon-list-item elementor-inline-item  flex gap-3 text-white">
+                                    <span class="elementor-icon-list-icon">
+                                        <i class="fa-solid fa-location-dot"></i>
+                                    </span>
+                                        No. 1, Manikam Market, Unchi Dankaur<br>
+                                    Greater Noida, Gautam Buddha Nagar,<br>
+                                    Uttar Pradesh – 201110</p>
+                                </li>
+                                <li><a href="mailto:marketing@verluxstands.com" target="_blank" class="flex">
+                                        <span class="elementor-icon-list-icon">
+                                            <i class="fa-solid fa-envelope-circle-check"></i></span>
+                                        &nbsp;
+                                        <span
+                                            class="elementor-icon-list-text text-xl">marketing@verluxstands.com</span>
+                                    </a></li>
+                                <li class="elementor-icon-list-item elementor-inline-item  flex gap-3">
+                                    <a href="tel:+917303531447" class="flex">
+                                        <span class="elementor-icon-list-icon ">
+                                            <i class="fa-solid fa-phone-volume"></i></span>
+                                        &nbsp;
+                                        <span class="elementor-icon-list-text text-xl">+91 7303531447</span>
+                                    </a>
+                                    <a href="tel:+918920253275" class="flex">
+                                        <span class="elementor-icon-list-icon ">
+                                            <i class="fa-solid fa-phone-volume"></i></span>
+                                        &nbsp;
+                                        <span class="elementor-icon-list-text text-xl">+91 8920253275</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+
+                    </div>
+
+                </div>
+                <div class="flex text-[15px] flex-col-reverse sm:flex-row items-center justify-center gap-5 pt-7">
+                    <p class="pt-5 py-5 text-white">Terms & Conditions
+                        Privacy Policy
+                        Disclaimer
+                        Contact</p>
+                    <p class="font-normal text-white">
+                        ©<span id="policy_year"></span> VERLUX STANDS PRIVATE LIMITED
+                    </p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Floating WhatsApp Chat Button -->
+    <div class="fixed bottom-4 left-4 z-50">
+        <!-- Chat Toggle Button -->
+        <a role="button" onclick="toggleChatBox()" id="contacti_button"
+            class="flex whats-app-btn items-center gap-2 bg-green-600 hover:bg-green-800 text-white p-4 rounded-full shadow-lg  transition">
+            <img src="./assets/icons/whatsapp.png" width="30px" alt="">
+        </a>
+        <!-- whatsapp Popup Box -->
+        <div id="chatBox" class="contact-hide">
+            <!-- whatsapp Toggle Button -->
+            <a role="button" href="mailto:marketing@verluxstands.com" target="_blank"
+                class="flex items-center gap-2 my-2 whats-app-btn bg-green-600 text-white p-4 rounded-full shadow-lg hover:bg-green-700 transition">
+                <img src="./assets/icons/mail-48.png" width="30px" alt=""> <span
+                    class="text-[14px]">marketing@verluxstands.com</span>
+            </a>
+
+            <a href="https://wa.me/+918920253275" target="_blank"
+                class="flex items-center whats-app-btn gap-1 my-2 bg-green-600 text-white p-4 rounded-full shadow-lg hover:bg-green-700 transition">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" width="30px" alt=""> <span
+                    class="text-[14px]">+91 8920253275
+                </span>
+            </a>
+
+            <div class="mt-3 bg-white border border-gray-200 rounded-xl shadow-lg overflow-hidden">
+                <!-- Header -->
+                <div class="bg-green-600 text-white flex items-center justify-between px-4 py-3">
+                    <div class="flex items-center gap-2">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp"
+                            class="w-[2.5rem] h-[2.5rem]">
+                        <span class="font-semibold">WhatsApp</span>
+                    </div>
+                    <a role="button" onclick="toggleChatBox()" title="Close"
+                        class="text-white hover:text-gray-200 w-8">✕</a>
+                </div>
+
+                <!-- Message Content -->
+                <div class="p-4 space-y-4">
+                    <p class="text-xl text-gray-700">👋 Hello! Can we help you?</p>
+                    <!-- QR Code -->
+                    <div class="flex justify-center flex-col items-center">
+                        <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://wa.me/+917303531447"
+                            alt="WhatsApp QR" class="mb-2 w-[13rem] h-[13rem]">
+                        <span class="text-[12px] mx-auto">+917303531447</span>
+                    </div>
+
+                    <!-- Quick Action Button -->
+
+                    <a href="https://wa.me/+917303531447" target="_blank"
+                        class="block w-full flex items-center justify-start gap-8 text-center bg-green-500 hover:bg-green-600 text-white font-semibold p-4 rounded-full transition">
+                        <!-- Paper Plane Icon (SVG) -->
+                        <svg class="animate-fly w-10 h-10 mx-2 text-white transform group-hover:translate-x-1 group-hover:-translate-y-1 transition duration-300 ease-out"
+                            fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z" />
+                        </svg>
+                        <span>Start Chat</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <a role="button" id="scrollToTopBtn" onclick="scrollToTop()"
+        class="flex scrolltotop items-center gap-2 bg-[#d1ac34] hover:bg-[#e7b71a] text-white p-4 rounded-full shadow-lg  transition">
+        <img src="./assets/icons/up.png" width="30px" alt="">
+    </a>
+
+
+    <script src="./script.js"></script>
+
+</body>
+
+</html>

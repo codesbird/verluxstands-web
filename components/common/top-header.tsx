@@ -21,13 +21,13 @@ export default function TopHeader() {
         </Link>
 
         <div className="hidden items-center gap-6 text-sm text-secondary/85 lg:flex">
-          <a href="tel:+15551234567" className="flex items-center gap-2 transition-colors hover:text-white">
+          <a href="tel:+918920253275" className="flex items-center gap-2 transition-colors hover:text-white">
             <Phone className="h-4 w-4 text-primary" />
-            <span>+1 (555) 123-4567</span>
+            <span>+91 8920253275</span>
           </a>
-          <a href="mailto:info@verluxstands.com" className="flex items-center gap-2 transition-colors hover:text-white">
+          <a href="mailto:marketing@verluxstands.com" className="hidden md:flex items-center gap-2 transition-colors hover:text-white">
             <Mail className="h-4 w-4 text-primary" />
-            <span>info@verluxstands.com</span>
+            <span>marketing@verluxstands.com</span>
           </a>
         </div>
 
@@ -46,4 +46,3 @@ export default function TopHeader() {
     </div>
   )
 }
-

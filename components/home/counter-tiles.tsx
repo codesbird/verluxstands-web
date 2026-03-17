@@ -5,10 +5,10 @@ import { Briefcase, Globe, FolderKanban, Maximize } from "lucide-react";
 
 export default function CounterTiles() {
   const [counts, setCounts] = useState({
-    experience: 0,
+    satisfaction: 0,
     countries: 0,
     projects: 0,
-    designs: 0,
+    served: 0,
   });
 
   const sectionRef = useRef<HTMLDivElement>(null);
@@ -16,32 +16,32 @@ export default function CounterTiles() {
 
   const stats = [
     {
-      number: 15,
-      suffix: "+",
-      label: "YEARS OF EXPERIENCE",
+      number: 98,
+      suffix: "%",
+      label: "Client Satisfactio",
       icon: <Briefcase size={28} />,
-      key: "experience",
+      key: "satisfaction",
     },
     {
-      number: 14,
+      number: 5,
       suffix: "+",
       label: "COUNTRIES SERVED",
       icon: <Globe size={28} />,
       key: "countries",
     },
     {
-      number: 1000,
+      number: 150,
       suffix: "+",
       label: "PROJECTS COMPLETED",
       icon: <FolderKanban size={28} />,
       key: "projects",
     },
     {
-      number: 2500,
+      number: 120,
       suffix: "+",
-      label: "NO. OF DESIGNS",
+      label: "Exhibition Served",
       icon: <Maximize size={28} />,
-      key: "designs",
+      key: "served",
     },
   ];
 
@@ -74,20 +74,20 @@ export default function CounterTiles() {
     const startTime = Date.now();
 
     const targets = {
-      experience: 15,
-      countries: 14,
-      projects: 1000,
-      designs: 2500,
+      satisfaction: 98,
+      countries: 5,
+      projects: 150,
+      served: 120,
     };
 
     const update = () => {
       const progress = Math.min((Date.now() - startTime) / duration, 1);
 
       setCounts({
-        experience: Math.floor(targets.experience * progress),
+        satisfaction: Math.floor(targets.satisfaction * progress),
         countries: Math.floor(targets.countries * progress),
         projects: Math.floor(targets.projects * progress),
-        designs: Math.floor(targets.designs * progress),
+        served: Math.floor(targets.served * progress),
       });
 
       if (progress < 1) requestAnimationFrame(update);

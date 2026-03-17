@@ -11,11 +11,11 @@ const navItems = [
   { label: 'Portfolio', href: '/portfolio' },
   { label: 'Services', href: '/services' },
   { label: 'Trade Shows', href: '/trade-shows' },
-  {
-    label: 'Global Presence',
-    href: '/global',
-    submenu: ['India', 'Dubai', 'Germany', 'France', 'Italy'],
-  },
+  // {
+  //   label: 'Global Presence',
+  //   href: '/global',
+  //   submenu: ['India', 'Dubai', 'Germany', 'France', 'Italy'],
+  // },
   { label: 'Contact Us', href: '/contact' },
 ]
 
@@ -42,10 +42,10 @@ export default function Header() {
                   className={`px-4 py-2 text-sm font-bold hover:border-b-3 hover:border-primary transition-colors whitespace-nowrap flex items-center gap-1 h-10 ${item.href === pathname && 'border-b-3 border-primary'}`}
                 >
                   {item.label}
-                  {item.submenu && <ChevronDown className="w-3 h-3" />}
+                  {/* {item.submenu && <ChevronDown className="w-3 h-3" />} */}
                 </Link>
 
-                {item.submenu && openDropdown === item.label && (
+                {/* {item.submenu && openDropdown === item.label && (
                   <div className="brand-panel absolute left-0 top-full mt-1 font-semibold w-56 overflow-hidden rounded-sm border border-primary/25 py-2 shadow-[0_24px_60px_rgba(0,0,0,0.35)]">
                     {item.submenu.map((subitem) => (
                       <Link
@@ -57,7 +57,7 @@ export default function Header() {
                       </Link>
                     ))}
                   </div>
-                )}
+                )} */}
               </div>
             )
             )}
