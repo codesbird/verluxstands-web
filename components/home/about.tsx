@@ -26,22 +26,19 @@ export default function About() {
                 We think that every brand deserves to shine on the display floor. Our team of architects, designers, and stand builders combines accuracy and inventiveness to create powerful exhibition stands across Asia and Europe.
               </p>
             </div>
-            <div className="flex justify-around gap-5 mt-10 flex-wrap w-full">
-              <QuoteButton name="REQUEST A FREE QUOTE" type="button" />
+            <div className="flex justify-start gap-5 mt-10 flex-wrap w-full">
               <QuoteButton name="SPEAK TO OUR TEAM" type="link" link="/contact" />
-
-              
             </div>
           </div>
 
           {/* Image */}
           <div className="lg:block z-2 relative rounded-3xl">
             <Image
-              src="/images/hero-stand.jpg"
+              src="/images/happilo.jpeg"
               alt="Exhibition stand build company"
               width={900}
               height={1100}
-              className="w-full max-h-100 object-cover rounded-4xl"
+              className="w-full max-h-100 object-contain rounded-4xl"
               priority
             />
             <div className="absolute background-card hidden md:block lg:block inset-0 rounded-4xl" />

@@ -78,7 +78,7 @@ export default function Process() {
         {/* Process Image */}
         <div className="mt-16 sm:mt-20 rounded-lg overflow-hidden border border-border shadow-lg">
           <Image
-            src="/images/design-process.jpg"
+            src="/images/banner.jpeg"
             alt="Professional design and planning process"
             width={1200}
             height={400}

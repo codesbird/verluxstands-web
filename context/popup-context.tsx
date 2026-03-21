@@ -50,10 +50,10 @@ interface PopupContextType {
 }
 
 const PopupContext = createContext<PopupContextType>({
-  openQuotePopup: () => {},
-  closeQuotePopup: () => {},
-  openBrochurePopup: () => {},
-  closeBrochurePopup: () => {},
+  openQuotePopup: () => { },
+  closeQuotePopup: () => { },
+  openBrochurePopup: () => { },
+  closeBrochurePopup: () => { },
 })
 
 const initialQuoteForm: QuoteFormData = {
@@ -405,36 +405,36 @@ function QuoteContent({
 }: any) {
   return (
     <>
-      <h2 className="mb-2 text-center font-serif text-4xl font-bold tracking-wide text-secondary">
-        Get <span className="brand-gold-text">Free</span> Quote
+      <h2 className="mb-2 text-center font-serif text-4xl font-bold tracking-wide brand-gold-text">
+        Get Free Quote
       </h2>
-      <p className="mb-7 text-center text-sm uppercase tracking-[0.24em] text-muted-foreground">
+      <p className="mb-7 text-center text-sm uppercase tracking-[0.24em] text-white/70">
         Exhibition Stands and Booth Design | No Obligation
       </p>
 
       {submitted ? (
         <div className="flex flex-col items-center gap-3 py-8">
           <div className="flex h-16 w-16 items-center justify-center rounded-full border border-primary/25 bg-primary/10">
-            <Send size={28} className="text-primary" />
+            <Send size={28} className="text-white" />
           </div>
-          <p className="font-serif text-2xl font-bold text-secondary">Quote Request Sent</p>
-          <p className="max-w-xs text-center text-sm text-muted-foreground">
+          <p className="font-serif text-2xl font-bold text-white/70">Quote Request Sent</p>
+          <p className="max-w-xs text-center text-sm text-white/70">
             Our team will get back to you within 24 hours with a tailored proposal.
           </p>
         </div>
       ) : (
         <div>
           <div className="mb-3 grid grid-cols-1 gap-3 md:grid-cols-2">
-            <Field icon={<User size={14} />} error={errors.contactName}>
-              <input name="contactName" placeholder="Contact Name" value={form.contactName} onChange={handleChange} className="w-full bg-transparent text-sm text-foreground outline-none placeholder:text-muted-foreground" />
+            <Field icon={<User size={15} className="text-white" />} error={errors.contactName}>
+              <input name="contactName" placeholder="Contact Name" value={form.contactName} onChange={handleChange} className="w-full bg-transparent text-sm text-white outline-none placeholder:text-white/70" />
             </Field>
 
-            <Field icon={<Building2 size={14} />} error={errors.companyName}>
-              <input name="companyName" placeholder="Company Name" value={form.companyName} onChange={handleChange} className="w-full bg-transparent text-sm text-foreground outline-none placeholder:text-muted-foreground" />
+            <Field icon={<Building2 size={15} className="text-white" />} error={errors.companyName}>
+              <input name="companyName" placeholder="Company Name" value={form.companyName} onChange={handleChange} className="w-full bg-transparent text-sm text-white outline-none placeholder:text-white/70" />
             </Field>
 
-            <Field icon={<Mail size={14} />} error={errors.email}>
-              <input name="email" type="email" placeholder="Email Address" value={form.email} onChange={handleChange} className="w-full bg-transparent text-sm text-foreground outline-none placeholder:text-muted-foreground" />
+            <Field icon={<Mail size={15} className="text-white" />} error={errors.email}>
+              <input name="email" type="email" placeholder="Email Address" value={form.email} onChange={handleChange} className="w-full bg-transparent text-sm text-white outline-none placeholder:text-white/70" />
             </Field>
 
             <PhoneField
@@ -449,18 +449,18 @@ function QuoteContent({
           </div>
 
           <div className="col-span-2">
-            <Field icon={<MessageSquare size={14} />} error={errors.message} tall>
-              <textarea name="message" placeholder="Tell us about your exhibition stand requirements..." value={form.message} onChange={handleChange} rows={3} className="w-full resize-none bg-transparent text-sm text-foreground outline-none placeholder:text-muted-foreground" />
+            <Field icon={<MessageSquare size={15} className="text-white" />} error={errors.message} tall>
+              <textarea name="message" placeholder="Tell us about your exhibition stand requirements..." value={form.message} onChange={handleChange} rows={3} className="w-full resize-none bg-transparent text-sm text-foreground outline-none placeholder:text-white/70" />
             </Field>
           </div>
 
           <div className="col-span-2 my-4">
             <label className="flex cursor-pointer items-center gap-3 rounded-2xl border border-dashed border-primary/25 bg-black/15 px-4 py-3 transition-colors hover:border-primary/45 hover:bg-primary/8">
               <div className="flex h-9 w-9 items-center justify-center rounded-xl border border-primary/15 bg-primary/10 text-primary">
-                <Paperclip size={14} />
+                <Paperclip size={15} className="text-white" />
               </div>
               <div className="min-w-0 flex-1">
-                <p className="text-xs font-semibold uppercase tracking-[0.16em] text-secondary/80">Attach brief / reference</p>
+                <p className="text-xs font-semibold uppercase tracking-[0.16em] text-text-white/70">Attach brief / reference</p>
                 <p className="truncate text-xs text-muted-foreground">{fileLabel}</p>
               </div>
               <input type="file" className="hidden" onChange={handleFile} accept=".pdf,.doc,.docx,.jpg,.jpeg,.png" />
@@ -472,7 +472,7 @@ function QuoteContent({
             <button onClick={handleSubmit} disabled={submitting} className="brand-button-dark w-full justify-center rounded-xl text-sm disabled:cursor-not-allowed disabled:opacity-60">
               {submitting ? "Submitting..." : "Submit Request"}
             </button>
-            <p className="mt-3 text-center text-xs text-muted-foreground">Your information is secure and never shared.</p>
+            <p className="mt-3 text-center text-xs text-white/80">Your information is secure and never shared.</p>
           </div>
         </div>
       )}
@@ -495,38 +495,38 @@ function BrochureContent({
 }: any) {
   return (
     <>
-      <h2 className="mb-2 text-center font-serif text-4xl font-bold tracking-wide text-secondary">
-        <span className="brand-gold-text">Download</span> Brochure
+      <h2 className="mb-2 text-center font-serif text-4xl font-bold tracking-wide brand-gold-text">
+        Download Brochure
       </h2>
-      <p className="mb-7 text-center text-sm uppercase tracking-[0.24em] text-muted-foreground">
+      <p className="mb-7 text-center text-sm uppercase tracking-[0.24em] text-white/70">
         Premium stand design portfolio and service overview
       </p>
 
       {submitted ? (
         <div className="flex flex-col items-center gap-3 py-8">
           <div className="flex h-16 w-16 items-center justify-center rounded-full border border-primary/25 bg-primary/10">
-            <Download size={28} className="text-primary" />
+            <Download size={28} className="text-white/80" />
           </div>
-          <p className="font-serif text-2xl font-bold text-secondary">Brochure Request Sent</p>
-          <p className="max-w-xs text-center text-sm text-muted-foreground">
+          <p className="font-serif text-2xl font-bold text-white">Brochure Request Sent</p>
+          <p className="max-w-xs text-center text-sm text-white/70">
             Your request has been saved and our team can follow up with the brochure.
           </p>
         </div>
       ) : (
         <div>
           <div className="grid grid-cols-1 gap-3 lg:grid-cols-2">
-            <Field icon={<User size={14} />} error={errors.contactName}>
-              <input name="contactName" placeholder="Contact Name" value={form.contactName} onChange={handleChange} className="w-full bg-transparent text-sm text-foreground outline-none placeholder:text-muted-foreground" />
+            <Field icon={<User size={14} className="text-white" />} error={errors.contactName}>
+              <input name="contactName" placeholder="Contact Name" value={form.contactName} onChange={handleChange} className="w-full bg-transparent text-sm text-white outline-none placeholder:text-white/70" />
             </Field>
 
-            <Field icon={<Building2 size={14} />} error={errors.companyName}>
-              <input name="companyName" placeholder="Company Name" value={form.companyName} onChange={handleChange} className="w-full bg-transparent text-sm text-foreground outline-none placeholder:text-muted-foreground" />
+            <Field icon={<Building2 size={14} className="text-white" />} error={errors.companyName}>
+              <input name="companyName" placeholder="Company Name" value={form.companyName} onChange={handleChange} className="w-full bg-transparent text-sm text-white outline-none placeholder:text-white/70" />
             </Field>
           </div>
 
-          <div className="my-3 grid grid-cols-1 gap-3 lg:grid-cols-2">
-            <Field icon={<Mail size={14} />} error={errors.email}>
-              <input name="email" type="email" placeholder="Email Address" value={form.email} onChange={handleChange} className="w-full bg-transparent text-sm text-foreground outline-none placeholder:text-muted-foreground" />
+          <div className="my-4 grid grid-cols-1 gap-3 lg:grid-cols-2">
+            <Field icon={<Mail size={14} className="text-white" />} error={errors.email}>
+              <input name="email" type="email" placeholder="Email Address" value={form.email} onChange={handleChange} className="w-full bg-transparent text-sm text-white outline-none placeholder:text-white/70" />
             </Field>
 
             <PhoneField
@@ -540,9 +540,14 @@ function BrochureContent({
             />
           </div>
 
-          <div className="col-span-2 mt-2">
-            {feedback && <p className="mb-3 rounded-xl border border-destructive/40 bg-destructive/10 px-3 py-2 text-sm text-destructive">{feedback}</p>}
-            <button onClick={handleSubmit} disabled={submitting} className="brand-button-dark w-full justify-center rounded-xl text-sm disabled:cursor-not-allowed disabled:opacity-60">
+          <div className="col-span-2 my-3">
+            {feedback && <p className="rounded-xl border border-destructive/40 bg-destructive/10 text-sm text-destructive">{feedback}</p>}
+            <button
+              onClick={handleSubmit}
+              disabled={submitting}
+              className="brand-button-dark w-full justify-center rounded-xl text-sm disabled:cursor-not-allowed disabled:opacity-60 p-0"
+              style={{ padding: 0 }}
+            >
               <Download size={16} /> {submitting ? "Submitting..." : "Download Brochure"}
             </button>
           </div>
@@ -562,15 +567,15 @@ function PhoneField({ form, setForm, errors, handleChange, dropdownOpen, dropdow
           <button
             type="button"
             onClick={() => setDropdownOpen((current: boolean) => !current)}
-            className="flex items-center gap-1.5 text-xs text-secondary/85 transition-colors hover:text-white"
+            className="flex items-center gap-1.5 text-xs text-white/85 transition-colors hover:text-white"
           >
             <span className="font-medium">{form.countryCode}</span>
-            <span className="text-muted-foreground">{countryCodes.find((item) => item.code === form.countryCode)?.name}</span>
+            <span className="text-white/85">{countryCodes.find((item) => item.code === form.countryCode)?.name}</span>
             <ChevronDown size={11} />
           </button>
           {dropdownOpen && (
             <div className="brand-panel absolute left-0 top-full z-20 mt-2 max-h-40 min-h-20 w-40 overflow-auto rounded-lg border border-primary/25 p-1 shadow-[0_18px_40px_rgba(0,0,0,0.32)]">
-              <input onChange={(event) => setSearchCode(event.target.value.toLowerCase())} type="search" className="sticky top-0 w-full rounded bg-[#1e1b17] px-2 py-1 text-xs text-foreground outline-none" placeholder="country/code" />
+              <input onChange={(event) => setSearchCode(event.target.value.toLowerCase())} type="search" className="sticky top-0 w-full rounded bg-[#1e1b17] px-2 py-1 text-xs text-white/80 outline-none" placeholder="country/code" />
               {countryCodes
                 .filter((item) => `${item.code} ${item.name}`.toLowerCase().includes(searchCode))
                 .map((item) => (
@@ -581,7 +586,7 @@ function PhoneField({ form, setForm, errors, handleChange, dropdownOpen, dropdow
                       setForm((current: any) => ({ ...current, countryCode: item.code }))
                       setDropdownOpen(false)
                     }}
-                    className="flex w-full items-center gap-2 rounded-lg px-3 py-2 text-xs text-foreground transition-colors hover:bg-primary/10 hover:text-secondary"
+                    className="flex w-full items-center gap-2 rounded-lg px-3 py-2 text-xs text-white/70 transition-colors hover:bg-primary/10 hover:text-white/90"
                   >
                     <span className="font-medium">{item.code}</span>
                     <span className="text-muted-foreground">{item.name}</span>
@@ -591,7 +596,7 @@ function PhoneField({ form, setForm, errors, handleChange, dropdownOpen, dropdow
           )}
         </div>
         <div className="h-4 w-px bg-primary/20" />
-        <input name="phone" type="tel" placeholder="Phone No." value={form.phone} onChange={handleChange} className="min-w-0 flex-1 bg-transparent text-sm text-foreground outline-none placeholder:text-muted-foreground" />
+        <input name="phone" type="tel" placeholder="Phone No." value={form.phone} onChange={handleChange} className="min-w-0 flex-1 bg-transparent text-sm text-foreground outline-none placeholder:text-white/70" />
       </div>
     </Field>
   )

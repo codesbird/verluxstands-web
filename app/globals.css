@@ -496,6 +496,7 @@
   width: 16rem;
   height: 27.7rem;
   opacity: 1;
+  bottom: -150px !important;
 }
 
 
@@ -505,4 +506,17 @@
 
 #contacti_button.active {
   opacity: 0;
+}
+
+.animate-fly {
+  animation: fly 1s ease-in-out infinite alternate;
+}
+
+@keyframes fly {
+  0% {
+    transform: translateY(0px);
+  }
+  100% {
+    transform: translateY(-10px);
+  }
 }

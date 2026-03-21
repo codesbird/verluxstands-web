@@ -11,12 +11,12 @@ export default function TopHeader() {
   return (
     <div className="relative z-40">
       <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 rounded-t-[1.75rem] rounded-b-none border-b-0 px-4 py-2 sm:px-6 lg:px-8">
-        <Link href="/" className="flex shrink-0 flex-col items-start justify-center leading-none text-secondary transition-colors hover:text-white">
+        <Link href="/" className="flex shrink-0 flex-col items-center justify-center leading-none text-white transition-colors hover:text-white">
           <span className="font-serif text-3xl font-bold tracking-[0.2em] sm:text-4xl">VERLUX</span>
-          <span className="mt-1 flex items-center gap-2 text-[11px] uppercase tracking-[0.45em] text-secondary/80 sm:text-xs">
-            <span className="h-px w-7 bg-primary/50" />
+          <span className="mt-1 flex items-center gap-2 text-[11px] uppercase tracking-[0.45em] text-white/80 sm:text-xs">
+            <span className="h-px w-7 bg-white/80" />
             STANDS
-            <span className="h-px w-7 bg-primary/50" />
+            <span className="h-px w-7 bg-white/80" />
           </span>
         </Link>
 

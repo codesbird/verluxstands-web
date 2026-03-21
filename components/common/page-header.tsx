@@ -26,13 +26,13 @@ export default function PageHeader({
     <section
       className="relative py-16 flex items-center justify-center text-center text-white overflow-hidden"
       style={{
-        backgroundImage: `url(${backgroundImage})`,
+        backgroundImage: `url(/images/happilo.jpeg)`,
         backgroundSize: "cover",
         backgroundPosition: "center",
       }}
     >
       {/* Dark Overlay */}
-      <div className="absolute inset-0 bg-blue-400/40"></div>
+      <div className="absolute inset-0 bg-black/60"></div>
 
       {/* Optional Gradient Overlay (Adds Depth) */}
       <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/60 to-black/80"></div>
@@ -51,7 +51,7 @@ export default function PageHeader({
           name="Get Free Quote"
           type="button"
           className="btn-white"
-          icon={<ArrowRight size={20}/>}
+          icon={<ArrowRight size={20} />}
           iconpos="end"
         />
 

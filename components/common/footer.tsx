@@ -27,8 +27,14 @@ export default function Footer() {
       <div className="brand-shell mx-auto max-w-7xl overflow-hidden rounded-[1.75rem] px-6 py-10 sm:px-8 lg:px-10 lg:py-12">
         <div className="grid gap-10 lg:grid-cols-[1.35fr_1fr_1fr_1fr]">
           <div>
-            <div className="font-serif text-4xl font-bold tracking-[0.18em] text-secondary">VERLUX</div>
-            <div className="mt-2 text-xs uppercase tracking-[0.45em] text-secondary/60">Stands</div>
+            <Link href="/" className="flex shrink-0 w-fit flex-col items-center justify-center leading-none text-white transition-colors hover:text-white">
+              <span className="font-serif text-3xl font-bold tracking-[0.2em] sm:text-4xl">VERLUX</span>
+              <span className="mt-1 flex items-center justify-center gap-2 text-[11px] uppercase tracking-[0.45em] text-white/80 sm:text-xs">
+                <span className="h-px w-7 bg-white/80" />
+                STANDS
+                <span className="h-px w-7 bg-white/80" />
+              </span>
+            </Link>
             <p className="mt-6 max-w-md text-sm leading-7 text-white/70">
               Your trusted exhibition stand builder, delivering elegant design systems, tailored fabrication, and global execution with a premium Verlux finish.
             </p>

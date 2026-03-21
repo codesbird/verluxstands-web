@@ -99,7 +99,7 @@ export default async function AboutPage() {
             <div className="relative">
               <div className="aspect-[4/3] rounded-xl overflow-hidden">
                 <Image
-                  src="/images/hero-stand.jpg"
+                  src="/images/happilo.jpeg"
                   alt="Verlux workshop"
                   fill
                   className="object-cover"

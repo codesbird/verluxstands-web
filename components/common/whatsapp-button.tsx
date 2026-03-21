@@ -8,7 +8,7 @@ import { usePathname } from "next/navigation";
 
 
 export default function WhatsAppButton() {
-  const phoneNumber = '919999999999'; // Replace with actual WhatsApp number
+  const phoneNumber = '+918920253275'; // Replace with actual WhatsApp number
   const message = 'Hi, I would like to know more about Verlux Stands exhibition solutions.';
   const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
   const [isOpen, setIsOpen] = useState(false)
@@ -34,7 +34,7 @@ export default function WhatsAppButton() {
   if (pathname.includes("admin")) return;
 
   return (
-    <div className="fixed bottom-6 left-4 z-50">
+    <div className={`fixed left-4 z-50 ${isOpen ? "-bottom-5" : "bottom-2"}`}>
       <a onClick={() => toggleChatBox('')} id="contacti_button"
         className={`flex whats-app-btn items-center gap-2 bg-green-600 hover:bg-green-800 text-white p-2 rounded-full shadow-lg transition ${isOpen && "active"}`}>
         <Image
@@ -58,20 +58,6 @@ export default function WhatsAppButton() {
           <span className="text-[14px]">marketing@verluxstands.com</span>
         </a>
 
-        <a href="https://wa.me/+918920253275" target="_blank"
-          className="flex items-center whats-app-btn gap-3 my-2 bg-green-600 text-white p-3 rounded-full shadow-lg hover:bg-green-700 transition">
-          <Image
-            src="./whatsapp.png"
-            alt="Our workshop"
-            width={25}
-            height={10}
-            className="object-contain"
-          />
-          <span
-            className="text-[14px]">+91 8920253275
-          </span>
-        </a>
-
         <div className="mt-3 bg-white border border-gray-200 rounded-xl shadow-lg overflow-hidden">
           <div className="bg-green-600 text-white flex items-center justify-between px-2 py-1">
             <div className="flex items-center justify-start gap-2">
@@ -86,17 +72,14 @@ export default function WhatsAppButton() {
           <div className="p-4 space-y-3">
             <p className="text-sm text-gray-700">👋 Hello! Can we help you?</p>
             <div className="flex justify-center flex-col items-center m-0">
-              <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://wa.me/+917303531447"
+              <img src={`https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${whatsappUrl}`}
                 alt="WhatsApp QR" className="w-[10rem]" />
-              <span className="text-[12px] text-black my-1 mx-auto">+917303531447</span>
+              <span className="text-[12px] text-black my-1 mx-auto">+918920253275</span>
             </div>
 
-            <a href="https://wa.me/+917303531447" target="_blank"
+            <a href={whatsappUrl} target="_blank"
               className="block w-full flex items-center justify-start gap-4 text-center bg-green-500 hover:bg-green-600 text-white font-semibold p-2 rounded-full transition">
-              <svg className="animate-fly w-8 h-8 mx-2 text-white transform group-hover:translate-x-1 group-hover:-translate-y-1 transition duration-300 ease-out"
-                fill="currentColor" viewBox="0 0 24 24">
-                <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z" />
-              </svg>
+              <img src="/images/send2.gif" className="w-10" style={{filter:"invert(1)"}}/>
               <span>Start Chat</span>
             </a>
           </div>
@@ -105,3 +88,5 @@ export default function WhatsAppButton() {
     </div>
   );
 }
+
+
