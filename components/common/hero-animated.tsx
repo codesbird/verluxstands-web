@@ -7,7 +7,7 @@ import { Award } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { usePopup } from '@/context/popup-context'
 
-const heroImages = ['/images/golden-background.jpg']
+const heroImages = ['/images/hero-stand.jpg']
 
 const benefits = [
   'Free Design',
@@ -42,7 +42,7 @@ export default function HeroAnimated() {
             ))}
           </div>
 
-          <div className="absolute inset-0 -z-10 bg-[linear-gradient(180deg,rgba(8,8,8,0.65),rgba(8,8,8,0.72)),radial-gradient(circle_at_top,rgba(196,160,102,0.18),transparent_38%)]" />
+          <div className="absolute inset-0 -z-10 bg-[linear-gradient(180deg,rgba(8, 8, 8, 0.84),rgba(8,8,8,0.72)),radial-gradient(circle_at_top,rgba(196,160,102,0.18),transparent_38%)]" />
           <div className="pointer-events-none absolute inset-x-0 top-0 h-px brand-divider" />
           <div className="pointer-events-none absolute inset-x-0 bottom-0 h-px brand-divider" />
 
@@ -56,7 +56,7 @@ export default function HeroAnimated() {
               <span className="brand-gold-text">Booth Designers</span>
             </h1>
 
-            <p className="mt-6 max-w-3xl text-base leading-8 text-white/82 sm:text-lg lg:text-[1.18rem]">
+            <p className="mt-6 max-w-3xl text-base leading-8 text-white sm:text-lg lg:text-[1.18rem]">
               Welcome to Verlux Stands, your trusted global exhibition stand builder, offering complete and innovative exhibiting solutions with excellence.
             </p>
 

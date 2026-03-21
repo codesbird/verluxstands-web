@@ -54,9 +54,9 @@ export default async function Home() {
 
   return (
     <>
-      {/* <DynamicSchema seo={seo} /> */}
-      {/* <OrganizationSchema /> */}
-      {/* <LocalBusinessSchema /> */}
+      <DynamicSchema seo={seo} />
+      <OrganizationSchema />
+      <LocalBusinessSchema />
       <FAQSchema faqs={homeFaqs} />
       <main>
         <TopHeader />

@@ -34,7 +34,7 @@ export default function WhatsAppButton() {
   if (pathname.includes("admin")) return;
 
   return (
-    <div className="fixed bottom-4 left-4 z-50">
+    <div className="fixed bottom-6 left-4 z-50">
       <a onClick={() => toggleChatBox('')} id="contacti_button"
         className={`flex whats-app-btn items-center gap-2 bg-green-600 hover:bg-green-800 text-white p-2 rounded-full shadow-lg transition ${isOpen && "active"}`}>
         <Image
@@ -88,7 +88,7 @@ export default function WhatsAppButton() {
             <div className="flex justify-center flex-col items-center m-0">
               <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://wa.me/+917303531447"
                 alt="WhatsApp QR" className="w-[10rem]" />
-              <span className="text-[12px] mx-auto">+917303531447</span>
+              <span className="text-[12px] text-black my-1 mx-auto">+917303531447</span>
             </div>
 
             <a href="https://wa.me/+917303531447" target="_blank"

@@ -20,19 +20,19 @@ export default function TopHeader() {
           </span>
         </Link>
 
-        <div className="hidden items-center gap-6 text-sm text-secondary/85 lg:flex">
-          <a href="tel:+918920253275" className="flex items-center gap-2 transition-colors hover:text-white">
-            <Phone className="h-4 w-4 text-primary" />
+        <div className="hidden items-center gap-6 text-sm text-white lg:flex">
+          <a href="tel:+918920253275" className="flex items-center gap-2 hover:text-white/70">
+            <Phone className="h-4 w-4 text-white" />
             <span>+91 8920253275</span>
           </a>
-          <a href="mailto:marketing@verluxstands.com" className="hidden md:flex items-center gap-2 transition-colors hover:text-white">
-            <Mail className="h-4 w-4 text-primary" />
+          <a href="mailto:marketing@verluxstands.com" className="hidden md:flex items-center gap-2 text-white hover:text-white/70">
+            <Mail className="h-4 w-4 text-white" />
             <span>marketing@verluxstands.com</span>
           </a>
         </div>
 
         <div className="flex items-center gap-2 sm:gap-3">
-          <Button onClick={openQuotePopup} size="lg" className="hidden sm:inline-flex">
+          <Button onClick={openQuotePopup} size="lg" className="hidden sm:inline-flex text-white">
             Get Free Quote
           </Button>
           <Button onClick={openBrochurePopup} variant="outline" size="sm" className="hidden md:inline-flex">

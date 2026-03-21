@@ -102,12 +102,10 @@ export default function ContactSection() {
               </div>
               <div className="flex gap-3">
                 <Phone className="mt-1 text-primary" />
-                <div>
+                <div className="flex flex-col gap-1">
                   <h6 className="font-semibold text-secondary">Phone</h6>
+                  <a className="text-foreground/80 hover:text-secondary" href="tel:+918920253275">+91 8920253275</a>
                   <a className="text-foreground/80 hover:text-secondary" href="tel:+917303531447">+91 7303531447</a>
-                  <div>
-                    <a className="text-foreground/80 hover:text-secondary" href="tel:+918920253275">+91 8920253275</a>
-                  </div>
                 </div>
               </div>
               <div className="flex gap-3">
