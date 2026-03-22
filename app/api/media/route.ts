@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server'
 import type { MediaRecord, MediaScope } from '@/lib/types/media'
 import { requireAdminDb, requireAdminRequest } from '@/lib/server/admin-request'
 import { uploadMediaToBlob } from '@/lib/server/blob-media'
+import { revalidatePath } from 'next/cache'
 
 export const dynamic = 'force-dynamic'
 
@@ -66,6 +67,8 @@ export async function POST(request: NextRequest) {
     })
 
     await mediaRef.set(mediaRecord)
+    revalidatePath('/')
+    revalidatePath('/portfolio')
 
     return NextResponse.json({ success: true, file: mediaRecord })
   } catch (error) {

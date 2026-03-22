@@ -46,7 +46,7 @@ export default function Header() {
                 </Link>
 
                 {/* {item.submenu && openDropdown === item.label && (
-                  <div className="brand-panel absolute left-0 top-full mt-1 font-semibold w-56 overflow-hidden rounded-sm border border-primary/25 py-2 shadow-[0_24px_60px_rgba(0,0,0,0.35)]">
+                  <div className="bg-gradient-to-r from-black/70 via-black/60 to-blak/50 absolute left-0 top-full font-semibold w-56 overflow-hidden rounded-sm border border-primary/25 py-2 shadow-[0_24px_60px_rgba(0,0,0,0.35)]">
                     {item.submenu.map((subitem) => (
                       <Link
                         key={subitem}
@@ -64,7 +64,7 @@ export default function Header() {
           </nav>
         </div>
 
-        <div className="flex items-center justify-between px-2 lg:hidden md:hidden">
+        <div className="flex items-center justify-between px-2 lg:hidden md:hidden z-50">
           <button
             onClick={() => setIsOpen((value) => !value)}
             className="inline-flex items-center justify-center rounded-sm border border-primary/25 bg-card/70 p-2 text-secondary transition-colors hover:border-primary/60 hover:text-white"
@@ -73,14 +73,14 @@ export default function Header() {
             {isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
           </button>
 
-          <div className="text-right text-[11px] uppercase tracking-[0.2em] text-secondary/70">
-            <div>Verlux Stands</div>
-            <div className="mt-1 text-[10px] tracking-[0.28em] text-secondary/45">Global Stand Design</div>
+          <div className="text-right text-[11px] uppercase tracking-[0.2em] text-secondary/90 ">
+            <div className="font-semibold">Verlux Stands</div>
+            <div className="mt-1 text-[10px] tracking-[0.28em] text-secondary/60">Global Stand Design</div>
           </div>
         </div>
 
         {isOpen && (
-          <nav className="grid gap-1 border-t border-primary/15 px-2 pb-3 pt-2 lg:hidden">
+          <nav className="bg-gradient-to-r from-black/90 to-black/70 shadow-[0_24px_60px_rgba(0,0,0,0.35)] grid gap-1 border-t border-primary/15 px-2 pb-3 pt-2 lg:hidden">
             {navItems.map((item) => (
               <Link
                 key={item.label}

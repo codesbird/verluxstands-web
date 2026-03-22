@@ -1,5 +1,6 @@
 import type { MediaRecord } from '@/lib/types/media'
 import { adminDB, isAdminInitialized } from '@/lib/firebase-admin'
+import { unstable_noStore as noStore } from 'next/cache'
 
 export interface PortfolioItem {
   id: string
@@ -12,6 +13,8 @@ export interface PortfolioItem {
 }
 
 export async function getPortfolioMedia() {
+  noStore()
+
   if (!isAdminInitialized || !adminDB) {
     return [] as PortfolioItem[]
   }

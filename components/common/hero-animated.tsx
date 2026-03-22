@@ -37,7 +37,7 @@ export default function HeroAnimated() {
           <div className="pointer-events-none absolute inset-x-0 top-0 h-px brand-divider" />
           <div className="pointer-events-none absolute inset-x-0 bottom-0 h-px brand-divider" />
 
-          <div className="mx-auto flex max-h-screen pt-20 md:pt:10 lg:pt-10 max-w-5xl flex-col items-center justify-center text-center">
+          <div className="mx-auto flex max-h-screen pt-5 lg:pt-10 md:pt-10 max-w-5xl flex-col items-center justify-center text-center">
 
             <h1 className="max-w-4xl text-3xl font-bold leading-[1.1] text-white sm:text-5xl lg:text-[4.2rem]">
               World-Class <span className="brand-gold-text">Exhibition</span>

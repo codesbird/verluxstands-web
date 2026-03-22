@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server'
 import type { MediaRecord, MediaStatus } from '@/lib/types/media'
 import { deleteMediaFromBlob } from '@/lib/server/blob-media'
 import { requireAdminDb, requireAdminRequest } from '@/lib/server/admin-request'
+import { revalidatePath } from 'next/cache'
 
 export const dynamic = 'force-dynamic'
 
@@ -73,6 +74,8 @@ export async function PATCH(request: NextRequest, context: { params: Promise<{ m
     }
 
     await db.ref(`media_library/${mediaId}`).set(updatedFile)
+    revalidatePath('/')
+    revalidatePath('/portfolio')
 
     return NextResponse.json({ success: true, file: updatedFile })
   } catch (error) {
@@ -96,6 +99,8 @@ export async function DELETE(request: NextRequest, context: { params: Promise<{ 
 
     await deleteMediaFromBlob(file.url)
     await db.ref(`media_library/${mediaId}`).remove()
+    revalidatePath('/')
+    revalidatePath('/portfolio')
 
     return NextResponse.json({ success: true })
   } catch (error) {

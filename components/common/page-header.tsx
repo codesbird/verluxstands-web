@@ -26,16 +26,17 @@ export default function PageHeader({
     <section
       className="relative py-16 flex items-center justify-center text-center text-white overflow-hidden"
       style={{
-        backgroundImage: `url(/images/happilo.jpeg)`,
+        backgroundImage: `url(/images/banner.jpeg)`,
         backgroundSize: "cover",
         backgroundPosition: "center",
+        backgroundRepeat:"no-repeat"
       }}
     >
       {/* Dark Overlay */}
-      <div className="absolute inset-0 bg-black/60"></div>
+      <div className="absolute inset-0 bg-black/80"></div>
 
       {/* Optional Gradient Overlay (Adds Depth) */}
-      <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/60 to-black/80"></div>
+      <div className="absolute inset-0 bg-gradient-to-r from-primary/10 via-black/40 to-primary/10"></div>
 
       {/* Content */}
       <div className="relative z-10 px-6 max-w-4xl">
